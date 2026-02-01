@@ -33,8 +33,21 @@ public class AncientDocument : IItem
                 WordData wordData = currentSentenceData.sentences[colToReveal][row];
                 if (wordData.type == WordType.Conjunction && wordData.isCorrect)
                 {
-                    // Highlight the column
-                    gameManager.ButtonContainer.HighLightColumn(colToReveal);
+                    if(gameManager.GetCurrentPlayer().playerId == 0) // 플레이어
+                    {
+                        Debug.Log($"The conjunction is at column {colToReveal + 1}!");
+                    }
+                    else // 적
+                    {
+                        for(int curRow = 0; curRow < currentSentenceData.sentences[colToReveal].Count; curRow++)
+                        {
+                            if(currentSentenceData.sentences[colToReveal][curRow].type == WordType.Conjunction)
+                            {
+                                continue;
+                            }
+                            ((Enemy)gameManager.GetCurrentPlayer()).RemoveAt(new Position(curRow, colToReveal)); // 조사가 아닌 경우 후보군에서 제외
+                        }
+                    }
                     break;
                 }
             }

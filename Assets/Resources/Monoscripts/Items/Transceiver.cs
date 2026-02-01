@@ -25,7 +25,21 @@ public class Transceiver : IItem
         {
             int randomIndex = Random.Range(0, correctLocations.Count);
             // Highlight the word at correctLocations[randomIndex]
-            gameManager.ButtonContainer.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
+            if(gameManager.GetCurrentPlayer().playerId == 0) // 플레이어
+            {
+                Debug.Log($"The word at column {correctLocations[randomIndex].Item2 + 1}, row {correctLocations[randomIndex].Item1 + 1} is correct!");
+            }
+            else // 적
+            {
+                for(int curRow = 0; curRow < currentSentenceData.sentences[correctLocations[randomIndex].Item2].Count; curRow++)
+                {
+                    if(correctLocations[randomIndex].Item1 == curRow)
+                    {
+                        continue;
+                    }
+                    ((Enemy)gameManager.GetCurrentPlayer()).RemoveAt(new Position(curRow, correctLocations[randomIndex].Item2)); // 정답이 아닌 경우 후보군에서 제외
+                }
+            }
         }
     }
 }
