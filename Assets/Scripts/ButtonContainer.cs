@@ -39,9 +39,13 @@ public class ButtonContainer : MonoBehaviour
             buttonlists[row] = new ButtonHandler[wordList.Length];
             GameObject go = Instantiate(new GameObject(),transform);
             go.name = "ButtonList";
+            go.transform.SetParent(transform,false);
             VerticalLayoutGroup verticalLayoutGroup = go.AddComponent<VerticalLayoutGroup>();
+            LayoutElement layoutElement = go.AddComponent<LayoutElement>();
+            layoutElement.preferredHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
+            layoutElement.preferredWidth = transform.GetComponent<RectTransform>().sizeDelta.x/wordLists.Length;
             verticalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
-            verticalLayoutGroup.childForceExpandWidth = false;
+            verticalLayoutGroup.childControlWidth = false;
             verticalLayoutGroup.childControlHeight = false;
             verticalLayoutGroup.spacing = verticalpaddingheight;
             for(int col = 0 ; col<wordList.Length ; col++)
