@@ -4,21 +4,6 @@ using UnityEngine.UI;
 
 public class ButtonContainer : MonoBehaviour
 { 
-    public static ButtonContainer Instance { get; private set; }
-
-    private void Awake()
-    {
-        // Singleton pattern implementation
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
