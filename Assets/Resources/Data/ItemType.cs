@@ -4,6 +4,6 @@ public enum ItemType
     MagnifyingGlass,
     Americano,
     AncientDocument,
-    GoldenTicket,
+    Gloves,
     Beer
 }
