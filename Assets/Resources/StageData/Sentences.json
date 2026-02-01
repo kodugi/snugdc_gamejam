@@ -19,6 +19,12 @@
             {"word": "을/를", "type":"Conjunction", "isCorrect": false},
             {"word": "잡곡", "type":"Noun", "isCorrect": false}
             ],
+            [{"word": "까지", "type": "Adverb", "isCorrect": false},
+            {"word": "먹고", "type":"Verb", "isCorrect": false},
+            {"word": "민지", "type":"Noun", "isCorrect": false},
+            {"word": "밥", "type":"Noun", "isCorrect": true},
+            {"word": "메고", "type":"Verb", "isCorrect": false}
+            ],
             [{"word": "야채를", "type": "Noun", "isCorrect": false},
             {"word": "을/를", "type":"Conjunction", "isCorrect": true},
             {"word": "에게", "type":"Conjunction", "isCorrect": false},
