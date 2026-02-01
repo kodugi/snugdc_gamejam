@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SentenceParser))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     private SentenceParser _sentenceParser;
     [SerializeField] ButtonContainer _buttonContainer;
+
+    public ButtonContainer ButtonContainer => _buttonContainer;
 
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
 
@@ -36,7 +39,10 @@ public class GameManager : MonoBehaviour
         _itemStrategies.Add(ItemType.AncientDocument, new AncientDocument());
         _itemStrategies.Add(ItemType.Gloves, new Gloves());
         _itemStrategies.Add(ItemType.Beer, new Beer());
+    }
 
+    private void Start()
+    {
         StartGame();
     }
 
@@ -77,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.SelectSentence;
         // Logic for selecting a sentence goes here
+        Debug.Log(_sentenceParser.sentenceDataList.Count);
         _currentSentenceData = _sentenceParser.sentenceDataList[0];
         _buttonContainer.Init(_currentSentenceData);// Example: select the first sentence data
     }
@@ -110,12 +117,12 @@ public class GameManager : MonoBehaviour
         {
             _correctColumns.Add(pos.col);
             // Highlight correct words
-            _buttonContainer.HighlightButton(pos.Item1,pos.Item2);
-            _buttonContainer.DisableColumn(pos.Item2);
+            _buttonContainer.HighlightButton(pos.row,pos.col);
+            _buttonContainer.DisableColumn(pos.col);
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            _buttonContainer.DisableButton(pos.Item1, pos.Item2);
+            _buttonContainer.DisableButton(pos.row, pos.col);
         }
         EndRun();
     }
@@ -216,12 +223,12 @@ public class GameManager : MonoBehaviour
         {
             // Handle correct choice
             _buttonContainer.DisableColumn(column);
-            _correctWordPositions.Add((row, column));
+            _correctWordPositions.Add(new Position(row, column));
         }
         else
         {
             // Handle incorrect choice
-            ButtonContainer.Instance.DisableButton(row,column);
+            _buttonContainer.DisableButton(row,column);
             _incorrectWordPositions.Add(new Position(row, column));
         }
 
@@ -231,15 +238,15 @@ public class GameManager : MonoBehaviour
         }
         while(_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
         
-        ButtonContainer.Instance.UnHighLightAll();
-        ButtonContainer.Instance.HighLightColumn(_currentColumn);
+        _buttonContainer.UnHighLightAll();
+        _buttonContainer.HighLightColumn(_currentColumn);
     }
 
     public void TurnEnd()
     {
         if (_remainingChoices == 2) return;
         Debug.Log("turnEnded");
-        if(_usedItems[new ItemData { type = ItemType.Beer }] > 0 && _remainingChoices > 0)
+        if(_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
         {
             return; // 이번 턴에 무조건 정답을 처리해야 함
         }

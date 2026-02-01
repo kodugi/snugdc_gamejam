@@ -25,7 +25,7 @@ public class Transceiver : IItem
         {
             int randomIndex = Random.Range(0, correctLocations.Count);
             // Highlight the word at correctLocations[randomIndex]
-            ButtonContainer.Instance.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
+            gameManager.ButtonContainer.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
         }
     }
 }

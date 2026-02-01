@@ -34,7 +34,7 @@ public class AncientDocument : IItem
                 if (wordData.type == WordType.Conjunction && wordData.isCorrect)
                 {
                     // Highlight the column
-                    ButtonContainer.Instance.HighLightColumn(colToReveal);
+                    gameManager.ButtonContainer.HighLightColumn(colToReveal);
                     break;
                 }
             }
