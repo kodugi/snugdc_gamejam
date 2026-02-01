@@ -144,13 +144,13 @@ public class GameManager : MonoBehaviour
         {
             // Handle correct choice
             _correctWordPositions.Add((row, column));
+            _buttonContainer.DisableColumn(column);
         }
         else
         {
             // Handle incorrect choice
             _incorrectWordPositions.Add((row, column));
         }
-        _buttonContainer.DisableColumn(column);
     }
 
     void TurnEnd()
