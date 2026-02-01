@@ -90,6 +90,7 @@ public class TurnManager : MonoBehaviour
         _remainingChoices--;
         Debug.Log("select " + row + ":" + column);
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
+        Debug.Log("Chosen word: " + chosenWord.word + ", isCorrect: " + chosenWord.isCorrect);
         if (chosenWord.isCorrect)
         {
             Debug.Log("Correct choice!");
@@ -106,7 +107,10 @@ public class TurnManager : MonoBehaviour
         _roundManager.AdvanceColumn();
 
         _gameManager.ButtonContainer.UnHighLightAll();
-        _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
+        if (_remainingChoices > 0)
+        {
+            _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
+        }
     }
 
     public void TurnEnd()
