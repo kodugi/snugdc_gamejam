@@ -108,4 +108,9 @@ public class GameManager : MonoBehaviour
     {
         return _allItems;
     }
+
+    public int GetCurrentColumn()
+    {
+        return _roundManager.CurrentColumn;
+    }
 }
