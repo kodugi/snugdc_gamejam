@@ -1,4 +1,4 @@
-enum WordType
+public enum WordType
 {
     Noun,
     Verb,
