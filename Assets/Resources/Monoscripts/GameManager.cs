@@ -34,12 +34,14 @@ public class GameManager : MonoBehaviour
     private List<(int, int)> _incorrectWordPositions = new List<(int, int)>();
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
+    private int _currentColumn = 0;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     void StartRound()
     {
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
+        _currentColumn = 0;
     }
 
     void SelectSentence()
@@ -120,6 +122,8 @@ public class GameManager : MonoBehaviour
     {
         if(_remainingChoices <= 0)
             return;
+        if(column != _currentColumn)
+            return;
         _remainingChoices--;
         _currentState = GameState.Interpret;
         // Logic for processing the chosen word goes here
@@ -134,6 +138,7 @@ public class GameManager : MonoBehaviour
             // Handle incorrect choice
             _incorrectWordPositions.Add((row, column));
         }
+        _currentColumn++;
     }
 
     void TurnEnd()
