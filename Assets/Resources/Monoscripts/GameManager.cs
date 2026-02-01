@@ -108,12 +108,12 @@ public class GameManager : MonoBehaviour
         foreach (var pos in _correctWordPositions)
         {
             // Highlight correct words
-            ButtonContainer.Instance.HighlightButton(pos.Item1,pos.Item2);
-            ButtonContainer.Instance.DisableColumn(pos.Item2);
+            ButtonContainer.Instance.HighlightButton(pos.row,pos.col);
+            ButtonContainer.Instance.DisableColumn(pos.col);
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            ButtonContainer.Instance.DisableButton(pos.Item1, pos.Item2);
+            ButtonContainer.Instance.DisableButton(pos.row, pos.col);
         }
         EndRun();
     }
@@ -197,21 +197,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void PlayTransceiver()
-    {
-        _itemStrategies[ItemType.Transceiver].Use(this);
-    }
-
-    private void PlayGloves()
-    {
-        _itemStrategies[ItemType.Gloves].Use(this);
-    }
-
-    private void PlayAncientDocument()
-    {
-        _itemStrategies[ItemType.AncientDocument].Use(this);
-    }
-
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
         if(column != _currentColumn)
@@ -226,13 +211,13 @@ public class GameManager : MonoBehaviour
         {
             // Handle correct choice
             ButtonContainer.Instance.DisableColumn(column);
-            _correctWordPositions.Add((row, column));
+            _correctWordPositions.Add(new Position(row, column));
         }
         else
         {
             // Handle incorrect choice
             ButtonContainer.Instance.DisableButton(row,column);
-            _incorrectWordPositions.Add((row, column));
+            _incorrectWordPositions.Add(new Position(row, column));
         }
         _currentColumn++;
         ButtonContainer.Instance.UnHighLightAll();
