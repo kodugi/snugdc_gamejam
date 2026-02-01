@@ -9,7 +9,6 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     [SerializeField] Image highlightImage;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
     private Collider2D collider2D;
-    public event Action<int, int,bool> OnButtonClicked;
     
     private string text = "";
     private WordType wordType;
@@ -52,7 +51,6 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     {
         Debug.Log("clicked");
         GameManager.Instance.ProcessWordChoice(row,col);
-        OnButtonClicked?.Invoke(row,col,isCorrect);
     }
 
     public void HighLight()
@@ -62,11 +60,13 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     }
     public void UnHighLight()
     {
+        if(collider2D.enabled)
         transform.localScale = Vector3.one;
         highlightImage.enabled = false;
     }
     public void Disablebutton()
     {
+        transform.localScale = Vector3.one * 0.8f;
      collider2D.enabled = false;
     }
 }
