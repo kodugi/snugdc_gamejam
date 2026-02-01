@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
     private int _remainingChoices = 2;
     private GameState _currentState = GameState.GameStart;
     private SentenceData _currentSentenceData; // _currentSentenceData[a][b]: a: col, b: row
-    private List<(int, int)> _correctWordPositions = new List<(int, int)>(); // (row, col)
-    private List<(int, int)> _incorrectWordPositions = new List<(int, int)>(); // (row, col)
+    private List<Position> _correctWordPositions = new List<Position>(); // (row, col)
+    private List<Position> _incorrectWordPositions = new List<Position>(); // (row, col)
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
     private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
