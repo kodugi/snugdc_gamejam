@@ -35,22 +35,23 @@ public class GameManager : MonoBehaviour
     private List<(int, int)> _incorrectWordPositions = new List<(int, int)>();
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
+    private Dictionary<ItemData, int> _usedItems = new Dictionary<ItemData, int>();
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
-    void StartRound()
+    public void StartRound()
     {
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
     }
 
-    void SelectSentence()
+    public void SelectSentence()
     {
         _currentState = GameState.SelectSentence;
         // Logic for selecting a sentence goes here
         _currentSentenceData = _sentenceParser.sentenceDataList[0]; // Example: select the first sentence data
     }
 
-    void RevealAnswer()
+    public void RevealAnswer()
     {
         _currentState = GameState.RevealAnswer;
         // Logic for revealing the answer goes here
@@ -65,17 +66,18 @@ public class GameManager : MonoBehaviour
     }
 
     // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
-    void StartTurn()
+    public void StartTurn()
     {
         _currentPlayer = (_currentPlayer + 1) % 2;
         _currentState = GameState.TurnStart;
         _correctWordPositions.Clear();
         _incorrectWordPositions.Clear();
         _remainingChoices = 2;
+        _usedItems.Clear();
         GainItem();
     }
 
-    void GainItem()
+    public void GainItem()
     {
         foreach (var player in Players)
         {
@@ -106,25 +108,41 @@ public class GameManager : MonoBehaviour
         return total;
     }
 
-    void PlayItem(ItemData item) // 아이템 선택 시 호출
+    public void PlayItem(ItemData item) // 아이템 선택 시 호출
     {
         _currentState = GameState.PlayItem;
         // Logic for playing an item goes here
         if (Players[_currentPlayer].inventory.ContainsKey(item) && Players[_currentPlayer].inventory[item] > 0)
         {
             Players[_currentPlayer].inventory[item]--;
-            
+            if (_usedItems.ContainsKey(item))
+            {
+                _usedItems[item]++;
+            }
+            else
+            {
+                _usedItems[item] = 1;
+            }
+
             switch (item.type)
             {
                 case ItemType.Transceiver:
+                    (int, int) location = _correctWordPositions[Random.Range(0, _correctWordPositions.Count)];
+                    // highlight word at location
                     break;
                 case ItemType.MagnifyingGlass:
                     break;
                 case ItemType.Americano:
                     break;
                 case ItemType.AncientDocument:
+                    PlayAncientDocument();
                     break;
-                case ItemType.GoldenTicket:
+                case ItemType.Gloves:
+                    if(_usedItems[item] >= 1) // 2회 이상 사용 불가
+                    {
+                        break;
+                    }
+                    PlayGloves();
                     break;
                 case ItemType.Beer:
                     break;
@@ -132,7 +150,42 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
+    private void PlayGloves()
+    {
+        // 상대의 아이템 랜덤으로 탈취
+        Player opponent = Players[(_currentPlayer + 1) % 2];
+        List<ItemData> opponentItems = new List<ItemData>(opponent.inventory.Keys);
+        if (opponentItems.Count > 0)
+        {
+            ItemData stolenItem = opponentItems[Random.Range(0, opponentItems.Count)];
+            while(opponent.inventory[stolenItem] <= 0) // 아이템 개수가 0인 경우 다시 선택
+            {
+                stolenItem = opponentItems[Random.Range(0, opponentItems.Count)];
+            }
+                
+            opponent.inventory[stolenItem]--;
+            if (opponent.inventory[stolenItem] <= 0)
+            {
+                opponent.inventory.Remove(stolenItem);
+            }
+
+            if (Players[_currentPlayer].inventory.ContainsKey(stolenItem))
+            {
+                Players[_currentPlayer].inventory[stolenItem]++;
+            }
+            else
+            {
+                Players[_currentPlayer].inventory[stolenItem] = 1;
+            }
+        }
+    }
+
+    private void PlayAncientDocument()
+    {
+        // 조사 위치 두 개 공개
+    }
+
+    public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
         if(_remainingChoices <= 0)
             return;
@@ -153,7 +206,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TurnEnd()
+    public void TurnEnd()
     {
         _currentState = GameState.TurnEnd;
         // Logic for ending the turn goes here
