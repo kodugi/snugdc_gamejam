@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
     private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
-    private bool _usedBeerLastTurn = false;
+    private bool _usedAmericanoLastTurn = false;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     public void StartRound()
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
                     }
                     break;
                 case ItemType.Beer:
-                    if(_usedBeerLastTurn)
+                    if(_usedAmericanoLastTurn)
                     {
                         return; // 연속 사용 불가
                     }
@@ -132,7 +132,6 @@ public class GameManager : MonoBehaviour
             {
                 case ItemType.Transceiver:
                     PlayTransceiver();
-                    // highlight word at location
                     break;
                 case ItemType.MagnifyingGlass:
                     // 선택한 위치가 정답인지 공개
@@ -256,10 +255,10 @@ public class GameManager : MonoBehaviour
         // Logic for ending the turn goes here
         if(_usedItems[new ItemData { type = ItemType.Americano }] > 0)
         {
-            _usedBeerLastTurn = true;
+            _usedAmericanoLastTurn = true;
             return; // 추가 턴이므로 플레이어 변경 안함
         }
-        _usedBeerLastTurn = false;
+        _usedAmericanoLastTurn = false;
         _currentPlayer = (_currentPlayer + 1) % 2;
     }
 }
