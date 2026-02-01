@@ -15,9 +15,3 @@ public enum ItemType
     Gloves,
     Beer
 }
-
-public class ItemData
-{
-    public string itemName;
-    public ItemType type;
-}

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
         foreach (ItemType type in System.Enum.GetValues(typeof(ItemType)))
         {
-            _allItems.Add(new ItemData { itemName = type.ToString(), type = type });
+            _allItems.Add(type);
         }
 
         _itemStrategies.Add(ItemType.Transceiver, new Transceiver());
@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
     private List<Position> _correctWordPositions = new List<Position>(); // (row, col)
     private List<Position> _incorrectWordPositions = new List<Position>(); // (row, col)
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
-    private List<ItemData> _allItems = new List<ItemData>();
-    private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
+    private List<ItemType> _allItems = new List<ItemType>();
+    private DefaultDictionary<ItemType, int> _usedItems = new DefaultDictionary<ItemType, int>();
     private bool _usedAmericanoLastTurn = false;
     private int _currentColumn = 0;
     private int _remainingRounds = 3;
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
             int leftCapacity = 5 - totalItems; // Assuming max capacity is 5
             for (int i = 0; i < 3 && i < leftCapacity; i++) // Example: gain 3 items
             {
-                ItemData newItem = _allItems[Random.Range(0, _allItems.Count)]; // Logic to determine which item to gain
+                ItemType newItem = _allItems[Random.Range(0, _allItems.Count)]; // Logic to determine which item to gain
                 player.inventory[newItem]++;
             }
         }
@@ -168,14 +168,14 @@ public class GameManager : MonoBehaviour
         return total;
     }
 
-    public void PlayItem(ItemData item) // 아이템 선택 시 호출
+    public void PlayItem(ItemType item) // 아이템 선택 시 호출
     {
         _currentState = GameState.PlayItem;
         // Logic for playing an item goes here
         if (Players[_currentPlayer].inventory[item] > 0)
         {
             // 이용 가능 여부 판정
-            switch (item.type)
+            switch (item)
             {
                 case ItemType.Gloves:
                     if(_usedItems[item] >= 1) // 2회 이상 사용 불가
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
             _usedItems[item]++;
 
             // 효과 발동
-            _itemStrategies[item.type].Use(this);
+            _itemStrategies[item].Use(this);
         }
     }
 
@@ -234,14 +234,14 @@ public class GameManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        if(_usedItems[new ItemData { type = ItemType.Beer }] > 0 && _remainingChoices > 0)
+        if(_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
         {
             return; // 이번 턴에 무조건 정답을 처리해야 함
         }
 
         _currentState = GameState.TurnEnd;
         // Logic for ending the turn goes here
-        if(_usedItems[new ItemData { type = ItemType.Americano }] > 0)
+        if(_usedItems[ItemType.Americano] > 0)
         {
             _usedAmericanoLastTurn = true;
             return; // 추가 턴이므로 플레이어 변경 안함
