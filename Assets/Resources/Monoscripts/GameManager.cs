@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private SentenceParser _sentenceParser;
     private ButtonContainer _buttonContainer;
 
+    private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
+
     private void Awake()
     {
         // Singleton pattern implementation
@@ -27,6 +29,15 @@ public class GameManager : MonoBehaviour
         {
             _allItems.Add(new ItemData { itemName = type.ToString(), type = type });
         }
+
+        _itemStrategies.Add(ItemType.Transceiver, new Transceiver());
+        _itemStrategies.Add(ItemType.MagnifyingGlass, new MagnifyingGlass());
+        _itemStrategies.Add(ItemType.Americano, new Americano());
+        _itemStrategies.Add(ItemType.AncientDocument, new AncientDocument());
+        _itemStrategies.Add(ItemType.Gloves, new Gloves());
+        _itemStrategies.Add(ItemType.Beer, new Beer());
+
+        StartGame();
     }
 
     private int _currentPlayer = 0; // 0 for Player 1, 1 for Player 2
@@ -40,11 +51,20 @@ public class GameManager : MonoBehaviour
     private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
     private bool _usedAmericanoLastTurn = false;
     private int _currentColumn = 0;
+    private int _remainingRounds = 3;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
-    // Round: 한 문장을 가지고 진행되는 매 판, Run: 맨 끝 단어까지의 한 번의 진행, Turn: 한 플레이어가 아이템 사용 및 단어 선택을 하는 한 차례 행동
+    // Game: 전체 게임, Round: 한 문장을 가지고 진행되는 매 판, Run: 맨 끝 단어까지의 한 번의 진행, Turn: 한 플레이어가 아이템 사용 및 단어 선택을 하는 한 차례 행동
+
+    public void StartGame()
+    {
+        _remainingRounds = 3;
+        StartRound();
+    }
+
     public void StartRound()
     {
+        _remainingRounds--;
         _currentColumn = 0;
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
@@ -58,6 +78,21 @@ public class GameManager : MonoBehaviour
         // Logic for selecting a sentence goes here
         _currentSentenceData = _sentenceParser.sentenceDataList[0];
         ButtonContainer.Instance.Init(_currentSentenceData);// Example: select the first sentence data
+    }
+
+    public void EndRound()
+    {
+        // Logic for ending the round goes here
+        // Prepare for the next round or end the game
+        if (_remainingRounds > 0)
+        {
+            StartRound();
+        }
+        else
+        {
+            // End the game
+            Debug.Log("Game Over");
+        }
     }
 
     public void StartRun()
@@ -86,10 +121,15 @@ public class GameManager : MonoBehaviour
     public void EndRun()
     {
         // Logic for ending the run goes here
-        // Prepare for the next round or end the game
-        StartRun();
+        if (true) // Condition to check if there are more runs in the round
+        {
+            StartRound();
+        }
+        else
+        {
+            EndRound();
+        }
     }
-
     // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
     public void StartTurn()
     {
@@ -153,106 +193,23 @@ public class GameManager : MonoBehaviour
             _usedItems[item]++;
 
             // 효과 발동
-            switch (item.type)
-            {
-                case ItemType.Transceiver:
-                    PlayTransceiver();
-                    break;
-                case ItemType.MagnifyingGlass:
-                    // 선택한 위치가 정답인지 공개
-                    break;
-                case ItemType.Americano:
-                    // 추가 턴 진행, 별도 함수 발동은 없음
-                    break;
-                case ItemType.AncientDocument:
-                    PlayAncientDocument();
-                    break;
-                case ItemType.Gloves:
-                    PlayGloves();
-                    break;
-                case ItemType.Beer:
-                    // 이번 턴에 무조건 정답을 처리해야 함, 별도 함수 발동은 없음
-                    break;
-            }
+            _itemStrategies[item.type].Use(this);
         }
     }
 
     private void PlayTransceiver()
     {
-        // 무작위 열의 정답 공개
-        List<(int, int)> correctLocations = new List<(int, int)>(); // (row, col)
-        for (int col = 0; col < _currentSentenceData.sentences.Count; col++)
-        {
-            for (int row = 0; row < _currentSentenceData.sentences[col].Count; row++)
-            {
-                WordData wordData = _currentSentenceData.sentences[col][row];
-                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
-                {
-                    correctLocations.Add((row, col));
-                    break;
-                }
-            }
-        }
-
-        int randomIndex = Random.Range(0, correctLocations.Count);
-        // Highlight the word at correctLocations[randomIndex]
-        _buttonContainer.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
+        _itemStrategies[ItemType.Transceiver].Use(this);
     }
 
     private void PlayGloves()
     {
-        // 상대의 아이템 랜덤으로 탈취
-        Player opponent = Players[(_currentPlayer + 1) % 2];
-        List<ItemData> opponentItems = new List<ItemData>(opponent.inventory.Keys);
-        if (opponentItems.Count > 0)
-        {
-            ItemData stolenItem = opponentItems[Random.Range(0, opponentItems.Count)];
-            while(opponent.inventory[stolenItem] <= 0) // 아이템 개수가 0인 경우 다시 선택
-            {
-                stolenItem = opponentItems[Random.Range(0, opponentItems.Count)];
-            }
-                
-            opponent.inventory[stolenItem]--;
-
-            Players[_currentPlayer].inventory[stolenItem]++;
-        }
+        _itemStrategies[ItemType.Gloves].Use(this);
     }
 
     private void PlayAncientDocument()
     {
-        // 조사 위치 두 개 공개
-        List<int> conjunctionColumns = new List<int>();
-        for (int col = 0; col < _currentSentenceData.sentences.Count; col++)
-        {
-            for (int row = 0; row < _currentSentenceData.sentences[col].Count; row++)
-            {
-                WordData wordData = _currentSentenceData.sentences[col][row];
-                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
-                {
-                    conjunctionColumns.Add(col);
-                    break;
-                }
-            }
-        }
-
-        int revealCount = Mathf.Min(2, conjunctionColumns.Count);
-        for (int i = 0; i < revealCount; i++)
-        {
-            int randomIndex = Random.Range(0, conjunctionColumns.Count);
-            int colToReveal = conjunctionColumns[randomIndex];
-            conjunctionColumns.RemoveAt(randomIndex);
-
-            for (int row = 0; row < _currentSentenceData.sentences[colToReveal].Count; row++)
-            {
-                WordData wordData = _currentSentenceData.sentences[colToReveal][row];
-                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
-                {
-                    // Highlight the column
-                    _buttonContainer.HighLightColumn(colToReveal);
-                    break;
-                }
-            }
-        }
+        _itemStrategies[ItemType.AncientDocument].Use(this);
     }
 
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
@@ -307,5 +264,24 @@ public class GameManager : MonoBehaviour
             // 모든 열을 다 선택했으므로 라운드 종료
             RevealAnswer();
         }
+        else
+        {
+            StartTurn();
+        }
+    }
+
+    public SentenceData GetCurrentSentenceData()
+    {
+        return _currentSentenceData;
+    }
+
+    public Player GetCurrentPlayer()
+    {
+        return Players[_currentPlayer];
+    }
+
+    public Player GetOpponent()
+    {
+        return Players[(_currentPlayer + 1) % 2];
     }
 }
