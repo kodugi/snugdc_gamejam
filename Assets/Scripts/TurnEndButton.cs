@@ -3,23 +3,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TurnEndButton : MonoBehaviour,IPointerClickHandler
+public class TurnEndButton : MonoBehaviour
 {
-   
+   Button _button;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnClick);
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    } public void OnPointerClick(PointerEventData eventData)
-    {
-        OnClick();
     }
     void OnClick()
     {

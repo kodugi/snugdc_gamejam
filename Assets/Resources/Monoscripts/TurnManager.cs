@@ -42,6 +42,10 @@ public class TurnManager : MonoBehaviour
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(_remainingChoices);
         GainItem();
+        if (_currentPlayer == 1)
+        {
+            PlayEnemyTurn();
+        }
     }
 
     public void GainItem()
@@ -89,6 +93,10 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private void PlayEnemyTurn()
+    {
+        
+    }
     public void ProcessWordChoice(int row, int column)
     {
         if (column != _roundManager.CurrentColumn)
