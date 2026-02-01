@@ -14,6 +14,7 @@ public class TurnManager : MonoBehaviour
         {
             __remainingChoices = value;
             _gameManager.UIManager.UpdateRemainingChoices(value);
+            _gameManager.UIManager.UpdateSkipButton(value);
         }
     }
     private int __remainingChoices = 2;
@@ -105,13 +106,13 @@ public class TurnManager : MonoBehaviour
         {
             Debug.Log("Correct choice!");
             _gameManager.ButtonContainer.DisableColumn(column);
-            _roundManager.CorrectWordPositions.Add(new Position(row, column));
+            _roundManager.CorrectWordPositionsAdd(new Position(row, column));
         }
         else
         {
             Debug.Log("Incorrect choice!");
             _gameManager.ButtonContainer.DisableButton(row, column);
-            _roundManager.IncorrectWordPositions.Add(new Position(row, column));
+            _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }
 
         _roundManager.AdvanceColumn();
@@ -120,6 +121,10 @@ public class TurnManager : MonoBehaviour
         if (_remainingChoices > 0)
         {
             _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
+        }
+        else
+        {
+            TurnEnd();
         }
     }
 
