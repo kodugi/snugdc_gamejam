@@ -40,145 +40,6 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    void Update()
-    {
-        switch (_currentState)
-        {
-            case GameState.GameStart:
-                // Logic for starting the game
-                _remainingRounds = 3;
-                _currentState = GameState.StartRound;
-                break;
-
-            case GameState.StartRound:
-                _remainingRounds--;
-                _currentColumn = 0;
-                _currentPlayer = 0;
-                _currentState = GameState.SelectSentence;
-                break;
-
-            case GameState.SelectSentence:
-                // Logic for selecting a sentence goes here
-                _currentSentenceData = _sentenceParser.sentenceDataList[0]; // Example: select the first sentence data
-                ButtonContainer.Instance.Init(_currentSentenceData);
-                _currentState = GameState.StartRun;
-                break;
-
-            case GameState.StartRun:
-                _currentColumn = 0;
-                _currentState = GameState.TurnStart;
-                break;
-
-            case GameState.TurnStart:
-                _correctWordPositions.Clear();
-                _incorrectWordPositions.Clear();
-                _remainingChoices = 2;
-                _usedItems.Clear();
-                _buttonContainer.UnHighLightAll();
-                GainItem();
-                // Transition to a state where you wait for player input, e.g., PlayItem or ProcessWordChoice
-                _currentState = GameState.WaitForInput;
-                break;
-
-            case GameState.PlayItem:
-                // This state would be entered when a player clicks an item button.
-                // The item's effect is applied, and then you might go back to waiting for input
-                // or to the next phase of the turn.
-                break;
-
-            case GameState.Interpret:
-                // This state is entered after a word is chosen.
-                // After processing, decide what's next.
-                if (_currentColumn >= _currentSentenceData.sentences.Count)
-                {
-                    _currentState = GameState.RevealAnswer;
-                }
-                else if (_remainingChoices <= 0)
-                {
-                    _currentState = GameState.TurnEnd;
-                }
-                else
-                {
-                    _currentState = GameState.WaitForInput;
-                }
-                break;
-
-            case GameState.TurnEnd:
-                if (_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
-                {
-                    // Stay in a state to force word choice
-                    _currentState = GameState.WaitForInput;
-                    return;
-                }
-
-                if (_usedItems[ItemType.Americano] > 0)
-                {
-                    _usedAmericanoLastTurn = true;
-                    _currentState = GameState.TurnStart; // New turn for same player
-                }
-                else
-                {
-                    _usedAmericanoLastTurn = false;
-                    _currentPlayer = (_currentPlayer + 1) % 2;
-                    _currentState = GameState.TurnStart; // New turn for next player
-                }
-
-                if (_currentColumn >= _currentSentenceData.sentences.Count)
-                {
-                    _currentState = GameState.RevealAnswer;
-                }
-                break;
-
-            case GameState.RevealAnswer:
-                // Logic for revealing the answer goes here
-                foreach (var pos in _correctWordPositions)
-                {
-                    _correctColumns.Add(pos.col);
-                    ButtonContainer.Instance.HighlightButton(pos.row, pos.col);
-                    ButtonContainer.Instance.DisableColumn(pos.col);
-                }
-                foreach (var pos in _incorrectWordPositions)
-                {
-                    ButtonContainer.Instance.DisableButton(pos.row, pos.col);
-                }
-                _currentState = GameState.EndRun;
-                break;
-
-            case GameState.EndRun:
-                if (_correctColumns.Count < _currentSentenceData.sentences.Count)
-                {
-                    _currentState = GameState.StartRun;
-                }
-                else
-                {
-                    _currentState = GameState.EndRound;
-                }
-                break;
-
-            case GameState.EndRound:
-                if (_remainingRounds > 0)
-                {
-                    _currentState = GameState.StartRound;
-                }
-                else
-                {
-                    Debug.Log("Game Over");
-                    _currentState = GameState.GameOver; // Or some other final state
-                }
-                break;
-
-            case GameState.WaitForInput:
-                // The game is now waiting for the player to either use an item or select a word.
-                // The UI buttons for items and words should call methods like PlayItem() or ProcessWordChoice().
-                // These methods will then change the state to GameState.PlayItem or GameState.Interpret.
-                break;
-
-            case GameState.GameOver:
-                // Game is over, do nothing.
-                break;
-        }
-    }
-
     private int _currentPlayer = 0; // 0 for Player 1, 1 for Player 2
     private int _remainingChoices = 2;
     private GameState _currentState = GameState.GameStart;
@@ -198,42 +59,89 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        _currentState = GameState.GameStart;
+        _remainingRounds = 3;
+        StartRound();
     }
 
     public void StartRound()
     {
-        _currentState = GameState.StartRound;
+        _remainingRounds--;
+        _currentColumn = 0;
+        _currentPlayer = 0;
+        _currentState = GameState.GameStart;
+        SelectSentence();
+        StartRun();
     }
 
     public void SelectSentence()
     {
         _currentState = GameState.SelectSentence;
+        // Logic for selecting a sentence goes here
+        _currentSentenceData = _sentenceParser.sentenceDataList[0];
+        ButtonContainer.Instance.Init(_currentSentenceData);// Example: select the first sentence data
     }
 
     public void EndRound()
     {
-        _currentState = GameState.EndRound;
+        // Logic for ending the round goes here
+        // Prepare for the next round or end the game
+        if (_remainingRounds > 0)
+        {
+            StartRound();
+        }
+        else
+        {
+            // End the game
+            Debug.Log("Game Over");
+        }
     }
 
     public void StartRun()
     {
-        _currentState = GameState.StartRun;
+        _currentColumn = 0;
+        StartTurn();
     }
 
     public void RevealAnswer()
     {
         _currentState = GameState.RevealAnswer;
+        // Logic for revealing the answer goes here
+        foreach (var pos in _correctWordPositions)
+        {
+            _correctColumns.Add(pos.col);
+            // Highlight correct words
+            ButtonContainer.Instance.HighlightButton(pos.row,pos.col);
+            ButtonContainer.Instance.DisableColumn(pos.col);
+        }
+        foreach (var pos in _incorrectWordPositions)
+        {
+            ButtonContainer.Instance.DisableButton(pos.row, pos.col);
+        }
+        EndRun();
     }
 
     public void EndRun()
     {
-        _currentState = GameState.EndRun;
+        // Logic for ending the run goes here
+        if (_correctColumns.Count < _currentSentenceData.sentences.Count) // 답을 다 맞히지 못했다면 다시 run 시작
+        {
+            StartRun();
+        }
+        else
+        {
+            EndRound();
+        }
     }
     // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
     public void StartTurn()
     {
         _currentState = GameState.TurnStart;
+        _correctWordPositions.Clear();
+        _incorrectWordPositions.Clear();
+        _remainingChoices = 2;
+        _usedItems.Clear();
+        _buttonContainer.UnHighLightAll();
+        GainItem();
     }
 
     public void GainItem()
@@ -262,8 +170,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayItem(ItemType item) // 아이템 선택 시 호출
     {
-        if (_currentState != GameState.WaitForInput) return;
-
+        _currentState = GameState.PlayItem;
         // Logic for playing an item goes here
         if (Players[_currentPlayer].inventory[item] > 0)
         {
@@ -289,19 +196,17 @@ public class GameManager : MonoBehaviour
 
             // 효과 발동
             _itemStrategies[item].Use(this);
-            _currentState = GameState.PlayItem;
         }
     }
 
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
-        if (_currentState != GameState.WaitForInput) return;
         if(column != _currentColumn)
             return; // 현재 선택 가능한 열이 아님
         if(_remainingChoices <= 0)
             return;
         _remainingChoices--;
-        
+        _currentState = GameState.Interpret;
         // Logic for processing the chosen word goes here
         WordData chosenWord = _currentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
@@ -325,12 +230,37 @@ public class GameManager : MonoBehaviour
         
         ButtonContainer.Instance.UnHighLightAll();
         ButtonContainer.Instance.HighLightColumn(_currentColumn);
-        _currentState = GameState.Interpret;
     }
 
     public void TurnEnd()
     {
+        if(_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
+        {
+            return; // 이번 턴에 무조건 정답을 처리해야 함
+        }
+
         _currentState = GameState.TurnEnd;
+        // Logic for ending the turn goes here
+        if(_usedItems[ItemType.Americano] > 0)
+        {
+            _usedAmericanoLastTurn = true;
+            return; // 추가 턴이므로 플레이어 변경 안함
+        }
+        else
+        {
+            _usedAmericanoLastTurn = false;
+            _currentPlayer = (_currentPlayer + 1) % 2;
+        }
+        
+        if(_currentColumn >= _currentSentenceData.sentences.Count)
+        {
+            // 모든 열을 다 선택했으므로 라운드 종료
+            RevealAnswer();
+        }
+        else
+        {
+            StartTurn();
+        }
     }
 
     public SentenceData GetCurrentSentenceData()
