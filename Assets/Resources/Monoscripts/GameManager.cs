@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SentenceParser))]
 [RequireComponent(typeof(RoundManager))]
 [RequireComponent(typeof(TurnManager))]
+[RequireComponent(typeof(UIManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -13,10 +14,10 @@ public class GameManager : MonoBehaviour
     private RoundManager _roundManager;
     private TurnManager _turnManager;
     [SerializeField] ButtonContainer _buttonContainer;
-
+    private UIManager _uiManager;
     public ButtonContainer ButtonContainer => _buttonContainer;
     public SentenceParser SentenceParser => _sentenceParser;
-
+    public UIManager UIManager => _uiManager;
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
 
     private void Awake()
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         _sentenceParser = GetComponent<SentenceParser>();
         _roundManager = GetComponent<RoundManager>();
         _turnManager = GetComponent<TurnManager>();
+        _uiManager = GetComponent<UIManager>();
 
         foreach (ItemType type in System.Enum.GetValues(typeof(ItemType)))
         {
