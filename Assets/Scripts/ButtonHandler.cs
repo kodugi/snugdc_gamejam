@@ -55,6 +55,7 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
 
     public void HighLight()
     {
+        if (!collider2D.enabled) return;
         transform.localScale = Vector3.one * 1.2f;
         highlightImage.enabled = true;
     }
@@ -67,6 +68,7 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     public void Disablebutton()
     {
         transform.localScale = Vector3.one * 0.8f;
+        GetComponent<Image>().color=new Color(100+(!isCorrect ? 100:0),100+(isCorrect ? 100:0),150,255);
         collider2D.enabled = false;
     }
 }
