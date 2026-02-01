@@ -1,77 +1,67 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonContainer : MonoBehaviour
-{
+{ 
+    public static ButtonContainer Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Singleton pattern implementation
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        WordData[][] test = new WordData[4][];
-        for (int i = 0; i < 4; i++)
-        {
-            test[i]=new WordData[3];
-            for (int j = 0; j < 3; j++)
-            {
-                WordData testdata=new WordData();
-                testdata.type = WordType.Verb;
-                testdata.word = "123";
-                testdata.isCorrect=false;
-                test[i][j]=testdata;
-            }
-        }
-        Init(test);
-        HighLightColumn(0);
     }
 
     [SerializeField] private float verticalpaddingheight;
     [SerializeField] private float horizontialpaddingwidth;
     [SerializeField] private GameObject button;
     private ButtonHandler[][] buttonlists;
-    public void Init(WordData[][] wordLists)
+    public void Init(SentenceData sentenceData)
     {
-        buttonlists = new ButtonHandler[wordLists.Length][];
+        List<List<WordData>> wordLists=sentenceData.sentences;
+        
+        buttonlists = new ButtonHandler[wordLists.Count][];
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
-        for(int col = 0 ; col<wordLists.Length ; col++)
+        for(int col = 0 ; col<wordLists.Count ; col++)
         {
-            WordData[] wordList = wordLists[col];
-            buttonlists[col] = new ButtonHandler[wordList.Length];
+            List<WordData> wordList = wordLists[col];
+            buttonlists[col] = new ButtonHandler[wordList.Count];
             GameObject go = Instantiate(new GameObject(),transform);
             go.name = "ButtonList";
             go.transform.SetParent(transform,false);
             VerticalLayoutGroup verticalLayoutGroup = go.AddComponent<VerticalLayoutGroup>();
             LayoutElement layoutElement = go.AddComponent<LayoutElement>();
             layoutElement.preferredHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
-            layoutElement.preferredWidth = transform.GetComponent<RectTransform>().sizeDelta.x/wordLists.Length;
+            layoutElement.preferredWidth = transform.GetComponent<RectTransform>().sizeDelta.x/wordLists.Count;
             
             verticalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
             verticalLayoutGroup.childControlWidth = false;
             verticalLayoutGroup.childControlHeight = false;
             verticalLayoutGroup.spacing = verticalpaddingheight;
-            for(int row = 0 ; row<wordList.Length ; row++)
+            for(int row = 0 ; row<wordList.Count ; row++)
             {
                 Debug.Log(row);
                 WordData wordData = wordList[row];
                 GameObject goButton = Instantiate(button, go.transform);
                 ButtonHandler buttonScript = goButton.GetComponent<ButtonHandler>();
-                buttonScript.OnButtonClicked += HandleButtonClicked;
                 buttonlists[col][row]=buttonScript;
                 buttonScript.Init(wordData,row,col);
             }
-        }
-    }
-
-    public void HandleButtonClicked(int row, int col,bool isCorrect)
-    {
-        if (isCorrect)
-        {
-            DisableColumn(col);
-        }
-        else
-        {
-            DisableButton(row,col);
         }
     }
     public void DisableButton(int row, int col)
@@ -104,6 +94,7 @@ public class ButtonContainer : MonoBehaviour
 
     public void HighLightColumn(int col)
     {
+        if (col >= buttonlists.Length) return;
         for (int row = 0; row < buttonlists[col].Length; row++)
         {
             buttonlists[col][row].HighLight();

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -51,7 +53,8 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.SelectSentence;
         // Logic for selecting a sentence goes here
-        _currentSentenceData = _sentenceParser.sentenceDataList[0]; // Example: select the first sentence data
+        _currentSentenceData = _sentenceParser.sentenceDataList[0];
+        ButtonContainer.Instance.Init(_currentSentenceData);// Example: select the first sentence data
     }
 
     public void RevealAnswer()
@@ -61,11 +64,12 @@ public class GameManager : MonoBehaviour
         foreach (var pos in _correctWordPositions)
         {
             // Highlight correct words
-            _buttonContainer.DisableColumn(pos.Item2);
+            ButtonContainer.Instance.HighlightButton(pos.Item1,pos.Item2);
+            ButtonContainer.Instance.DisableColumn(pos.Item2);
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            _buttonContainer.DisableButton(pos.Item1, pos.Item2);
+            ButtonContainer.Instance.DisableButton(pos.Item1, pos.Item2);
         }
     }
 
@@ -244,14 +248,18 @@ public class GameManager : MonoBehaviour
         if (chosenWord.isCorrect)
         {
             // Handle correct choice
+            ButtonContainer.Instance.DisableColumn(column);
             _correctWordPositions.Add((row, column));
         }
         else
         {
             // Handle incorrect choice
+            ButtonContainer.Instance.DisableButton(row,column);
             _incorrectWordPositions.Add((row, column));
         }
         _currentColumn++;
+        ButtonContainer.Instance.UnHighLightAll();
+        ButtonContainer.Instance.HighLightColumn(_currentColumn);
     }
 
     public void TurnEnd()
