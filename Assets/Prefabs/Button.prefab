@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHandler
   highlightImage: {fileID: 5905430365909038836}
   _textMeshPro: {fileID: 627783224015335605}
+  collider2D: {fileID: 3505025029723201943}
 --- !u!61 &3505025029723201943
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,7 +250,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 75, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6517605042691426332
 CanvasRenderer:
@@ -279,7 +280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30a3e0ef1332d7e408f5972ba3e6df13, type: 2}
   m_sharedMaterial: {fileID: 7861205532988152930, guid: 30a3e0ef1332d7e408f5972ba3e6df13, type: 2}

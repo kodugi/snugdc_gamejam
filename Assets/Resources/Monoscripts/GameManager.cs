@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     private SentenceParser _sentenceParser;
-    private ButtonContainer _buttonContainer;
+    [SerializeField] ButtonContainer _buttonContainer;
 
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
 
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         _currentState = GameState.SelectSentence;
         // Logic for selecting a sentence goes here
         _currentSentenceData = _sentenceParser.sentenceDataList[0];
-        ButtonContainer.Instance.Init(_currentSentenceData);// Example: select the first sentence data
+        _buttonContainer.Init(_currentSentenceData);// Example: select the first sentence data
     }
 
     public void EndRound()
@@ -110,12 +110,12 @@ public class GameManager : MonoBehaviour
         {
             _correctColumns.Add(pos.col);
             // Highlight correct words
-            ButtonContainer.Instance.HighlightButton(pos.row,pos.col);
-            ButtonContainer.Instance.DisableColumn(pos.col);
+            _buttonContainer.HighlightButton(pos.Item1,pos.Item2);
+            _buttonContainer.DisableColumn(pos.Item2);
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            ButtonContainer.Instance.DisableButton(pos.row, pos.col);
+            _buttonContainer.DisableButton(pos.Item1, pos.Item2);
         }
         EndRun();
     }
@@ -201,19 +201,22 @@ public class GameManager : MonoBehaviour
 
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
-        if(column != _currentColumn)
+        if(column != _currentColumn){
+            Debug.Log("clicked:"+column+",need:"+_currentColumn);
             return; // 현재 선택 가능한 열이 아님
+        }
         if(_remainingChoices <= 0)
             return;
         _remainingChoices--;
         _currentState = GameState.Interpret;
+        Debug.Log("select "+row+":"+column);
         // Logic for processing the chosen word goes here
         WordData chosenWord = _currentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
             // Handle correct choice
-            ButtonContainer.Instance.DisableColumn(column);
-            _correctWordPositions.Add(new Position(row, column));
+            _buttonContainer.DisableColumn(column);
+            _correctWordPositions.Add((row, column));
         }
         else
         {
@@ -234,12 +237,15 @@ public class GameManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        if(_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
+        if (_remainingChoices == 2) return;
+        Debug.Log("turnEnded");
+        if(_usedItems[new ItemData { type = ItemType.Beer }] > 0 && _remainingChoices > 0)
         {
             return; // 이번 턴에 무조건 정답을 처리해야 함
         }
 
         _currentState = GameState.TurnEnd;
+        _remainingChoices = 2;
         // Logic for ending the turn goes here
         if(_usedItems[ItemType.Americano] > 0)
         {
