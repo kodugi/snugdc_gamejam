@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
         _correctWordPositions.Clear();
         _incorrectWordPositions.Clear();
         _remainingChoices = 2;
-        gainItem();
+        GainItem();
     }
 
-    void gainItem()
+    void GainItem()
     {
         foreach (var player in Players)
         {
-            int totalItems = getTotalItems(player.playerId);
+            int totalItems = GetTotalItems(player.playerId);
             int leftCapacity = 5 - totalItems; // Assuming max capacity is 5
             for (int i = 0; i < 3 && i < leftCapacity; i++) // Example: gain 3 items
             {
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    int getTotalItems(int playerId)
+    private int GetTotalItems(int playerId)
     {
         int total = 0;
         foreach (var itemCount in Players[playerId].inventory.Values)
@@ -113,7 +113,22 @@ public class GameManager : MonoBehaviour
         if (Players[_currentPlayer].inventory.ContainsKey(item) && Players[_currentPlayer].inventory[item] > 0)
         {
             Players[_currentPlayer].inventory[item]--;
-            // Apply item effect to the game
+            
+            switch (item.type)
+            {
+                case ItemType.Transceiver:
+                    break;
+                case ItemType.MagnifyingGlass:
+                    break;
+                case ItemType.Americano:
+                    break;
+                case ItemType.AncientDocument:
+                    break;
+                case ItemType.GoldenTicket:
+                    break;
+                case ItemType.Beer:
+                    break;
+            }
         }
     }
 
@@ -142,17 +157,5 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.TurnEnd;
         // Logic for ending the turn goes here
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
