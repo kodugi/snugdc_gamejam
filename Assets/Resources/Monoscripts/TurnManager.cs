@@ -7,7 +7,16 @@ public class TurnManager : MonoBehaviour
     private RoundManager _roundManager;
 
     private int _currentPlayer = 0;
-    private int _remainingChoices = 2;
+        private int _remainingChoices
+    {
+        get => __remainingChoices;
+        set
+        {
+            __remainingChoices = value;
+            _gameManager.UIManager.UpdateRemainingChoices(value);
+        }
+    }
+    private int __remainingChoices = 2;
     private DefaultDictionary<ItemType, int> _usedItems = new DefaultDictionary<ItemType, int>();
     private bool _usedAmericanoLastTurn = false;
 
@@ -30,6 +39,7 @@ public class TurnManager : MonoBehaviour
         _usedItems.Clear();
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
+        _gameManager.UIManager.UpdateRemainingChoices(_remainingChoices);
         GainItem();
     }
 
