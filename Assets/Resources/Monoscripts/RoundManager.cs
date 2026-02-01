@@ -44,7 +44,7 @@ public class RoundManager : MonoBehaviour
     public void SelectSentence()
     {
         // Logic for selecting a sentence goes here
-        _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[0];
+        _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[Random.Range(0, _gameManager.SentenceParser.sentenceDataList.Count)];
         _gameManager.ButtonContainer.Init(_currentSentenceData);
     }
 
