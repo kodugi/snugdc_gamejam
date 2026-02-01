@@ -30,12 +30,13 @@ public class GameManager : MonoBehaviour
     private int _currentPlayer = 0; // 0 for Player 1, 1 for Player 2
     private int _remainingChoices = 2;
     private GameState _currentState = GameState.GameStart;
-    private SentenceData _currentSentenceData;
+    private SentenceData _currentSentenceData; // _currentSentenceData[a][b]: a: col, b: row
     private List<(int, int)> _correctWordPositions = new List<(int, int)>();
     private List<(int, int)> _incorrectWordPositions = new List<(int, int)>();
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
-    private Dictionary<ItemData, int> _usedItems = new Dictionary<ItemData, int>();
+    private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
+    private bool _usedBeerLastTurn = false;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     public void StartRound()
@@ -68,7 +69,6 @@ public class GameManager : MonoBehaviour
     // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
     public void StartTurn()
     {
-        _currentPlayer = (_currentPlayer + 1) % 2;
         _currentState = GameState.TurnStart;
         _correctWordPositions.Clear();
         _incorrectWordPositions.Clear();
@@ -86,14 +86,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 3 && i < leftCapacity; i++) // Example: gain 3 items
             {
                 ItemData newItem = _allItems[Random.Range(0, _allItems.Count)]; // Logic to determine which item to gain
-                if (player.inventory.ContainsKey(newItem))
-                {
-                    player.inventory[newItem]++;
-                }
-                else
-                {
-                    player.inventory[newItem] = 1;
-                }
+                player.inventory[newItem]++;
             }
         }
     }
@@ -112,42 +105,74 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.PlayItem;
         // Logic for playing an item goes here
-        if (Players[_currentPlayer].inventory.ContainsKey(item) && Players[_currentPlayer].inventory[item] > 0)
+        if (Players[_currentPlayer].inventory[item] > 0)
         {
-            Players[_currentPlayer].inventory[item]--;
-            if (_usedItems.ContainsKey(item))
+            // 이용 가능 여부 판정
+            switch (item.type)
             {
-                _usedItems[item]++;
-            }
-            else
-            {
-                _usedItems[item] = 1;
+                case ItemType.Gloves:
+                    if(_usedItems[item] >= 1) // 2회 이상 사용 불가
+                    {
+                        return;
+                    }
+                    break;
+                case ItemType.Beer:
+                    if(_usedBeerLastTurn)
+                    {
+                        return; // 연속 사용 불가
+                    }
+                    break;
             }
 
+            Players[_currentPlayer].inventory[item]--;
+            _usedItems[item]++;
+
+            // 효과 발동
             switch (item.type)
             {
                 case ItemType.Transceiver:
-                    (int, int) location = _correctWordPositions[Random.Range(0, _correctWordPositions.Count)];
+                    PlayTransceiver();
                     // highlight word at location
                     break;
                 case ItemType.MagnifyingGlass:
+                    // 선택한 위치가 정답인지 공개
                     break;
                 case ItemType.Americano:
+                    // 추가 턴 진행, 별도 함수 발동은 없음
                     break;
                 case ItemType.AncientDocument:
                     PlayAncientDocument();
                     break;
                 case ItemType.Gloves:
-                    if(_usedItems[item] >= 1) // 2회 이상 사용 불가
-                    {
-                        break;
-                    }
                     PlayGloves();
                     break;
                 case ItemType.Beer:
+                    // 이번 턴에 무조건 정답을 처리해야 함, 별도 함수 발동은 없음
                     break;
             }
         }
+    }
+
+    private void PlayTransceiver()
+    {
+        // 무작위 열의 정답 공개
+        List<(int, int)> correctLocations = new List<(int, int)>();
+        for (int col = 0; col < _currentSentenceData.sentences.Count; col++)
+        {
+            for (int row = 0; row < _currentSentenceData.sentences[col].Count; row++)
+            {
+                WordData wordData = _currentSentenceData.sentences[col][row];
+                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
+                {
+                    correctLocations.Add((row, col));
+                    break;
+                }
+            }
+        }
+
+        int randomIndex = Random.Range(0, correctLocations.Count);
+        WordData wordData = _currentSentenceData.sentences[correctLocations[randomIndex].Item2][correctLocations[randomIndex].Item1];
+        // Highlight the word at correctLocations[randomIndex]
     }
 
     private void PlayGloves()
@@ -164,25 +189,45 @@ public class GameManager : MonoBehaviour
             }
                 
             opponent.inventory[stolenItem]--;
-            if (opponent.inventory[stolenItem] <= 0)
-            {
-                opponent.inventory.Remove(stolenItem);
-            }
 
-            if (Players[_currentPlayer].inventory.ContainsKey(stolenItem))
-            {
-                Players[_currentPlayer].inventory[stolenItem]++;
-            }
-            else
-            {
-                Players[_currentPlayer].inventory[stolenItem] = 1;
-            }
+            Players[_currentPlayer].inventory[stolenItem]++;
         }
     }
 
     private void PlayAncientDocument()
     {
         // 조사 위치 두 개 공개
+        List<int> conjunctionColumns = new List<int>();
+        for (int col = 0; col < _currentSentenceData.sentences.Count; col++)
+        {
+            for (int row = 0; row < _currentSentenceData.sentences[col].Count; row++)
+            {
+                WordData wordData = _currentSentenceData.sentences[col][row];
+                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
+                {
+                    conjunctionColumns.Add(col);
+                    break;
+                }
+            }
+        }
+
+        int revealCount = Mathf.Min(2, conjunctionColumns.Count);
+        for (int i = 0; i < revealCount; i++)
+        {
+            int randomIndex = Random.Range(0, conjunctionColumns.Count);
+            int colToReveal = conjunctionColumns[randomIndex];
+            conjunctionColumns.RemoveAt(randomIndex);
+
+            for (int row = 0; row < _currentSentenceData.sentences[colToReveal].Count; row++)
+            {
+                WordData wordData = _currentSentenceData.sentences[colToReveal][row];
+                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
+                {
+                    // Highlight the column
+                    break;
+                }
+            }
+        }
     }
 
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
@@ -192,7 +237,7 @@ public class GameManager : MonoBehaviour
         _remainingChoices--;
         _currentState = GameState.Interpret;
         // Logic for processing the chosen word goes here
-        WordData chosenWord = _currentSentenceData.sentences[row][column];
+        WordData chosenWord = _currentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
             // Handle correct choice
@@ -210,5 +255,12 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.TurnEnd;
         // Logic for ending the turn goes here
+        if(_usedItems[new ItemData { type = ItemType.Americano }] > 0)
+        {
+            _usedBeerLastTurn = true;
+            return; // 추가 턴이므로 플레이어 변경 안함
+        }
+        _usedBeerLastTurn = false;
+        _currentPlayer = (_currentPlayer + 1) % 2;
     }
 }
