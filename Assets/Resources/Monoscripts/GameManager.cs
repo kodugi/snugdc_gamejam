@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     private void PlayTransceiver()
     {
         // 무작위 열의 정답 공개
-        List<(int, int)> correctLocations = new List<(int, int)>();
+        List<(int, int)> correctLocations = new List<(int, int)>(); // (row, col)
         for (int col = 0; col < _currentSentenceData.sentences.Count; col++)
         {
             for (int row = 0; row < _currentSentenceData.sentences[col].Count; row++)
@@ -171,7 +171,6 @@ public class GameManager : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, correctLocations.Count);
-        WordData wordData = _currentSentenceData.sentences[correctLocations[randomIndex].Item2][correctLocations[randomIndex].Item1];
         // Highlight the word at correctLocations[randomIndex]
     }
 
