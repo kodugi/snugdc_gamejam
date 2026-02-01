@@ -32,7 +32,7 @@ public class ButtonContainer : MonoBehaviour
             VerticalLayoutGroup verticalLayoutGroup = go.AddComponent<VerticalLayoutGroup>();
             LayoutElement layoutElement = go.AddComponent<LayoutElement>();
             layoutElement.preferredHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
-            layoutElement.preferredWidth = transform.GetComponent<RectTransform>().sizeDelta.x/wordLists.Count;
+            layoutElement.preferredWidth = 75;
             
             verticalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
             verticalLayoutGroup.childControlWidth = false;

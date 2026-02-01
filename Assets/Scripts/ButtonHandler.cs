@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class ButtonHandler : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] Image highlightImage;
+    [SerializeField] Image IncorrectHider;
+    [SerializeField] Image CorrectHider;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
     [SerializeField] private Collider2D collider2D;
     
@@ -30,6 +32,9 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     public void Init(WordData wordData,int row,int col)
     {
         UnHighLight();
+        IncorrectHider.enabled = false;
+        CorrectHider.enabled = false;
+        collider2D.enabled = true;
         highlightImage.transform.localScale=Vector3.one*1.3f;
         text=wordData.word;
         SetText(text);
@@ -45,6 +50,8 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!collider2D.enabled)
+            return;
         OnClick();
     }
     void OnClick()
@@ -56,7 +63,6 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     public void HighLight()
     {
         if (!collider2D.enabled) return;
-        transform.localScale = Vector3.one * 1.2f;
         highlightImage.enabled = true;
     }
     public void UnHighLight()
@@ -67,8 +73,25 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     }
     public void Disablebutton()
     {
-        transform.localScale = Vector3.one * 0.8f;
-        GetComponent<Image>().color=new Color(100+(!isCorrect ? 100:0),100+(isCorrect ? 100:0),150,255);
+        if (isCorrect)
+        {
+            Disablecorrect();
+        }
+        else
+        {
+            DisableIncorrect();
+        }
         collider2D.enabled = false;
+    }
+
+    private void DisableIncorrect()
+    {
+        transform.localScale = Vector3.one * 0.8f;
+        IncorrectHider.enabled = true;
+    }
+
+    private void Disablecorrect()
+    {
+        CorrectHider.enabled = true;
     }
 }

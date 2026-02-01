@@ -78,8 +78,8 @@ public class RoundManager : MonoBehaviour
         foreach (var pos in _correctWordPositions)
         {
             _correctColumns.Add(pos.col);
-            _gameManager.ButtonContainer.HighlightButton(pos.row, pos.col);
             _gameManager.ButtonContainer.DisableColumn(pos.col);
+            _gameManager.ButtonContainer.HighlightButton(pos.row, pos.col);
         }
         foreach (var pos in _incorrectWordPositions)
         {
@@ -108,5 +108,19 @@ public class RoundManager : MonoBehaviour
             _currentColumn++;
         }
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
+        if(_currentColumn==_currentSentenceData.sentences.Count) _currentColumn = 0;
+        while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count)
+        {
+            _currentColumn++;
+        }
+    }
+
+    public void CorrectWordPositionsAdd(Position position)
+    {
+        _correctWordPositions.Add(position);
+        _correctColumns.Add(position.col);
+    }public void IncorrectWordPositionsAdd(Position position)
+    {
+        _incorrectWordPositions.Add(position);
     }
 }
