@@ -4,9 +4,21 @@ using System.Collections.Generic;
 public class SentenceParser : MonoBehaviour
 {
     [System.Serializable]
+    private class WordListWrapper
+    {
+        public List<WordData> words;
+    }
+
+    [System.Serializable]
+    private class SentenceListWrapper
+    {
+        public List<WordListWrapper> sentences;
+    }
+
+    [System.Serializable]
     private class SentenceDataWrapper
     {
-        public List<List<List<WordData>>> sentences;
+        public List<SentenceListWrapper> stages;
     }
 
     public List<SentenceData> sentenceDataList;
@@ -19,12 +31,17 @@ public class SentenceParser : MonoBehaviour
             SentenceDataWrapper wrapper = JsonUtility.FromJson<SentenceDataWrapper>(sentenceJson.text);
             sentenceDataList = new List<SentenceData>();
 
-            for (int i = 0; i < wrapper.sentences.Count; i++)
+            foreach (var stage in wrapper.stages)
             {
                 SentenceData data = new SentenceData
                 {
-                    sentences = wrapper.sentences[i]
+                    sentences = new List<List<WordData>>()
                 };
+
+                foreach (var sentence in stage.sentences)
+                {
+                    data.sentences.Add(sentence.words);
+                }
                 sentenceDataList.Add(data);
             }
         }
