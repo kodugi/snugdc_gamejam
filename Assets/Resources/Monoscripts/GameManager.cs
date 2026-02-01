@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         _incorrectWordPositions.Clear();
         _remainingChoices = 2;
         _usedItems.Clear();
+        _buttonContainer.UnHighLightAll();
         GainItem();
     }
 
@@ -123,7 +124,7 @@ public class GameManager : MonoBehaviour
                         return;
                     }
                     break;
-                case ItemType.Beer:
+                case ItemType.Americano:
                     if(_usedAmericanoLastTurn)
                     {
                         return; // 연속 사용 불가
@@ -178,6 +179,7 @@ public class GameManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, correctLocations.Count);
         // Highlight the word at correctLocations[randomIndex]
+        _buttonContainer.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
     }
 
     private void PlayGloves()
@@ -229,6 +231,7 @@ public class GameManager : MonoBehaviour
                 if (wordData.type == WordType.Conjunction && wordData.isCorrect)
                 {
                     // Highlight the column
+                    _buttonContainer.HighLightColumn(colToReveal);
                     break;
                 }
             }
