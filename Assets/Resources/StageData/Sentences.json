@@ -1,0 +1,16 @@
+{
+    "sentences": [[
+        [{"word": "나", "type": "Noun", "isCorrect": true},
+        {"word": "너", "type":"Noun", "isCorrect": false},
+        {"word": "초콜릿", "type":"Noun", "isCorrect": false},
+        {"word": "가방", "type":"Noun", "isCorrect": false},
+        {"word": "사과", "type":"Noun", "isCorrect": false}
+        ],
+        [{"word": "은/는", "type": "Conjunction", "isCorrect": true},
+        {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+        {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+        {"word": "에게", "type": "Conjunction", "isCorrect": false},
+        {"word": "푸딩", "type": "Noun", "isCorrect": false}
+        ]
+    ]]
+}
