@@ -31,16 +31,18 @@ public class GameManager : MonoBehaviour
     private int _remainingChoices = 2;
     private GameState _currentState = GameState.GameStart;
     private SentenceData _currentSentenceData; // _currentSentenceData[a][b]: a: col, b: row
-    private List<(int, int)> _correctWordPositions = new List<(int, int)>();
-    private List<(int, int)> _incorrectWordPositions = new List<(int, int)>();
+    private List<(int, int)> _correctWordPositions = new List<(int, int)>(); // (row, col)
+    private List<(int, int)> _incorrectWordPositions = new List<(int, int)>(); // (row, col)
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
     private DefaultDictionary<ItemData, int> _usedItems = new DefaultDictionary<ItemData, int>();
     private bool _usedAmericanoLastTurn = false;
+    private int _currentColumn = 0;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     public void StartRound()
     {
+        _currentColumn = 0;
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
     }
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         foreach (var pos in _correctWordPositions)
         {
             // Highlight correct words
+            _buttonContainer.DisableColumn(pos.Item2);
         }
         foreach (var pos in _incorrectWordPositions)
         {
@@ -230,6 +233,8 @@ public class GameManager : MonoBehaviour
 
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
+        if(column != _currentColumn)
+            return; // 현재 선택 가능한 열이 아님
         if(_remainingChoices <= 0)
             return;
         _remainingChoices--;
@@ -240,13 +245,13 @@ public class GameManager : MonoBehaviour
         {
             // Handle correct choice
             _correctWordPositions.Add((row, column));
-            _buttonContainer.DisableColumn(column);
         }
         else
         {
             // Handle incorrect choice
             _incorrectWordPositions.Add((row, column));
         }
+        _currentColumn++;
     }
 
     public void TurnEnd()
@@ -258,7 +263,16 @@ public class GameManager : MonoBehaviour
             _usedAmericanoLastTurn = true;
             return; // 추가 턴이므로 플레이어 변경 안함
         }
-        _usedAmericanoLastTurn = false;
-        _currentPlayer = (_currentPlayer + 1) % 2;
+        else
+        {
+            _usedAmericanoLastTurn = false;
+            _currentPlayer = (_currentPlayer + 1) % 2;
+        }
+        
+        if(_currentColumn >= _currentSentenceData.sentences.Count)
+        {
+            // 모든 열을 다 선택했으므로 라운드 종료
+            RevealAnswer();
+        }
     }
 }
