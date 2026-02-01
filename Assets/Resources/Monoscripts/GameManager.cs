@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         _remainingRounds--;
         _currentColumn = 0;
         _currentPlayer = 0;
+        _correctColumns.Clear();
         _currentState = GameState.GameStart;
         SelectSentence();
         StartRun();
@@ -105,7 +106,13 @@ public class GameManager : MonoBehaviour
 
     public void StartRun()
     {
+        _correctWordPositions.Clear();
+        _incorrectWordPositions.Clear();
         _currentColumn = 0;
+        while(_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count){
+            _currentColumn++; // 이미 맞힌 열은 건너뜀
+        }
+        Debug.Log("StartRun at column "+_currentColumn);
         StartTurn();
     }
 
@@ -130,6 +137,7 @@ public class GameManager : MonoBehaviour
     public void EndRun()
     {
         // Logic for ending the run goes here
+        Debug.Log($"EndRun. Correct columns so far: {_correctColumns.Count}");
         if (_correctColumns.Count < _currentSentenceData.sentences.Count) // 답을 다 맞히지 못했다면 다시 run 시작
         {
             StartRun();
@@ -143,8 +151,6 @@ public class GameManager : MonoBehaviour
     public void StartTurn()
     {
         _currentState = GameState.TurnStart;
-        _correctWordPositions.Clear();
-        _incorrectWordPositions.Clear();
         _remainingChoices = 2;
         _usedItems.Clear();
         _buttonContainer.UnHighLightAll();
@@ -222,12 +228,14 @@ public class GameManager : MonoBehaviour
         if (chosenWord.isCorrect)
         {
             // Handle correct choice
+            Debug.Log("Correct choice!");
             _buttonContainer.DisableColumn(column);
             _correctWordPositions.Add(new Position(row, column));
         }
         else
         {
             // Handle incorrect choice
+            Debug.Log("Incorrect choice!");
             _buttonContainer.DisableButton(row,column);
             _incorrectWordPositions.Add(new Position(row, column));
         }
