@@ -1,24 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class SentenceParser : MonoBehaviour
 {
     [System.Serializable]
-    private class WordListWrapper
-    {
-        public List<WordData> words;
-    }
-
-    [System.Serializable]
-    private class SentenceListWrapper
-    {
-        public List<WordListWrapper> sentences;
-    }
-
-    [System.Serializable]
     private class SentenceDataWrapper
     {
-        public List<SentenceListWrapper> stages;
+        public List<List<List<WordData>>> sentences;
     }
 
     public List<SentenceData> sentenceDataList;
@@ -28,20 +17,15 @@ public class SentenceParser : MonoBehaviour
         TextAsset sentenceJson = Resources.Load<TextAsset>("StageData/Sentences");
         if (sentenceJson != null)
         {
-            SentenceDataWrapper wrapper = JsonUtility.FromJson<SentenceDataWrapper>(sentenceJson.text);
+            var wrapper = JsonConvert.DeserializeObject<SentenceDataWrapper>(sentenceJson.text);
             sentenceDataList = new List<SentenceData>();
 
-            foreach (var stage in wrapper.stages)
+            for (int i = 0; i < wrapper.sentences.Count; i++)
             {
                 SentenceData data = new SentenceData
                 {
-                    sentences = new List<List<WordData>>()
+                    sentences = wrapper.sentences[i]
                 };
-
-                foreach (var sentence in stage.sentences)
-                {
-                    data.sentences.Add(sentence.words);
-                }
                 sentenceDataList.Add(data);
             }
         }
