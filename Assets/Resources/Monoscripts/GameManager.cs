@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     private SentenceParser _sentenceParser;
+    private ButtonContainer _buttonContainer;
 
     private void Awake()
     {
@@ -34,14 +35,12 @@ public class GameManager : MonoBehaviour
     private List<(int, int)> _incorrectWordPositions = new List<(int, int)>();
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
-    private int _currentColumn = 0;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     void StartRound()
     {
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
-        _currentColumn = 0;
     }
 
     void SelectSentence()
@@ -61,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            // Highlight incorrect words
+            _buttonContainer.DisableButton(pos.Item1, pos.Item2);
         }
     }
 
@@ -122,8 +121,6 @@ public class GameManager : MonoBehaviour
     {
         if(_remainingChoices <= 0)
             return;
-        if(column != _currentColumn)
-            return;
         _remainingChoices--;
         _currentState = GameState.Interpret;
         // Logic for processing the chosen word goes here
@@ -138,7 +135,7 @@ public class GameManager : MonoBehaviour
             // Handle incorrect choice
             _incorrectWordPositions.Add((row, column));
         }
-        _currentColumn++;
+        _buttonContainer.DisableColumn(column);
     }
 
     void TurnEnd()
