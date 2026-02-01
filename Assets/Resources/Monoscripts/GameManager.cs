@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern implementation
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -34,12 +35,39 @@ public class GameManager : MonoBehaviour
     private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemData> _allItems = new List<ItemData>();
 
-    // 호출 흐름: StartTurn -> SelectSentence -> PlayItem -> ProcessWordChoice -> RevealAnswer
+    // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
+    void StartRound()
+    {
+        _currentPlayer = 0;
+        _currentState = GameState.GameStart;
+    }
+
+    void SelectSentence()
+    {
+        _currentState = GameState.SelectSentence;
+        // Logic for selecting a sentence goes here
+        _currentSentenceData = _sentenceParser.sentenceDataList[0]; // Example: select the first sentence data
+    }
+
+    void RevealAnswer()
+    {
+        _currentState = GameState.RevealAnswer;
+        // Logic for revealing the answer goes here
+        foreach (var pos in _correctWordPositions)
+        {
+            // Highlight correct words
+        }
+        foreach (var pos in _incorrectWordPositions)
+        {
+            // Highlight incorrect words
+        }
+    }
+
+    // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
     void StartTurn()
     {
         _currentPlayer = (_currentPlayer + 1) % 2;
-        _currentState = GameState.GameStart;
-        // Additional logic for starting a turn goes here
+        _currentState = GameState.TurnStart;
         _correctWordPositions.Clear();
         _incorrectWordPositions.Clear();
         _remainingChoices = 2;
@@ -77,13 +105,6 @@ public class GameManager : MonoBehaviour
         return total;
     }
 
-    void SelectSentence()
-    {
-        _currentState = GameState.SelectSentence;
-        // Logic for selecting a sentence goes here
-        _currentSentenceData = _sentenceParser.sentenceDataList[0]; // Example: select the first sentence data
-    }
-
     void PlayItem(ItemData item) // 아이템 선택 시 호출
     {
         _currentState = GameState.PlayItem;
@@ -115,18 +136,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RevealAnswer()
+    void TurnEnd()
     {
-        _currentState = GameState.RevealAnswer;
-        // Logic for revealing the answer goes here
-        foreach (var pos in _correctWordPositions)
-        {
-            // Highlight correct words
-        }
-        foreach (var pos in _incorrectWordPositions)
-        {
-            // Highlight incorrect words
-        }
+        _currentState = GameState.TurnEnd;
+        // Logic for ending the turn goes here
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
