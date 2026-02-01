@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 public class Enemy: Player
 {
     public int playerId = 1;
 
-    public (int, int) getNextChoice()
+    public Position getNextChoice(HashSet<int> correctColumns, int currentColumn, SentenceData sentenceData)
     {
-        return (0, 0);
+        return new Position(0, currentColumn);
     }
 }
