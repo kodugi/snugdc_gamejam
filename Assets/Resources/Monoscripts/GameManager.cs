@@ -42,11 +42,14 @@ public class GameManager : MonoBehaviour
     private int _currentColumn = 0;
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
+    // Round: 한 문장을 가지고 진행되는 매 판, Run: 맨 끝 단어까지의 한 번의 진행, Turn: 한 플레이어가 아이템 사용 및 단어 선택을 하는 한 차례 행동
     public void StartRound()
     {
         _currentColumn = 0;
         _currentPlayer = 0;
         _currentState = GameState.GameStart;
+        SelectSentence();
+        StartRun();
     }
 
     public void SelectSentence()
@@ -55,6 +58,12 @@ public class GameManager : MonoBehaviour
         // Logic for selecting a sentence goes here
         _currentSentenceData = _sentenceParser.sentenceDataList[0];
         ButtonContainer.Instance.Init(_currentSentenceData);// Example: select the first sentence data
+    }
+
+    public void StartRun()
+    {
+        _currentColumn = 0;
+        StartTurn();
     }
 
     public void RevealAnswer()
@@ -71,6 +80,14 @@ public class GameManager : MonoBehaviour
         {
             ButtonContainer.Instance.DisableButton(pos.Item1, pos.Item2);
         }
+        EndRun();
+    }
+
+    public void EndRun()
+    {
+        // Logic for ending the run goes here
+        // Prepare for the next round or end the game
+        StartRun();
     }
 
     // 호출 흐름: StartTurn ->  PlayItem -> ProcessWordChoice -> TurnEnd
@@ -81,6 +98,7 @@ public class GameManager : MonoBehaviour
         _incorrectWordPositions.Clear();
         _remainingChoices = 2;
         _usedItems.Clear();
+        _buttonContainer.UnHighLightAll();
         GainItem();
     }
 
@@ -123,7 +141,7 @@ public class GameManager : MonoBehaviour
                         return;
                     }
                     break;
-                case ItemType.Beer:
+                case ItemType.Americano:
                     if(_usedAmericanoLastTurn)
                     {
                         return; // 연속 사용 불가
@@ -178,6 +196,7 @@ public class GameManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, correctLocations.Count);
         // Highlight the word at correctLocations[randomIndex]
+        _buttonContainer.HighlightButton(correctLocations[randomIndex].Item2, correctLocations[randomIndex].Item1);
     }
 
     private void PlayGloves()
@@ -229,6 +248,7 @@ public class GameManager : MonoBehaviour
                 if (wordData.type == WordType.Conjunction && wordData.isCorrect)
                 {
                     // Highlight the column
+                    _buttonContainer.HighLightColumn(colToReveal);
                     break;
                 }
             }
@@ -264,6 +284,11 @@ public class GameManager : MonoBehaviour
 
     public void TurnEnd()
     {
+        if(_usedItems[new ItemData { type = ItemType.Beer }] > 0 && _remainingChoices > 0)
+        {
+            return; // 이번 턴에 무조건 정답을 처리해야 함
+        }
+
         _currentState = GameState.TurnEnd;
         // Logic for ending the turn goes here
         if(_usedItems[new ItemData { type = ItemType.Americano }] > 0)
