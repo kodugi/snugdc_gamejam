@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     private bool _usedAmericanoLastTurn = false;
     private int _currentColumn = 0;
     private int _remainingRounds = 3;
+    private HashSet<int> _correctColumns = new HashSet<int>();
 
     // 호출 흐름: StartRound -> SelectSentence -> RevealAnswer
     // Game: 전체 게임, Round: 한 문장을 가지고 진행되는 매 판, Run: 맨 끝 단어까지의 한 번의 진행, Turn: 한 플레이어가 아이템 사용 및 단어 선택을 하는 한 차례 행동
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
         // Logic for revealing the answer goes here
         foreach (var pos in _correctWordPositions)
         {
+            _correctColumns.Add(pos.col);
             // Highlight correct words
             ButtonContainer.Instance.HighlightButton(pos.row,pos.col);
             ButtonContainer.Instance.DisableColumn(pos.col);
@@ -219,7 +221,13 @@ public class GameManager : MonoBehaviour
             ButtonContainer.Instance.DisableButton(row,column);
             _incorrectWordPositions.Add(new Position(row, column));
         }
-        _currentColumn++;
+
+        do {
+            // 이미 맞힌 열은 건너뜀
+            _currentColumn++;
+        }
+        while(_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
+        
         ButtonContainer.Instance.UnHighLightAll();
         ButtonContainer.Instance.HighLightColumn(_currentColumn);
     }
