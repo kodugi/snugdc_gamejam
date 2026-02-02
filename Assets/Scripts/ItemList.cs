@@ -3,8 +3,7 @@ using UnityEngine;
 public class ItemList : MonoBehaviour
 {
     [SerializeField] GameObject ItemPrefab;
-    [SerializeField] Sprite[] sprites;
-    public void Render(DefaultDictionary<ItemType, int> inventory)
+    public void Render(DefaultDictionary<ItemType, int> inventory,bool isplayer)
     {
         foreach (Transform child in transform)
         {
@@ -12,12 +11,13 @@ public class ItemList : MonoBehaviour
         }
         foreach(var item in inventory)
         {
+            if (item.Key == ItemType.None) continue;
             if (item.Value == 0) continue;
             for(int i = 0; i < item.Value; i++)
             {
-                GameObject newItem = Instantiate(ItemPrefab);
+                GameObject newItem = Instantiate(ItemPrefab,this.transform);
                 ItemItem itemScript = newItem.GetComponent<ItemItem>();
-                itemScript.Init(item.Key);
+                itemScript.Init(item.Key,isplayer);
             }
         }
     }

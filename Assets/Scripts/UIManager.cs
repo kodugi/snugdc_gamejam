@@ -47,7 +47,7 @@ public class UIManager: MonoBehaviour
 
     public void ItemUpdate(DefaultDictionary<ItemType, int> playerinventory,DefaultDictionary<ItemType, int> enemyinventory)
     {
-        playerInventory.Render(playerinventory);
-        enemyInventory.Render(enemyinventory);
+        playerInventory.Render(playerinventory,true);
+        enemyInventory.Render(enemyinventory,false);
     }
 }
