@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Enemy: Player
 {
-    public int playerId = 1;
     private GameManager _gameManager;
     private SentenceData _wordCandidates;
 
@@ -52,7 +52,8 @@ public class Enemy: Player
     public void Initialize(GameManager gameManager)
     {
         _gameManager = gameManager;
-        _wordCandidates = gameManager.GetCurrentSentenceData();
+        _wordCandidates = new SentenceData(gameManager.GetCurrentSentenceData());
+        Debug.Log(_wordCandidates.sentences.Count + " columns in enemy word candidates.");
     }
 
     public void RemoveAt(Position pos)
@@ -67,6 +68,7 @@ public class Enemy: Player
 
     public void RemoveExceptAnswer(int column)
     {
+        Debug.Log("Enemy RemoveExceptAnswer at column " + column);
         _wordCandidates.sentences[column].RemoveAll(wd => !wd.isCorrect);
     }
 }
