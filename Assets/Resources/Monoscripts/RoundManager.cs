@@ -107,6 +107,7 @@ public class RoundManager : MonoBehaviour
     public void EndRun()
     {
         Debug.Log($"EndRun. Correct columns so far: {_correctColumns.Count}");
+        
         if (_correctColumns.Count < _currentSentenceData.sentences.Count)
         {
             StartRun();

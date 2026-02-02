@@ -48,7 +48,7 @@ public class TurnManager : MonoBehaviour
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
-        GainItem();
+        _gameManager.GainItem();
         if (_currentPlayer == 1)
         {
             Debug.Log("Enemy's Turn");
@@ -138,15 +138,11 @@ public class TurnManager : MonoBehaviour
         {
             _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         }
-        else
-        {
-            TurnEnd();
-        }
     }
 
     public void TurnEnd()
     {
-        if (RemainingChoices == 2) return;
+        // if (RemainingChoices == 2) return;
         /*if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;

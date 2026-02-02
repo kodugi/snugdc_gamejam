@@ -19,24 +19,28 @@ public class Enemy: Player
             if (useItem == ItemType.None)
                 break;
             Debug.Log("Enemy uses item: " + useItem);
-            _turnManager.PlayItem(useItem);
+            _gameManager.PlayItem(useItem);
             await Task.Delay(1000);
         }
 
         Position first = getNextChoice();
         Debug.Log("Enemy first 선택: Column " + first.col + ", Row " + first.row);
         _turnManager.ProcessWordChoice(first.row, first.col);
-        await Task.Delay(1000);
-        
-        Position second = getNextChoice();
-        if (second.row != -1)
-        {
+
+        Position second;
+        while(true){
+            await Task.Delay(1000);
+            second = getNextChoice();
+            if(second.row == -1){
+                break;
+            }
             _turnManager.ProcessWordChoice(second.row, second.col);
+            if(_turnManager.RemainingChoices <= 0){
+                break;
+            }
         }
-        else
-        {
-            _turnManager.TurnEnd();
-        }
+        
+        _turnManager.TurnEnd();
     }
 
     public Position getNextChoice()
