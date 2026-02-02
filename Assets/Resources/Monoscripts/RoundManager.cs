@@ -67,6 +67,10 @@ public class RoundManager : MonoBehaviour
         _gameManager.UIManager.UpdateScore(_scores.Item1, _scores.Item2);
 
         _gameManager.UIManager.InfoDeploy(winnerId == 0 ? "플레이어 승리!" : "CPU 승리!");
+        if(winnerId == 0)
+        {
+            _gameManager.PlaySound(AudioType.Victory);
+        }
         await Task.Delay(1000);
 
         if (_remainingRounds > 0)
