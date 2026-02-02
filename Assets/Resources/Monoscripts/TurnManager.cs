@@ -100,7 +100,7 @@ public class TurnManager : MonoBehaviour
 
             _gameManager.GetPlayers()[_currentPlayer].inventory[item]--;
             _usedItems[item]++;
-
+            _gameManager.PlaySound(AudioType.ItemUse);
             _gameManager.GetItemStrategy(item).Use(_gameManager);
         }
     }
