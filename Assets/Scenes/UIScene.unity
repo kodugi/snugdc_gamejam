@@ -595,7 +595,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2314,9 +2314,9 @@ MonoBehaviour:
   IncorrectSound: {fileID: 8300000, guid: f61a6c154fd1b454483e9c5487bc0273, type: 3}
   VictorySound: {fileID: 8300000, guid: 8e60aebc49d08a146b95e2703565d092, type: 3}
   ItemUseSound: {fileID: 8300000, guid: 505e4861786a39540bfd6309f2e8c4cd, type: 3}
-  TitleScreenMusic: {fileID: 8300000, guid: 6dcb1c9d8901c724187ec2a3f066f167, type: 3}
-  IngameScreenMusic: {fileID: 8300000, guid: cd56b686ae354a54fbf0efa45875b7d1, type: 3}
-  TutorialMusic: {fileID: 8300000, guid: 5db5c3aefec062642b96787d661f311f, type: 3}
+  TitleScreenMusic: {fileID: 8300000, guid: 23d077ff19d35e344bd22becc8259696, type: 3}
+  IngameScreenMusic: {fileID: 8300000, guid: 6dcb1c9d8901c724187ec2a3f066f167, type: 3}
+  TutorialMusic: {fileID: 8300000, guid: 23d077ff19d35e344bd22becc8259696, type: 3}
 --- !u!82 &858100464
 AudioSource:
   m_ObjectHideFlags: 0
