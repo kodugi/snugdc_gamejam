@@ -114,7 +114,12 @@ public class TurnManager : MonoBehaviour
         }
 
         Position first = enemy.getNextChoice();
+        if(first.row == -1)
+        {
+            Debug.Log("Enemy chose to skip on the first turn. Pray to jesus now.");
+        }
         ProcessWordChoice(first.row, first.col);
+        
         Position second = enemy.getNextChoice();
         if (second.row != -1)
         {

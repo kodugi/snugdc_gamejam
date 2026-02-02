@@ -86,7 +86,7 @@ public class RoundManager : MonoBehaviour
         }
         foreach (var pos in _incorrectWordPositions)
         {
-            _gameManager.GetEnemy().RemoveWord(_currentSentenceData.sentences[pos.col][pos.row], pos.col); // 적의 후보군에서 틀린 단어 제거
+            _gameManager.GetEnemy().RemoveAt(pos);
             _gameManager.ButtonContainer.DisableButton(pos.row, pos.col);
         }
         EndRun();

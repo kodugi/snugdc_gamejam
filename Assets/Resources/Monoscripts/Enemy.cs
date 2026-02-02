@@ -4,21 +4,31 @@ using UnityEngine;
 public class Enemy: Player
 {
     private GameManager _gameManager;
-    private SentenceData _wordCandidates;
+    private List<List<bool>> _availableWords;
 
     public Position getNextChoice()
     {
         // row가-1이면 skip을 의미
-        var currentSentenceData = _gameManager.GetCurrentSentenceData();
         int currentColumn = _gameManager.GetCurrentColumn();
-        int randomIndex = UnityEngine.Random.Range(0, _wordCandidates.sentences[currentColumn].Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 1));
+        
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < _availableWords[currentColumn].Count; i++)
+        {
+            Debug.Log($"Availability at column {currentColumn}, row {i}: {_availableWords[currentColumn][i]}");
+            if (_availableWords[currentColumn][i])
+            {
+                availableIndices.Add(i);
+            }
+        }
+        Debug.Log("Remaining choices: " + _gameManager.GetRemainingChoices());
+        Debug.Log("Available indices count: " + availableIndices.Count);
+        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 1));
         // 남은 선택 횟수가 2회 이상이면 skip 불가
         // 일단은 위치를 가능한 후보군 중 랜덤으로 선택
-        if(randomIndex < _wordCandidates.sentences[currentColumn].Count)
+        if(randomIndex < availableIndices.Count)
         {
-            return new Position(randomIndex, currentColumn);
+            return new Position(availableIndices[randomIndex], currentColumn);
         }
-
         return new Position(-1, currentColumn);
     }
 
@@ -52,23 +62,35 @@ public class Enemy: Player
     public void Initialize(GameManager gameManager)
     {
         _gameManager = gameManager;
-        _wordCandidates = new SentenceData(gameManager.GetCurrentSentenceData());
-        Debug.Log(_wordCandidates.sentences.Count + " columns in enemy word candidates.");
+        _availableWords = new List<List<bool>>();
+        foreach (var sentence in gameManager.GetCurrentSentenceData().sentences)
+        {
+            List<bool> availability = new List<bool>();
+            for (int i = 0; i < sentence.Count; i++)
+            {
+                availability.Add(true);
+            }
+            _availableWords.Add(availability);
+        }
+
     }
 
     public void RemoveAt(Position pos)
     {
-        _wordCandidates.sentences[pos.col].RemoveAt(pos.row);
-    }
-
-    public void RemoveWord(WordData wordData, int column)
-    {
-        _wordCandidates.sentences[column].RemoveAll(wd => wd.word == wordData.word);
+        Debug.Log("Enemy RemoveAt at column " + pos.col + ", row " + pos.row);
+        _availableWords[pos.col][pos.row] = false;
     }
 
     public void RemoveExceptAnswer(int column)
     {
         Debug.Log("Enemy RemoveExceptAnswer at column " + column);
-        _wordCandidates.sentences[column].RemoveAll(wd => !wd.isCorrect);
+        for(int row = 0; row < _availableWords[column].Count; row++)
+        {
+            if(_gameManager.GetCurrentSentenceData().sentences[column][row].isCorrect)
+            {
+                continue;
+            }
+            _availableWords[column][row] = false;
+        }
     }
 }
