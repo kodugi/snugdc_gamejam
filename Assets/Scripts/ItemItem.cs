@@ -32,7 +32,7 @@ public class ItemItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
                 break;
             case ItemType.Beer:
                 _image.sprite = sprites[2];
-                _explanation = "현재 선택해야 할 열을 고르지 않고 넘어갑니다. 선택횟수는 차감되지 않습니다.";
+                _explanation = "틀릴 때까지 단어를 선택합니다. 틀릴 시, 패배합니다.";
                 break;
             case ItemType.Gloves:
                 _image.sprite = sprites[3];

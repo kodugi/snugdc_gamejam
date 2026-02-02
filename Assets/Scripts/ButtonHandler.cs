@@ -9,6 +9,7 @@ public class ButtonHandler : MonoBehaviour
     [SerializeField] Image highlightImage;
     [SerializeField] Image IncorrectHider;
     [SerializeField] Image CorrectHider;
+    [SerializeField] Image UnHighlightImage;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
     [SerializeField] private Button _button;
     
@@ -34,6 +35,7 @@ public class ButtonHandler : MonoBehaviour
         UnHighLight();
         IncorrectHider.enabled = false;
         CorrectHider.enabled = false;
+        UnHighlightImage.enabled = false;
         _button.onClick.AddListener(OnClick);
         text=wordData.word;
         SetText(text);
@@ -64,15 +66,24 @@ public class ButtonHandler : MonoBehaviour
     {
         if (!_button.interactable) return;
         highlightImage.enabled = true;
+        UnHighlightImage.enabled = false;
     }
     public void UnHighLight()
     {
         if(_button.interactable)
         transform.localScale = Vector3.one;
         highlightImage.enabled = false;
+        UnHighlightImage.enabled = true;
+    }
+
+    public void UnUnHighLight()
+    {
+        if (!_button.interactable) return;
+        UnHighlightImage.enabled = false;
     }
     public void Disablebutton()
     {
+        UnHighlightImage.enabled = true;
         if (isCorrect)
         {
             Disablecorrect();
