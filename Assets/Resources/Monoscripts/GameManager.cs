@@ -137,6 +137,11 @@ public class GameManager : MonoBehaviour
         return _turnManager.RemainingChoices;
     }
 
+    public HashSet<int> GetCorrectColumns()
+    {
+        return _roundManager.CorrectColumns;
+    }
+
     public void BeerEffect()
     {
         _roundManager.AdvanceColumn();
@@ -158,7 +163,6 @@ public class GameManager : MonoBehaviour
             null
         );
     }
-
     public void ShowTextUIManager(string text,Sprite sprite)
     {
         _textUImanager.Init(text,sprite);
