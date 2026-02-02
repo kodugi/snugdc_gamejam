@@ -66,9 +66,16 @@ public class GameManager : MonoBehaviour
 
     public void PlayItem(ItemType item) // 아이템 선택 시 호출
     {
+        Debug.Log("use"+item);
         _turnManager.PlayItem(item);
+        _uiManager.ItemUpdate(Players[0].inventory,Players[1].inventory);
     }
 
+    public void GainItem()
+    {
+        _turnManager.GainItem();
+        _uiManager.ItemUpdate(Players[0].inventory,Players[1].inventory);
+    }
     public void ProcessWordChoice(int row, int column) // 단어 선택 시 호출
     {
         _turnManager.ProcessWordChoice(row, column);

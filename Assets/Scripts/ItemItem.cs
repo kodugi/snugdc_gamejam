@@ -9,29 +9,35 @@ public class ItemItem : MonoBehaviour
     private ItemType _itemType;
     private Button _button;
     [SerializeField] Image _image;
-    public void Init(ItemType itemType)
+    [SerializeField] private Sprite[] sprites;
+    public void Init(ItemType itemType,bool isPlayers)
     {
         _itemType = itemType;
-        _button = GetComponent<Button>();
+        if (isPlayers)
+        {
+            _button = GetComponent<Button>();
+            _button.onClick.AddListener(OnUse);
+        }
+
         switch (itemType)
         {
             case ItemType.AncientDocument:
-                _image.sprite = Resources.Load<Sprite>("Sprites/AncientDocument");
+                _image.sprite = sprites[0];
                 break;
             case ItemType.Americano:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Americano");
+                _image.sprite = sprites[1];
                 break;
             case ItemType.Beer:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Beer");
+                _image.sprite = sprites[2];
                 break;
             case ItemType.Gloves:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Gloves");
+                _image.sprite = sprites[3];
                 break;
             case ItemType.Transceiver:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Transceiver");
+                _image.sprite = sprites[4];
                 break;
             case ItemType.MagnifyingGlass:
-                _image.sprite = Resources.Load<Sprite>("Sprites/MagnifyingGlass");
+                _image.sprite = sprites[5];
                 break;
         }
     }
