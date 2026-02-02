@@ -112,10 +112,10 @@
                 {"word": "보다", "type": "Conjunction", "isCorrect": true}
             ],
             [
-                {"word": "달다.", "type": "Verb", "isCorrect": false},
-                {"word": "느끼하다.", "type": "Verb", "isCorrect": true},
-                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
-                {"word": "값지다.", "type": "Verb", "isCorrect": false}
+                {"word": "달다", "type": "Verb", "isCorrect": false},
+                {"word": "느끼하다", "type": "Verb", "isCorrect": true},
+                {"word": "비싸다", "type": "Verb", "isCorrect": false},
+                {"word": "값지다", "type": "Verb", "isCorrect": false}
             ]
         ],
         [
@@ -152,10 +152,10 @@
                 {"word": "보다", "type": "Conjunction", "isCorrect": false}
             ],
             [
-                {"word": "달다.", "type": "Verb", "isCorrect": true},
-                {"word": "느끼하다.", "type": "Verb", "isCorrect": false},
-                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
-                {"word": "값지다.", "type": "Verb", "isCorrect": false}
+                {"word": "달다", "type": "Verb", "isCorrect": true},
+                {"word": "느끼하다", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다", "type": "Verb", "isCorrect": false},
+                {"word": "값지다", "type": "Verb", "isCorrect": false}
             ]
         ],
         [
@@ -192,10 +192,10 @@
                 {"word": "보다", "type": "Conjunction", "isCorrect": true}
             ],
             [
-                {"word": "달다.", "type": "Verb", "isCorrect": false},
-                {"word": "느끼하다.", "type": "Verb", "isCorrect": false},
-                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
-                {"word": "값지다.", "type": "Verb", "isCorrect": true}
+                {"word": "달다", "type": "Verb", "isCorrect": false},
+                {"word": "느끼하다", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다", "type": "Verb", "isCorrect": false},
+                {"word": "값지다", "type": "Verb", "isCorrect": true}
             ]
         ]
     ]

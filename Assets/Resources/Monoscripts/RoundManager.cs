@@ -30,6 +30,8 @@ public class RoundManager : MonoBehaviour
     public void StartGame()
     {
         _remainingRounds = 5;
+        _scores = (0, 0);
+        _gameManager.UIManager.UpdateScore(_scores.Item1, _scores.Item2);
         StartRound();
     }
 
