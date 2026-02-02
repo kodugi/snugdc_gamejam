@@ -38,6 +38,7 @@ public class RoundManager : MonoBehaviour
     public void StartRound()
     {
         Debug.Log("Starting new round. Remaining rounds: " + _remainingRounds);
+        _gameManager.UIManager.PlayersSpriteReset();
         _remainingRounds--;
         _currentColumn = 0;
         _turnManager.ResetPlayer();
@@ -61,10 +62,12 @@ public class RoundManager : MonoBehaviour
         if(winnerId == 0)
         {
             _scores.Item1 += 1;
+            _gameManager.UIManager.PlayerWinRender();
         }
         else
         {
             _scores.Item2 += 1;
+            _gameManager.UIManager.EnemyWinRender();
         }
         Debug.Log($"Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         Debug.Log("Remaining Rounds: " + _remainingRounds);

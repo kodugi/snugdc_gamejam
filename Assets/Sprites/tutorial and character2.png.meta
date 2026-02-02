@@ -1,0 +1,425 @@
+fileFormatVersion: 2
+guid: 718249d4137f28e4aa323748eaf38511
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5914557746121958821
+    second: tutorial and character2_0
+  - first:
+      213: 68028059812358339
+    second: tutorial and character2_1
+  - first:
+      213: 3070018529767566692
+    second: tutorial and character2_2
+  - first:
+      213: 6583406141186824954
+    second: tutorial and character2_3
+  - first:
+      213: -819501722830561752
+    second: tutorial and character2_4
+  - first:
+      213: -8902938388912322983
+    second: tutorial and character2_5
+  - first:
+      213: -4661793810582989789
+    second: tutorial and character2_6
+  - first:
+      213: -2568756915069621666
+    second: tutorial and character2_7
+  - first:
+      213: -3836431455086343504
+    second: tutorial and character2_8
+  - first:
+      213: -881031679275811329
+    second: tutorial and character2_9
+  - first:
+      213: 5250835663278438712
+    second: tutorial and character2_10
+  - first:
+      213: 3857976185048081836
+    second: tutorial and character2_11
+  - first:
+      213: 7673119723638768000
+    second: tutorial and character2_12
+  - first:
+      213: 2254452874641085089
+    second: tutorial and character2_13
+  - first:
+      213: -2571551372635377227
+    second: tutorial and character2_14
+  - first:
+      213: -5803327392296257307
+    second: tutorial and character2_15
+  - first:
+      213: -8081568934938913782
+    second: tutorial and character2_16
+  - first:
+      213: -9119772863384486000
+    second: tutorial and character2_17
+  - first:
+      213: 6540315125709822508
+    second: tutorial and character2_18
+  - first:
+      213: -6035259337150076147
+    second: tutorial and character2_19
+  - first:
+      213: -9097373768969427912
+    second: tutorial and character2_20
+  - first:
+      213: -824892225318155404
+    second: tutorial and character2_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tutorial_herb
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 238
+        width: 101
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c8efd3f82fa1f000800000000000000
+      internalID: 68028059812358339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_win
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 204
+        width: 60
+        height: 145
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82e1dd5668b80a4f0800000000000000
+      internalID: -819501722830561752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_lose
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 212
+        width: 89
+        height: 113
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95641bf74b8627480800000000000000
+      internalID: -8902938388912322983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_magnifyingGlass
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 170
+        width: 109
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a62f21231f95cd0800000000000000
+      internalID: -2568756915069621666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_beer
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 203
+        width: 108
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ba817afae142cac0800000000000000
+      internalID: -3836431455086343504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_gloves
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 132
+        width: 102
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a217d3e1fc694f10800000000000000
+      internalID: 2254452874641085089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_lose
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 46
+        width: 59
+        height: 118
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b17668b6a3005cd0800000000000000
+      internalID: -2571551372635377227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_win
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 54
+        width: 89
+        height: 141
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e833eaeb70767fa0800000000000000
+      internalID: -5803327392296257307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_memo
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 94
+        width: 111
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2a5c0b64fdd3ca50800000000000000
+      internalID: 6540315125709822508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_ancientDocument
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 59
+        width: 103
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b6fc9eb937e3ca0800000000000000
+      internalID: -6035259337150076147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 76b5a24a7403bf746ba9ed432082906d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Human_lose: -2571551372635377227
+      Human_win: -819501722830561752
+      Robot_lose: -8902938388912322983
+      Robot_win: -5803327392296257307
+      tutorial and character2_0: 5914557746121958821
+      tutorial and character2_10: 5250835663278438712
+      tutorial and character2_11: 3857976185048081836
+      tutorial and character2_12: 7673119723638768000
+      tutorial and character2_16: -8081568934938913782
+      tutorial and character2_17: -9119772863384486000
+      tutorial and character2_2: 3070018529767566692
+      tutorial and character2_20: -9097373768969427912
+      tutorial and character2_21: -824892225318155404
+      tutorial and character2_3: 6583406141186824954
+      tutorial and character2_6: -4661793810582989789
+      tutorial and character2_9: -881031679275811329
+      tutorial_ancientDocument: -6035259337150076147
+      tutorial_beer: -3836431455086343504
+      tutorial_gloves: 2254452874641085089
+      tutorial_herb: 68028059812358339
+      tutorial_magnifyingGlass: -2568756915069621666
+      tutorial_memo: 6540315125709822508
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
