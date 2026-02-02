@@ -19,7 +19,8 @@ public class Enemy: Player
                 availableIndices.Add(i);
             }
         }
-        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 1));
+        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 5));
+        // skip 상황 테스트를 위해 값 수정
         // 남은 선택 횟수가 2회 이상이면 skip 불가
         // 일단은 위치를 가능한 후보군 중 랜덤으로 선택
         if(randomIndex < availableIndices.Count)

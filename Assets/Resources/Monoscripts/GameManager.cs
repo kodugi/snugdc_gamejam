@@ -130,4 +130,9 @@ public class GameManager : MonoBehaviour
     {
         return _turnManager.RemainingChoices;
     }
+
+    public void AddRemainingChoices(int amount)
+    {
+        _turnManager.AddRemainingChoices(amount);
+    }
 }

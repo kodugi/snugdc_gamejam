@@ -18,6 +18,12 @@ public class TurnManager : MonoBehaviour
             _gameManager.UIManager.UpdateSkipButton(value);
         }
     }
+
+    public void AddRemainingChoices(int amount)
+    {
+        RemainingChoices += amount;
+    }
+
     private int __remainingChoices = 2;
     private DefaultDictionary<ItemType, int> _usedItems = new DefaultDictionary<ItemType, int>();
     private bool _usedAmericanoLastTurn = false;
@@ -102,6 +108,7 @@ public class TurnManager : MonoBehaviour
     {
         Enemy enemy = GameManager.Instance.GetEnemy();
         int i = 0;
+        // use items
         while (true)
         {
             i++;
@@ -112,6 +119,7 @@ public class TurnManager : MonoBehaviour
             _gameManager.PlayItem(useItem);
         }
 
+        // select words
         Position first = enemy.getNextChoice();
         if(first.row == -1)
         {
@@ -119,15 +127,22 @@ public class TurnManager : MonoBehaviour
         }
         ProcessWordChoice(first.row, first.col);
         
-        Position second = enemy.getNextChoice();
-        if (second.row != -1)
+        Position second;
+        while (true)
         {
+            second = enemy.getNextChoice();
+            if(second.row == -1)
+            {
+                break;
+            }
             ProcessWordChoice(second.row, second.col);
+            if (RemainingChoices <= 0)
+            {
+                break;
+            }
+            Debug.Log("RemainingChoices: " + RemainingChoices);
         }
-        else
-        {
-            TurnEnd();
-        }
+        TurnEnd();
     }
     public void ProcessWordChoice(int row, int column)
     {
@@ -139,16 +154,15 @@ public class TurnManager : MonoBehaviour
         if (RemainingChoices <= 0)
             return;
         RemainingChoices--;
+        Debug.Log($"Player {_currentPlayer} 선택: Column {column}, Row {row}");
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
-            Debug.Log("Correct choice!");
             _gameManager.ButtonContainer.DisableColumn(column);
             _roundManager.CorrectWordPositionsAdd(new Position(row, column));
         }
         else
         {
-            Debug.Log("Incorrect choice!");
             _gameManager.ButtonContainer.DisableButton(row, column);
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }
@@ -169,12 +183,13 @@ public class TurnManager : MonoBehaviour
     public void TurnEnd()
     {
         if (RemainingChoices == 2) return;
-        if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
+        /*if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;
-        }
+        }*/
 
         RemainingChoices = 2;
+        _currentPlayer = (_currentPlayer + 1) % 2;
         if (_usedItems[ItemType.Americano] > 0)
         {
             _usedAmericanoLastTurn = true;
@@ -182,8 +197,8 @@ public class TurnManager : MonoBehaviour
         else
         {
             _usedAmericanoLastTurn = false;
-            _currentPlayer = (_currentPlayer + 1) % 2;
         }
+
         _gameManager.UIManager.DisableAll();
         if (_roundManager.CurrentColumn >= _roundManager.CurrentSentenceData.sentences.Count)
         {
