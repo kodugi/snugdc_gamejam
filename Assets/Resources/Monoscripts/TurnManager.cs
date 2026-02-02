@@ -100,7 +100,7 @@ public class TurnManager : MonoBehaviour
 
             _gameManager.GetPlayers()[_currentPlayer].inventory[item]--;
             _usedItems[item]++;
-            _gameManager.PlaySound(AudioType.ItemUse);
+            _gameManager.SoundManager.PlaySound(AudioType.ItemUse);
             _gameManager.GetItemStrategy(item).Use(_gameManager);
         }
     }
@@ -122,13 +122,13 @@ public class TurnManager : MonoBehaviour
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
-            _gameManager.PlaySound(AudioType.Correct);
+            _gameManager.SoundManager.PlaySound(AudioType.Correct);
             _gameManager.ButtonContainer.DisableColumn(column);
             _roundManager.CorrectWordPositionsAdd(new Position(row, column));
         }
         else
         {
-            _gameManager.PlaySound(AudioType.Incorrect);
+            _gameManager.SoundManager.PlaySound(AudioType.Incorrect);
             _gameManager.ButtonContainer.DisableButton(row, column);
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }

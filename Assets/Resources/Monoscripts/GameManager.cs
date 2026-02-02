@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public ButtonContainer ButtonContainer => _buttonContainer;
     public SentenceParser SentenceParser => _sentenceParser;
     public UIManager UIManager => _uiManager;
+    public SoundManager SoundManager => _soundManager;
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
     private SoundManager _soundManager;
     
@@ -154,17 +155,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("New Remaining Choices: " + _turnManager.RemainingChoices);
     }
 
-    public void PlaySound(AudioType audioType)
-    {
-        _soundManager.GetComponent<AudioSource>().PlayOneShot(
-            audioType == AudioType.Correct ? _soundManager.CorrectSound :
-            audioType == AudioType.Incorrect ? _soundManager.IncorrectSound :
-            audioType == AudioType.Victory ? _soundManager.VictorySound :
-            audioType == AudioType.ButtonClick ? _soundManager.ButtonClickSound :
-            audioType == AudioType.ItemUse ? _soundManager.ItemUseSound :
-            null
-        );
-    }
+    
     public void ShowTextUIManager(string text,Sprite sprite)
     {
         _textUImanager.Init(text,sprite);
