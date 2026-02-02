@@ -33,15 +33,27 @@
         "imagePath": "Sprites/TutorialImage/TutorialImage_4"
       },
       {
-        "text": "이렇게 턴을 반복하여, 최종 정답 단어를 골라내면 점수를 얻게 된다네. 열심히 맞춰도 상대가 마지막 단어를 맞추면 억울하지 않냐고? 그게 인생이지 하하.",
+        "text": "이렇게 턴을 반복하여, 최종 정답 단어를 골라내면 점수를 얻게 된다네.",
         "imagePath":"Sprites/TutorialImage/TutorialImage_5"
       },
       {
-        "text": "한턴에는 무조건 하나의 단어는 확인을 해봐야해. 하지만, 두번째 확인이 상대에게 도움이 될 것 같다면 스킵도 방법이야! 마지막 단어를 골라야하니, 전략적으로 문제에 접근하자고!!",
+        "text": "열심히 맞춰도 상대가 마지막 단어를 맞추면 억울하지 않냐고? 그게 인생이지 하하.",
         "imagePath": "Sprites/TutorialImage/TutorialImage_5"
       },
       {
-        "text": "마지막으로 아이템을 사용하면, 더 쉽게 게임을 이길 수 있을꺼야! 한 턴에 한개씩만 보급되니, 아껴서 사용해도 괜찮지! 물론 5개가 최대니, 너무 아끼진 말고.",
+        "text": "한턴에는 무조건 하나의 단어는 확인을 해봐야해. 하지만, 두번째 확인이 상대에게 도움이 될 것 같다면 스킵도 방법이야!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
+      },
+      {
+        "text": " 마지막 단어를 골라야하니, 전략적으로 문제에 접근하자고!!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
+      },
+      {
+        "text": "마지막으로 아이템을 사용하면, 더 쉽게 게임을 이길 수 있을꺼야!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
+      },
+      {
+        "text": "한 턴에 한개씩만 보급되니, 아껴서 사용해도 괜찮지! 물론 5개가 최대니, 너무 아끼진 말고.",
         "imagePath": "Sprites/TutorialImage/TutorialImage_5"
       },
       {
