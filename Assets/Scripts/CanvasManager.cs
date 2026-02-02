@@ -14,15 +14,15 @@ public class CanvasManager : MonoBehaviour
     
     public void StartGame()
     {
-        titleCanvas.enabled = false;
-        playCanvas.enabled = true;
+        titleCanvas.transform.gameObject.SetActive(false);
+        playCanvas.transform.gameObject.SetActive(true);
         GameManager.Instance.StartGame();
     }
 
     public void EndGame()
     {
-        titleCanvas.enabled = true;
-        playCanvas.enabled = false;
+        titleCanvas.transform.gameObject.SetActive(true);
+        playCanvas.transform.gameObject.SetActive(false);
     }
 
     public void Awake()

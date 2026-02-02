@@ -45,6 +45,7 @@ public class TurnManager : MonoBehaviour
     {
         RemainingChoices = 2;
         _usedItems.Clear();
+        _gameManager.GainItem();
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
@@ -152,15 +153,8 @@ public class TurnManager : MonoBehaviour
         }*/
 
         RemainingChoices = 2;
-        if (_usedItems[ItemType.Americano] > 0)
-        {
-            _usedAmericanoLastTurn = true;
-        }
-        else
-        {
-            _usedAmericanoLastTurn = false;
-            _currentPlayer = (_currentPlayer + 1) % 2;
-        }
+        _currentPlayer = (_currentPlayer + 1) % 2;
+        
         _gameManager.UIManager.DisableAll();
         if (_roundManager.CurrentColumn >= _roundManager.CurrentSentenceData.sentences.Count)
         {

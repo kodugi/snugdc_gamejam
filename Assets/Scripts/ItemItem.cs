@@ -44,6 +44,7 @@ public class ItemItem : MonoBehaviour
 
     private void OnUse()
     {
+        _button.enabled = false;
         GameManager.Instance.PlayItem(_itemType);
         Destroy(this.gameObject);
         
