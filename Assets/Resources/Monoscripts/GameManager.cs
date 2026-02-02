@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Players = new List<Player> { new Player { playerId = 0 }, new Enemy { playerId = 1 } };
         _roundManager.StartGame();
     }
 
