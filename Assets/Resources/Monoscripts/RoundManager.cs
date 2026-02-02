@@ -6,7 +6,7 @@ public class RoundManager : MonoBehaviour
     private GameManager _gameManager;
     private TurnManager _turnManager;
 
-    private int _remainingRounds = 3;
+    private int _remainingRounds;
     private SentenceData _currentSentenceData;
     private List<Position> _correctWordPositions = new List<Position>();
     private List<Position> _incorrectWordPositions = new List<Position>();
@@ -34,6 +34,7 @@ public class RoundManager : MonoBehaviour
 
     public void StartRound()
     {
+        Debug.Log("Starting new round. Remaining rounds: " + _remainingRounds);
         _remainingRounds--;
         _currentColumn = 0;
         _turnManager.ResetPlayer();
@@ -47,7 +48,7 @@ public class RoundManager : MonoBehaviour
         // Logic for selecting a sentence goes here
         _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[Random.Range(0, _gameManager.SentenceParser.sentenceDataList.Count)];
         _gameManager.ButtonContainer.Init(_currentSentenceData);
-        _gameManager.GetEnemy().Initialize(_gameManager);
+        _gameManager.GetEnemy().Initialize(_gameManager, _turnManager);
     }
 
     public void EndRound()
@@ -61,6 +62,7 @@ public class RoundManager : MonoBehaviour
             _scores.Item2 += 1;
         }
         Debug.Log($"Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
+        Debug.Log("Remaining Rounds: " + _remainingRounds);
         if (_remainingRounds > 0)
         {
             StartRound();

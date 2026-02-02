@@ -18,6 +18,12 @@ public class TurnManager : MonoBehaviour
             _gameManager.UIManager.UpdateSkipButton(value);
         }
     }
+
+    public void AddRemainingChoices(int amount)
+    {
+        RemainingChoices += amount;
+    }
+
     private int __remainingChoices = 2;
     private DefaultDictionary<ItemType, int> _usedItems = new DefaultDictionary<ItemType, int>();
     private bool _usedAmericanoLastTurn = false;
@@ -42,9 +48,10 @@ public class TurnManager : MonoBehaviour
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
-        _gameManager.GainItem();
+        GainItem();
         if (_currentPlayer == 1)
         {
+            Debug.Log("Enemy's Turn");
             PlayEnemyTurn();
         }
         else
@@ -98,36 +105,9 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    private void PlayEnemyTurn()
+    private async void PlayEnemyTurn()
     {
-        Enemy enemy = GameManager.Instance.GetEnemy();
-        int i = 0;
-        while (true)
-        {
-            i++;
-            if (i == 10) break;
-            ItemType useItem = enemy.UseItem();
-            if (useItem == ItemType.None)
-                break;
-            _gameManager.PlayItem(useItem);
-        }
-
-        Position first = enemy.getNextChoice();
-        if(first.row == -1)
-        {
-            Debug.Log("Enemy chose to skip on the first turn. Pray to jesus and Buddha now.");
-        }
-        ProcessWordChoice(first.row, first.col);
-        
-        Position second = enemy.getNextChoice();
-        if (second.row != -1)
-        {
-            ProcessWordChoice(second.row, second.col);
-        }
-        else
-        {
-            TurnEnd();
-        }
+        await GameManager.Instance.GetEnemy().PlayTurnAsync();
     }
     public void ProcessWordChoice(int row, int column)
     {
@@ -142,13 +122,11 @@ public class TurnManager : MonoBehaviour
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
-            Debug.Log("Correct choice!");
             _gameManager.ButtonContainer.DisableColumn(column);
             _roundManager.CorrectWordPositionsAdd(new Position(row, column));
         }
         else
         {
-            Debug.Log("Incorrect choice!");
             _gameManager.ButtonContainer.DisableButton(row, column);
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }
@@ -169,10 +147,10 @@ public class TurnManager : MonoBehaviour
     public void TurnEnd()
     {
         if (RemainingChoices == 2) return;
-        if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
+        /*if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;
-        }
+        }*/
 
         RemainingChoices = 2;
         if (_usedItems[ItemType.Americano] > 0)

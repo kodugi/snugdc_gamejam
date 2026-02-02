@@ -1,10 +1,43 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Enemy: Player
 {
     private GameManager _gameManager;
+    private TurnManager _turnManager;
     private List<List<bool>> _availableWords;
+
+    public async Task PlayTurnAsync()
+    {
+        int i = 0;
+        while (true)
+        {
+            i++;
+            if (i == 10) break;
+            ItemType useItem = UseItem();
+            if (useItem == ItemType.None)
+                break;
+            Debug.Log("Enemy uses item: " + useItem);
+            _turnManager.PlayItem(useItem);
+            await Task.Delay(1000);
+        }
+
+        Position first = getNextChoice();
+        Debug.Log("Enemy first 선택: Column " + first.col + ", Row " + first.row);
+        _turnManager.ProcessWordChoice(first.row, first.col);
+        await Task.Delay(1000);
+        
+        Position second = getNextChoice();
+        if (second.row != -1)
+        {
+            _turnManager.ProcessWordChoice(second.row, second.col);
+        }
+        else
+        {
+            _turnManager.TurnEnd();
+        }
+    }
 
     public Position getNextChoice()
     {
@@ -19,13 +52,16 @@ public class Enemy: Player
                 availableIndices.Add(i);
             }
         }
-        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 1));
+        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 4));
         // 남은 선택 횟수가 2회 이상이면 skip 불가
         // 일단은 위치를 가능한 후보군 중 랜덤으로 선택
+        Debug.Log($"Available Indices Count: {availableIndices.Count}, Remaining Choices: {_gameManager.GetRemainingChoices()}");
         if(randomIndex < availableIndices.Count)
         {
+            Debug.Log($"Enemy 선택: Column {currentColumn}, Row {availableIndices[randomIndex]}");
             return new Position(availableIndices[randomIndex], currentColumn);
         }
+        Debug.Log($"Enemy 선택: Column {currentColumn}, Skip");
         return new Position(-1, currentColumn);
     }
 
@@ -56,9 +92,10 @@ public class Enemy: Player
         return availableItems[randomIndex];
     }
 
-    public void Initialize(GameManager gameManager)
+    public void Initialize(GameManager gameManager, TurnManager turnManager)
     {
         _gameManager = gameManager;
+        _turnManager = turnManager;
         _availableWords = new List<List<bool>>();
         foreach (var sentence in gameManager.GetCurrentSentenceData().sentences)
         {
