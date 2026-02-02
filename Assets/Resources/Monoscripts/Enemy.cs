@@ -14,14 +14,11 @@ public class Enemy: Player
         List<int> availableIndices = new List<int>();
         for (int i = 0; i < _availableWords[currentColumn].Count; i++)
         {
-            Debug.Log($"Availability at column {currentColumn}, row {i}: {_availableWords[currentColumn][i]}");
             if (_availableWords[currentColumn][i])
             {
                 availableIndices.Add(i);
             }
         }
-        Debug.Log("Remaining choices: " + _gameManager.GetRemainingChoices());
-        Debug.Log("Available indices count: " + availableIndices.Count);
         int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 1));
         // 남은 선택 횟수가 2회 이상이면 skip 불가
         // 일단은 위치를 가능한 후보군 중 랜덤으로 선택
@@ -77,13 +74,11 @@ public class Enemy: Player
 
     public void RemoveAt(Position pos)
     {
-        Debug.Log("Enemy RemoveAt at column " + pos.col + ", row " + pos.row);
         _availableWords[pos.col][pos.row] = false;
     }
 
     public void RemoveExceptAnswer(int column)
     {
-        Debug.Log("Enemy RemoveExceptAnswer at column " + column);
         for(int row = 0; row < _availableWords[column].Count; row++)
         {
             if(_gameManager.GetCurrentSentenceData().sentences[column][row].isCorrect)

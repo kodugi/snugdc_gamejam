@@ -40,7 +40,6 @@ public class ButtonContainer : MonoBehaviour
             verticalLayoutGroup.spacing = verticalpaddingheight;
             for(int row = 0 ; row<wordList.Count ; row++)
             {
-                Debug.Log(row);
                 WordData wordData = wordList[row];
                 GameObject goButton = Instantiate(button, go.transform);
                 ButtonHandler buttonScript = goButton.GetComponent<ButtonHandler>();
