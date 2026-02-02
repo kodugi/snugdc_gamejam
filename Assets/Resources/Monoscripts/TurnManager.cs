@@ -66,7 +66,7 @@ public class TurnManager : MonoBehaviour
         {
             int totalItems = GetTotalItems(player.playerId);
             int leftCapacity = 5 - totalItems; // Assuming max capacity is 5
-            for (int i = 0; i < 3 && i < leftCapacity; i++) // Example: gain 3 items
+            for (int i = 0; i < 1 && i < leftCapacity; i++) // Example: gain 1 item
             {
                 ItemType newItem = _gameManager.GetAllItems()[Random.Range(0, _gameManager.GetAllItems().Count)]; // Logic to determine which item to gain
                 player.inventory[newItem]++;
