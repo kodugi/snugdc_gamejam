@@ -47,7 +47,6 @@ public class TurnManager : MonoBehaviour
         _usedItems.Clear();
         _gameManager.GainItem();
         _gameManager.ButtonContainer.UnHighLightAll();
-        _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
         if (_currentPlayer == 1)
         {
@@ -56,6 +55,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
             _gameManager.UIManager.DisDisableAll();
         }
     }

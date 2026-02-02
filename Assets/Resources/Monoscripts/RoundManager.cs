@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class RoundManager : MonoBehaviour
 {
@@ -50,9 +51,10 @@ public class RoundManager : MonoBehaviour
         _gameManager.GetEnemy().Initialize(_gameManager, _turnManager);
     }
 
-    public void EndRound()
+    public async void EndRound()
     {
-        if(_gameManager.GetCurrentPlayer().playerId == 0)
+        int winnerId = _gameManager.GetCurrentPlayer().playerId;
+        if(winnerId == 0)
         {
             _scores.Item1 += 1;
         }
@@ -63,6 +65,10 @@ public class RoundManager : MonoBehaviour
         Debug.Log($"Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         Debug.Log("Remaining Rounds: " + _remainingRounds);
         _gameManager.UIManager.UpdateScore(_scores.Item1, _scores.Item2);
+
+        _gameManager.UIManager.InfoDeploy(winnerId == 0 ? "플레이어 승리!" : "CPU 승리!");
+        await Task.Delay(1000);
+
         if (_remainingRounds > 0)
         {
             StartRound();
