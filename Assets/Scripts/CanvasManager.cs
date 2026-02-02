@@ -17,7 +17,9 @@ public class CanvasManager : MonoBehaviour
     
     private void StartGame()
     {
-        PlaySound();
+        PlayButtonSound();
+        _soundManager.PlayMusic(AudioType.IngameScreenMusic);
+        
         titleCanvas.transform.gameObject.SetActive(false);
         playCanvas.transform.gameObject.SetActive(true);
         GameManager.Instance.StartGame();
@@ -25,33 +27,39 @@ public class CanvasManager : MonoBehaviour
 
     private void EndGame()
     {
-        PlaySound();
+        PlayButtonSound();
+        _soundManager.PlayMusic(AudioType.TitleScreenMusic);
         titleCanvas.transform.gameObject.SetActive(true);
         playCanvas.transform.gameObject.SetActive(false);
     }
 
     private void OpenTutorial()
     {
-        PlaySound();
+        PlayButtonSound();
+        _soundManager.PlayMusic(AudioType.TutorialMusic);
         titleCanvas.transform.gameObject.SetActive(false);
         playCanvas.transform.gameObject.SetActive(false);
         SceneManager.LoadScene("TutorialScene", LoadSceneMode.Additive);
     }
 
-    private void PlaySound()
+    private void PlayButtonSound()
     {
-        _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
+        _soundManager.PlaySound(AudioType.ButtonClick);
     }
 
     private void CloseTutorial(Scene scene)
     {
         if (scene.name == "TutorialScene")
         {
-            PlaySound();
+            PlayButtonSound();
+            _soundManager.PlayMusic(AudioType.TitleScreenMusic);
             titleCanvas.transform.gameObject.SetActive(true);
             playCanvas.transform.gameObject.SetActive(false);
         }   
     }
+
+    
+
     public void Awake()
     {
         StartButton.onClick.AddListener(StartGame);

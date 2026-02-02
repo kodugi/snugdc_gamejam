@@ -4,5 +4,8 @@ public enum AudioType
     Incorrect,
     Victory,
     ButtonClick,
-    ItemUse
+    ItemUse,
+    TitleScreenMusic,
+    IngameScreenMusic,
+    TutorialMusic
 }
