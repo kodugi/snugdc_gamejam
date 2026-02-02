@@ -12,11 +12,13 @@ public class TutorialManager : MonoBehaviour
     private int currentStep = 0;
 
     private TutorialData tutorialData;
+    private SoundManager _soundManager;
 
     private void Start()
     {
         TextAsset tutorialJson = Resources.Load<TextAsset>("TutorialData/TutorialDialogue");
         tutorialData = JsonUtility.FromJson<TutorialData>(tutorialJson.text);
+        _soundManager = GetComponent<SoundManager>();
 
         nextButton.onClick.AddListener(OnNextButtonClicked);
         prevButton.onClick.AddListener(OnPrevButtonClicked);
@@ -51,17 +53,20 @@ public class TutorialManager : MonoBehaviour
 
     private void OnNextButtonClicked()
     {
+        _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
         currentStep++;
         ShowStep(currentStep);
     }
     private void OnPrevButtonClicked()
     {
+        _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
         currentStep--;
         ShowStep(currentStep);
     }
 
     private void OnQuitButtonClicked()
     {
+        _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
         SceneManager.LoadScene("UIScene");
     }
 }
