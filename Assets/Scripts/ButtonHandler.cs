@@ -35,7 +35,6 @@ public class ButtonHandler : MonoBehaviour
         IncorrectHider.enabled = false;
         CorrectHider.enabled = false;
         _button.onClick.AddListener(OnClick);
-        highlightImage.transform.localScale=Vector3.one*1.3f;
         text=wordData.word;
         SetText(text);
         wordType=wordData.type;

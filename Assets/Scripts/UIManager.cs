@@ -47,6 +47,7 @@ public class UIManager: MonoBehaviour
 
     public void ItemUpdate(DefaultDictionary<ItemType, int> playerinventory,DefaultDictionary<ItemType, int> enemyinventory)
     {
+        Debug.Log("Item update called");
         playerInventory.Render(playerinventory,true);
         enemyInventory.Render(enemyinventory,false);
     }
