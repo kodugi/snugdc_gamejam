@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     private GameState _currentState = GameState.GameStart;
-    private List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
+    public List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
     private List<ItemType> _allItems = new List<ItemType>();
 
     public void StartGame()
@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
         return Players;
     }
 
+    public Enemy GetEnemy()
+    {
+        return (Enemy)Players[1];
+    }
+
     public List<ItemType> GetAllItems()
     {
         return _allItems;
@@ -112,5 +117,10 @@ public class GameManager : MonoBehaviour
     public int GetCurrentColumn()
     {
         return _roundManager.CurrentColumn;
+    }
+
+    public int GetRemainingChoices()
+    {
+        return _turnManager.RemainingChoices;
     }
 }
