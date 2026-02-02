@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonHandler : MonoBehaviour,IPointerClickHandler
+public class ButtonHandler : MonoBehaviour
 {
     [SerializeField] Image highlightImage;
     [SerializeField] Image IncorrectHider;
     [SerializeField] Image CorrectHider;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
-    [SerializeField] private Collider2D collider2D;
+    [SerializeField] private Button _button;
     
     private string text = "";
     private WordType wordType;
@@ -34,7 +34,7 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
         UnHighLight();
         IncorrectHider.enabled = false;
         CorrectHider.enabled = false;
-        collider2D.enabled = true;
+        _button.onClick.AddListener(OnClick);
         highlightImage.transform.localScale=Vector3.one*1.3f;
         text=wordData.word;
         SetText(text);
@@ -47,13 +47,6 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
     {
         _textMeshPro.text = word;
     }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (!collider2D.enabled)
-            return;
-        OnClick();
-    }
     void OnClick()
     {
         Debug.Log("clicked "+row+", "+col);
@@ -62,12 +55,12 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
 
     public void HighLight()
     {
-        if (!collider2D.enabled) return;
+        if (!_button.interactable) return;
         highlightImage.enabled = true;
     }
     public void UnHighLight()
     {
-        if(collider2D.enabled)
+        if(_button.interactable)
         transform.localScale = Vector3.one;
         highlightImage.enabled = false;
     }
@@ -81,7 +74,8 @@ public class ButtonHandler : MonoBehaviour,IPointerClickHandler
         {
             DisableIncorrect();
         }
-        collider2D.enabled = false;
+
+        _button.interactable = false;
     }
 
     private void DisableIncorrect()
