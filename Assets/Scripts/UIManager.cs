@@ -11,6 +11,8 @@ public class UIManager: MonoBehaviour
     [SerializeField] private CanvasGroup _MainField;
     [SerializeField] private ItemList playerInventory;
     [SerializeField] private ItemList enemyInventory;
+    [SerializeField] private TextUIManager textUIManager;
+    [SerializeField] private InfoBoxManager infoBoxManager;
     public void UpdateRemainingChoices(int remainingChoices)
     {
         TMP_RemainingChoices.text = remainingChoices + "/2";
@@ -18,7 +20,7 @@ public class UIManager: MonoBehaviour
 
     public void UpdateSkipButton(int remainingChoices)
     {
-        if (remainingChoices == 2)
+        if (remainingChoices >= 2)
         {
             DisableSkip();
         }
@@ -59,6 +61,10 @@ public class UIManager: MonoBehaviour
         enemyInventory.Render(enemyinventory,false);
     }
 
+    public void InfoDeploy(string text)
+    {
+        infoBoxManager.CloneAndDeploy(text);
+    }
     public void ItemShowcase(ItemType item)
     {
         

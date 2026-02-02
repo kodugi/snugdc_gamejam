@@ -134,13 +134,8 @@ public class TurnManager : MonoBehaviour
         }
 
         _roundManager.AdvanceColumn();
-
-        _gameManager.ButtonContainer.UnHighLightAll();
-        if (RemainingChoices > 0)
-        {
-            _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
-        }
-        else
+        
+        if(RemainingChoices==0)
         {
             TurnEnd();
         }
@@ -148,7 +143,7 @@ public class TurnManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        if (RemainingChoices == 2) return;
+        if (RemainingChoices >= 2) return;
         /*if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;

@@ -22,6 +22,7 @@ public class AncientDocument : IItem
         }
 
         int revealCount = Mathf.Min(2, conjunctionColumns.Count);
+        string output = "";
         for (int i = 0; i < revealCount; i++)
         {
             int randomIndex = Random.Range(0, conjunctionColumns.Count);
@@ -35,7 +36,7 @@ public class AncientDocument : IItem
                 {
                     if(gameManager.GetCurrentPlayer().playerId == 0) // 플레이어
                     {
-                        Debug.Log($"The conjunction is at column {colToReveal + 1}!");
+                        output += $"{colToReveal + 1}번째 줄에 조사가 있습니다.\n";
                     }
                     else // 적
                     {
@@ -52,5 +53,9 @@ public class AncientDocument : IItem
                 }
             }
         }
+
+        if (output == "") output = "남은 조사가 없습니다.";
+        if(gameManager.GetCurrentPlayer().playerId == 0) 
+        gameManager.ShowInfoUIManager(output);
     }
 }

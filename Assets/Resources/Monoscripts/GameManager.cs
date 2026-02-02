@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private RoundManager _roundManager;
     private TurnManager _turnManager;
     [SerializeField] ButtonContainer _buttonContainer;
+    [SerializeField] TextUIManager _textUImanager;
     private UIManager _uiManager;
     public ButtonContainer ButtonContainer => _buttonContainer;
     public SentenceParser SentenceParser => _sentenceParser;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         foreach (ItemType type in System.Enum.GetValues(typeof(ItemType)))
         {
+            if (type == ItemType.None) continue;
             _allItems.Add(type);
         }
 
@@ -134,6 +136,10 @@ public class GameManager : MonoBehaviour
         return _turnManager.RemainingChoices;
     }
 
+    public void BeerEffect()
+    {
+        _roundManager.AdvanceColumn();
+    }
     public void AddRemainingChoices(int amount)
     {
         Debug.Log("Adding Remaining Choices: " + amount);
@@ -150,5 +156,18 @@ public class GameManager : MonoBehaviour
             audioType == AudioType.Victory ? _soundManager.VictorySound :
             null
         );
+    public void ShowTextUIManager(string text,Sprite sprite)
+    {
+        _textUImanager.Init(text,sprite);
+    }
+
+    public void DisableTextUIManager()
+    {
+        _textUImanager.Disable();
+    }
+
+    public void ShowInfoUIManager(string text)
+    {
+        _uiManager.InfoDeploy(text);
     }
 }
