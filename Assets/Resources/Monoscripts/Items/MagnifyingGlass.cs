@@ -41,7 +41,7 @@ public class MagnifyingGlass : IItem
             // Highlight the word at correctLocations[randomIndex]
             if(gameManager.GetCurrentPlayer().playerId == 0) // 플레이어
             {
-                gameManager.ShowInfoUIManager($"현재 줄의 {correctLocations[randomIndex].Item1 + 1}번째 단어는 옳습니다.");
+                gameManager.ShowInfoUIManager($"현재 줄의 {correctLocations[randomIndex].Item1 + 1}번째 단어는 옳습니다.",2f);
             }
             else // 적
             {

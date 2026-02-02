@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using System.Collections;
@@ -8,17 +9,23 @@ public class InfoBoxManager : MonoBehaviour
     [SerializeField] private float moveTime = 0.5f;       // 이동 시간
     [SerializeField] private float stayTime = 1f;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI; // 머무는 시간
-
-    public void CloneAndDeploy(string text)
+    private bool isClone = false;
+    public void CloneAndDeploy(string text,float customStayTime=1f)
     {
         GameObject clone = Instantiate(gameObject, transform.parent, false);
-        clone.GetComponent<InfoBoxManager>().Deploy(text);
+        InfoBoxManager clonemanager = clone.GetComponent<InfoBoxManager>();
+        clonemanager.StayTimeSetter(customStayTime);
+        clonemanager.Deploy(text);
     }
 
+    public void StayTimeSetter(float time)
+    {
+        stayTime = time;
+    }
     void Deploy(string text)
     {
         _textMeshProUGUI.text = text;
-
+        isClone = true;
         StartCoroutine(MoveRoutine());
     }
 
@@ -54,5 +61,13 @@ public class InfoBoxManager : MonoBehaviour
         }
 
         rect.localPosition = to; // 보정
+    }
+
+    private void OnDisable()
+    {
+        if (isClone)
+        {
+            Destroy(gameObject);
+        }
     }
 }

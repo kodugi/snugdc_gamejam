@@ -13,7 +13,7 @@ public class Enemy: Player
         int i = 0;
         while (true)
         {
-            await Task.Delay(1000);
+            await Task.Delay(1000+Random.Range(0,500));
             i++;
             if (i == 10) break;
             ItemType useItem = UseItem();
@@ -23,13 +23,13 @@ public class Enemy: Player
             _gameManager.PlayItem(useItem);
         }
 
-        await Task.Delay(1000);
+        await Task.Delay(1000+Random.Range(0,500));
         Position first = getNextChoice();
         Debug.Log("Enemy first 선택: Column " + first.col + ", Row " + first.row);
         _turnManager.ProcessWordChoice(first.row, first.col);
-        await Task.Delay(1000);
         while(_gameManager.GetRemainingChoices()>0 && _gameManager.GetCurrentPlayer().playerId==1)
         {
+            await Task.Delay(1000+Random.Range(0,500));
             Position second = getNextChoice();
             if (second.row != -1)
             {
