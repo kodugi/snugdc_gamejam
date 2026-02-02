@@ -105,7 +105,6 @@ public class TurnManager : MonoBehaviour
         while (true)
         {
             i++;
-            Debug.Log(i);
             if (i == 10) break;
             ItemType useItem = enemy.UseItem();
             if (useItem == ItemType.None)
@@ -140,9 +139,7 @@ public class TurnManager : MonoBehaviour
         if (RemainingChoices <= 0)
             return;
         RemainingChoices--;
-        Debug.Log("select " + row + ":" + column);
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
-        Debug.Log("Chosen word: " + chosenWord.word + ", isCorrect: " + chosenWord.isCorrect);
         if (chosenWord.isCorrect)
         {
             Debug.Log("Correct choice!");
@@ -172,7 +169,6 @@ public class TurnManager : MonoBehaviour
     public void TurnEnd()
     {
         if (RemainingChoices == 2) return;
-        Debug.Log("turnEnded");
         if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;

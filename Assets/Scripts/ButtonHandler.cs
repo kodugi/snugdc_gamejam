@@ -49,7 +49,6 @@ public class ButtonHandler : MonoBehaviour
     }
     void OnClick()
     {
-        Debug.Log("clicked "+row+", "+col);
         GameManager.Instance.ProcessWordChoice(row,col);
     }
 

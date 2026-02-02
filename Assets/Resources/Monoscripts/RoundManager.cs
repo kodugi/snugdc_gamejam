@@ -18,6 +18,7 @@ public class RoundManager : MonoBehaviour
     public List<Position> CorrectWordPositions => _correctWordPositions;
     public List<Position> IncorrectWordPositions => _incorrectWordPositions;
     public HashSet<int> CorrectColumns => _correctColumns;
+    private (int, int) _scores = (0, 0); // (playerScore, enemyScore)
 
     private void Awake()
     {
@@ -51,6 +52,15 @@ public class RoundManager : MonoBehaviour
 
     public void EndRound()
     {
+        if(_gameManager.GetCurrentPlayer().playerId == 0)
+        {
+            _scores.Item1 += 1;
+        }
+        else
+        {
+            _scores.Item2 += 1;
+        }
+        Debug.Log($"Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         if (_remainingRounds > 0)
         {
             StartRound();
@@ -58,6 +68,7 @@ public class RoundManager : MonoBehaviour
         else
         {
             Debug.Log("Game Over");
+            Debug.Log($"Final Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         }
     }
 
@@ -70,7 +81,6 @@ public class RoundManager : MonoBehaviour
         {
             _currentColumn++; // 이미 맞힌 열은 건너뜀
         }
-        Debug.Log("StartRun at column " + _currentColumn);
         _turnManager.StartTurn();
     }
 
