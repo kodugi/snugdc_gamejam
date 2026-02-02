@@ -119,60 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &7431300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7431301}
-  - component: {fileID: 7431302}
-  m_Layer: 5
-  m_Name: ItemPopUp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7431301
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7431300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 525189300}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7431302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7431300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2026236a57ad39e4bbadfbfd1e2ed8b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemPopUpManager
-  moveDownDistance: 90
-  moveUpDistance: 180
-  moveDownTime: 0.1
-  moveUpTime: 0.5
-  stayTime: 1
-  image: {fileID: 0}
 --- !u!1 &114652347
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +581,8 @@ MonoBehaviour:
   enemyInventory: {fileID: 487286234}
   textUIManager: {fileID: 2064633879}
   infoBoxManager: {fileID: 1105210876}
+  playerSpriteController: {fileID: 916757287}
+  enemySpriteController: {fileID: 2104873386}
 --- !u!82 &319194423
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1102,12 +1050,11 @@ RectTransform:
   m_Children:
   - {fileID: 1105210875}
   - {fileID: 803724754}
-  - {fileID: 2064633877}
   - {fileID: 713723710}
   - {fileID: 114652348}
   - {fileID: 916757284}
   - {fileID: 2104873383}
-  - {fileID: 7431301}
+  - {fileID: 2064633877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2599,6 +2546,8 @@ GameObject:
   - component: {fileID: 916757284}
   - component: {fileID: 916757286}
   - component: {fileID: 916757285}
+  - component: {fileID: 916757287}
+  - component: {fileID: 916757288}
   m_Layer: 5
   m_Name: Human
   m_TagString: Untagged
@@ -2615,15 +2564,15 @@ RectTransform:
   m_GameObject: {fileID: 916757283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 525189300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -808, y: -503}
-  m_SizeDelta: {x: 152.5, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 82, y: 148}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &916757285
 MonoBehaviour:
@@ -2663,6 +2612,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916757283}
   m_CullTransparentMesh: 1
+--- !u!114 &916757287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916757283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ee468307d2d454a83b818842ef8254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpriteController
+  idle: {fileID: 7620869590115789396, guid: d30407f3baefc494c936f5c6a3bb3998, type: 3}
+  lose: {fileID: -2571551372635377227, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
+  win: {fileID: -819501722830561752, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
+--- !u!114 &916757288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916757283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &924755788
 GameObject:
   m_ObjectHideFlags: 0
@@ -4168,6 +4146,7 @@ GameObject:
   - component: {fileID: 2104873383}
   - component: {fileID: 2104873385}
   - component: {fileID: 2104873384}
+  - component: {fileID: 2104873386}
   m_Layer: 5
   m_Name: Robot
   m_TagString: Untagged
@@ -4189,9 +4168,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 525189300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 827.75, y: -403}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -132.25385, y: 160.077}
   m_SizeDelta: {x: 264.5077, y: 320.154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104873384
@@ -4232,6 +4211,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104873382}
   m_CullTransparentMesh: 1
+--- !u!114 &2104873386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104873382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ee468307d2d454a83b818842ef8254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpriteController
+  idle: {fileID: 8708344105300648415, guid: d30407f3baefc494c936f5c6a3bb3998, type: 3}
+  lose: {fileID: -8902938388912322983, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
+  win: {fileID: -5803327392296257307, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

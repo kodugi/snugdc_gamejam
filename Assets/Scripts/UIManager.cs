@@ -13,6 +13,9 @@ public class UIManager: MonoBehaviour
     [SerializeField] private ItemList enemyInventory;
     [SerializeField] private TextUIManager textUIManager;
     [SerializeField] private InfoBoxManager infoBoxManager;
+    [SerializeField] private PlayerSpriteController playerSpriteController;
+    [SerializeField] private PlayerSpriteController enemySpriteController;
+    
     public void UpdateRemainingChoices(int remainingChoices)
     {
         TMP_RemainingChoices.text = remainingChoices + "/2";
@@ -68,5 +71,23 @@ public class UIManager: MonoBehaviour
     public void ItemShowcase(ItemType item)
     {
         
+    }
+
+    public void PlayerWinRender()
+    {
+        playerSpriteController.Win();
+        enemySpriteController.Lose();
+    }
+
+    public void EnemyWinRender()
+    {
+        playerSpriteController.Lose();
+        enemySpriteController.Win();
+    }
+
+    public void PlayersSpriteReset()
+    {
+        playerSpriteController.reset();
+        enemySpriteController.reset();
     }
 }
