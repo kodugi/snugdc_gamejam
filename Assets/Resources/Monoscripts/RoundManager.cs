@@ -48,7 +48,7 @@ public class RoundManager : MonoBehaviour
         // Logic for selecting a sentence goes here
         _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[Random.Range(0, _gameManager.SentenceParser.sentenceDataList.Count)];
         _gameManager.ButtonContainer.Init(_currentSentenceData);
-        _gameManager.GetEnemy().Initialize(_gameManager);
+        _gameManager.GetEnemy().Initialize(_gameManager, _turnManager);
     }
 
     public void EndRound()

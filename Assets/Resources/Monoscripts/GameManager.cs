@@ -133,6 +133,9 @@ public class GameManager : MonoBehaviour
 
     public void AddRemainingChoices(int amount)
     {
+        Debug.Log("Adding Remaining Choices: " + amount);
+        Debug.Log("Current Remaining Choices: " + _turnManager.RemainingChoices);
         _turnManager.AddRemainingChoices(amount);
+        Debug.Log("New Remaining Choices: " + _turnManager.RemainingChoices);
     }
 }
