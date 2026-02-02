@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public SentenceParser SentenceParser => _sentenceParser;
     public UIManager UIManager => _uiManager;
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
+    private SoundManager _soundManager;
+    
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         _roundManager = GetComponent<RoundManager>();
         _turnManager = GetComponent<TurnManager>();
         _uiManager = GetComponent<UIManager>();
+        _soundManager = GetComponent<SoundManager>();
 
         foreach (ItemType type in System.Enum.GetValues(typeof(ItemType)))
         {
@@ -137,5 +140,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Current Remaining Choices: " + _turnManager.RemainingChoices);
         _turnManager.AddRemainingChoices(amount);
         Debug.Log("New Remaining Choices: " + _turnManager.RemainingChoices);
+    }
+
+    public void PlaySound(AudioType audioType)
+    {
+        _soundManager.GetComponent<AudioSource>().PlayOneShot(
+            audioType == AudioType.Correct ? _soundManager.CorrectSound :
+            audioType == AudioType.Incorrect ? _soundManager.IncorrectSound :
+            audioType == AudioType.Victory ? _soundManager.VictorySound :
+            null
+        );
     }
 }

@@ -21,6 +21,7 @@ public class TurnEndButton : MonoBehaviour
     }
     void OnClick()
     {
+        _button.GetComponent<AudioSource>().Play();
         Debug.Log("turnEndclicked");
         GameManager.Instance.TurnEnd();
     }
