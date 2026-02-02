@@ -13,7 +13,7 @@ public class Transceiver : IItem
             for (int row = 0; row < currentSentenceData.sentences[col].Count; row++)
             {
                 WordData wordData = currentSentenceData.sentences[col][row];
-                if (wordData.type == WordType.Conjunction && wordData.isCorrect)
+                if (wordData.isCorrect)
                 {
                     correctLocations.Add((row, col));
                     break;
