@@ -26,11 +26,11 @@
       },
       {
         "text": " 정답인 선택지가 있는 경우 해당 열에 있는 다른 모든 오답들이 지워지며, 해당 열은 더 이상 선택할 수 없는 상태가 되어 턴을 소모하지 않고 지나갈 수 있게 됩니다.",
-        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
+        "imagePath": "Sprites/TutorialImage/TutorialImage_4"
       },
       {
         "text": "아이템 설명",
-        "imagePath":"Sprites/TutorialImage/TutorialImage_6"
+        "imagePath":"Sprites/TutorialImage/TutorialImage_5"
       },
       {
         "text": "이제, 아이템을 하나씩 설명하도록 하겠습니다. 먼저, 무전기입니다. 무전기는 랜덤한 위치의 정답을 한 개 알려줍니다.",
