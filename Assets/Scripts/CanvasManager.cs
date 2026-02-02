@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Button StartButton;
     [SerializeField] Button HomeButton;
     [SerializeField] Button ExitButton;
+    [SerializeField] Button TutorialButton;
     
     public void StartGame()
     {
@@ -25,10 +27,15 @@ public class CanvasManager : MonoBehaviour
         playCanvas.transform.gameObject.SetActive(false);
     }
 
+    public void OpenTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
     public void Awake()
     {
         StartButton.onClick.AddListener(StartGame);
         HomeButton.onClick.AddListener(EndGame);
         ExitButton.onClick.AddListener(Application.Quit);
+        TutorialButton.onClick.AddListener(OpenTutorial);
     }
 }

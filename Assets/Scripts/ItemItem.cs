@@ -28,7 +28,7 @@ public class ItemItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
                 break;
             case ItemType.Americano:
                 _image.sprite = sprites[1];
-                _explanation = "플레이어가 단어를 두 번 더 고를 수 있도록 합니다.";
+                _explanation = "플레이어가 단어를 한 번 더 고를 수 있도록 합니다.";
                 break;
             case ItemType.Beer:
                 _image.sprite = sprites[2];
