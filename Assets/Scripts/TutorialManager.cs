@@ -25,7 +25,15 @@ public class TutorialManager : MonoBehaviour
         if (stepIndex < tutorialData.steps.Length)
         {
             tutorialText.text = tutorialData.steps[stepIndex].text;
-            tutorialImage.sprite = Resources.Load<Sprite>(tutorialData.steps[stepIndex].imagePath);
+            Sprite tutorialSprite = Resources.Load<Sprite>(tutorialData.steps[stepIndex].imagePath);
+            if (tutorialSprite != null)
+            {
+                tutorialImage.sprite = tutorialSprite;
+            }
+            else
+            {
+                Debug.LogError($"Tutorial Image not found at path: {tutorialData.steps[stepIndex].imagePath}");
+            }
         }
         else
         {
