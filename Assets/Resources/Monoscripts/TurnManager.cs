@@ -7,10 +7,10 @@ public class TurnManager : MonoBehaviour
     private RoundManager _roundManager;
 
     private int _currentPlayer = 0;
-        private int _remainingChoices
+    public int RemainingChoices
     {
         get => __remainingChoices;
-        set
+        private set
         {
             __remainingChoices = value;
             _gameManager.UIManager.UpdateRemainingChoices(value);
@@ -36,11 +36,11 @@ public class TurnManager : MonoBehaviour
 
     public void StartTurn()
     {
-        _remainingChoices = 2;
+        RemainingChoices = 2;
         _usedItems.Clear();
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
-        _gameManager.UIManager.UpdateRemainingChoices(_remainingChoices);
+        _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
         GainItem();
     }
 
@@ -96,9 +96,9 @@ public class TurnManager : MonoBehaviour
             Debug.Log("clicked:" + column + ",need:" + _roundManager.CurrentColumn);
             return;
         }
-        if (_remainingChoices <= 0)
+        if (RemainingChoices <= 0)
             return;
-        _remainingChoices--;
+        RemainingChoices--;
         Debug.Log("select " + row + ":" + column);
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         Debug.Log("Chosen word: " + chosenWord.word + ", isCorrect: " + chosenWord.isCorrect);
@@ -118,7 +118,7 @@ public class TurnManager : MonoBehaviour
         _roundManager.AdvanceColumn();
 
         _gameManager.ButtonContainer.UnHighLightAll();
-        if (_remainingChoices > 0)
+        if (RemainingChoices > 0)
         {
             _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         }
@@ -130,14 +130,14 @@ public class TurnManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        if (_remainingChoices == 2) return;
+        if (RemainingChoices == 2) return;
         Debug.Log("turnEnded");
-        if (_usedItems[ItemType.Beer] > 0 && _remainingChoices > 0)
+        if (_usedItems[ItemType.Beer] > 0 && RemainingChoices > 0)
         {
             return;
         }
 
-        _remainingChoices = 2;
+        RemainingChoices = 2;
         if (_usedItems[ItemType.Americano] > 0)
         {
             _usedAmericanoLastTurn = true;

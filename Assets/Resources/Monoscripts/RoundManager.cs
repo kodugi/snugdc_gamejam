@@ -78,11 +78,13 @@ public class RoundManager : MonoBehaviour
         foreach (var pos in _correctWordPositions)
         {
             _correctColumns.Add(pos.col);
+            _gameManager.GetEnemy().RemoveExceptAnswer(pos.col); // 적의 후보군에서도 정답만 남김
             _gameManager.ButtonContainer.DisableColumn(pos.col);
             _gameManager.ButtonContainer.HighlightButton(pos.row, pos.col);
         }
         foreach (var pos in _incorrectWordPositions)
         {
+            _gameManager.GetEnemy().RemoveWord(_currentSentenceData.sentences[pos.col][pos.row], pos.col); // 적의 후보군에서 틀린 단어 제거
             _gameManager.ButtonContainer.DisableButton(pos.row, pos.col);
         }
         EndRun();

@@ -13,5 +13,6 @@ public enum ItemType
     Americano,
     AncientDocument,
     Gloves,
-    Beer
+    Beer,
+    None
 }
