@@ -45,6 +45,15 @@ public class ButtonHandler : MonoBehaviour
     private void SetText(string word)
     {
         _textMeshPro.text = word;
+        // 길이에 따른 크기 조정
+        if(word.Length >= 4)
+        {
+            _textMeshPro.fontSize = 36;
+        }
+        else
+        {
+            _textMeshPro.fontSize = 54;
+        }
     }
     void OnClick()
     {
