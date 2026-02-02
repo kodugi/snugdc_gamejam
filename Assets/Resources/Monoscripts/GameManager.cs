@@ -156,6 +156,8 @@ public class GameManager : MonoBehaviour
             audioType == AudioType.Victory ? _soundManager.VictorySound :
             null
         );
+    }
+
     public void ShowTextUIManager(string text,Sprite sprite)
     {
         _textUImanager.Init(text,sprite);
