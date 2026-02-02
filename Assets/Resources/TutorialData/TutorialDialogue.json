@@ -1,72 +1,80 @@
 {
     "steps": [
       {
-        "text": "게임이 시작되면, 문장의 구성 요소들이 제시되고 아이템 3개가 주어집니다. 아이템은 나중에 설명하도록 하겠습니다.(다음 클릭시 다음 화면으로 이동)",
+        "text": "안녕! 게임에 온 걸 환영해~ 이제 튜토리얼을 진행할테니 집중하라고!",
         "imagePath": "Sprites/TutorialImage/TutorialImage_0"
       },
       {
-        "text": "게임의 화면은 다음과 같습니다.",
+        "text": "우리의 목표는 문장을 전부 번역하는거라네!옆에 보이는 저 로봇보다 빠르게 말이지.",
         "imagePath": "Sprites/TutorialImage/TutorialImage_0"
       },
       {
-        "text": "플레이어는 문장 속 단어가 맞는지 최소 1개에서 최대 2개까지 추론해야 합니다.",
+        "text": "아~ 하지만 해적에게 언어 능력을 바라지는 마. 하나하나 눌러보면서 번역하는게 가장 안전한 방법이라고!!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_0"
+      },
+      {
+        "text": "가능한 문장 내 단어중 우리는 두가지 단어가 정답인지 확인해볼 수 있지.",
         "imagePath": "Sprites/TutorialImage/TutorialImage_1"
       },
       {
-        "text": "그럼, AI도 마찬가지로 2개나 1개를 선택할 겁니다.",
+        "text": "아~ 이 단어는 문장에 안들어가나보군 유감이야.",
         "imagePath": "Sprites/TutorialImage/TutorialImage_2"
       },
       {
-        "text": "그럼, AI도 마찬가지로 2개나 1개를 선택할 겁니다.",
+        "text": "오! 이 단어는 들어가나 보군. 좋아 좋아~",
         "imagePath": "Sprites/TutorialImage/TutorialImage_3"
       },
       {
-        "text": "서로 번갈아 가며 선택하며 정답이 아닌 선택지들은 지워집니다.",
+        "text": "한턴에는 총 두번 단어를 확인해 볼 수 있어. 두번 확인했으니, 이제 저 컴퓨터가 확인할 차례로군.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_3"
+      },
+      {
+        "text": "오. 저 컴퓨터가 하나를 맞췄는걸? 우리는 저걸 이용해서 더 쉽게 번역을 시도할 수 있겠지!",
         "imagePath": "Sprites/TutorialImage/TutorialImage_4"
       },
       {
-        "text": " 정답인 선택지를 고른 경우 해당 열에 있는 다른 모든 오답들이 지워지며, 해당 열은 더 이상 선택할 수 없는 상태가 되어 턴을 소모하지 않고 지나갈 수 있게 됩니다.",
-        "imagePath": "Sprites/TutorialImage/TutorialImage_4"
-      },
-      {
-        "text": " 모든 열의 정답을 고를때까지 이를 반복하며, 가장 마지막으로 정답을 고른 플레이어가 점수를 얻습니다.",
-        "imagePath": "Sprites/TutorialImage/TutorialImage_4"
-      },
-      {
-        "text": "아이템에 대한 설명을 시작하겠습니다.",
+        "text": "이렇게 턴을 반복하여, 최종 정답 단어를 골라내면 점수를 얻게 된다네. 열심히 맞춰도 상대가 마지막 단어를 맞추면 억울하지 않냐고? 그게 인생이지 하하.",
         "imagePath":"Sprites/TutorialImage/TutorialImage_5"
       },
       {
-        "text": "먼저, 무전기입니다. 무전기는 랜덤한 위치의 정답을 한 개 알려줍니다.",
-        "imagePath": "Sprites/TutorialImage/radio"
+        "text": "한턴에는 무조건 하나의 단어는 확인을 해봐야해. 하지만, 두번째 확인이 상대에게 도움이 될 것 같다면 스킵도 방법이야! 마지막 단어를 골라야하니, 전략적으로 문제에 접근하자고!!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
       },
       {
-        "text": "다음은 돋보기입니다. 돋보기는 현재 열의 정답 위치를 알려줍니다.",
-        "imagePath": "Sprites/TutorialImage/magnifying_glass"
+        "text": "마지막으로 아이템을 사용하면, 더 쉽게 게임을 이길 수 있을꺼야! 한 턴에 한개씩만 보급되니, 아껴서 사용해도 괜찮지! 물론 5개가 최대니, 너무 아끼진 말고.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_5"
       },
       {
-        "text": "허브는 플레이어가 단어를 하나 더 고를 수 있게 합니다.",
-        "imagePath": "Sprites/TutorialImage/americano"
+        "text": "아이템은 이렇게 6개 존재해.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_6"
       },
       {
-        "text": "공개된 고문서는 ‘조사’의 위치(열)를 최대 2곳 알려줍니다. 이 조사의 위치를 이용하여 어디에 명사나 동사가 있는지 편하게 확인할 수 있습니다.",
-        "imagePath": "Sprites/TutorialImage/ancient_scroll"
+        "text": "먼저 허브야. 허브는 이번 턴에 단어를 하나 더 확인할 수 있게 해 주지.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_7"
       },
       {
-        "text": "장갑은 상대방의 무작위 아이템을 훔쳐옵니다.",
-        "imagePath": "Sprites/TutorialImage/gloves"
+        "text": "다음은 맥주야. 맥주를 마시면 턴 소모 없이 이번 열을 건너뛰고 다음 열으로 넘어갈 수 있지.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_8"
       },
       {
-        "text": "아이템은 한 턴에 원하는 만큼 사용할 수 있습니다.",
-        "imagePath": "Sprites/TutorialImage/gloves"
+        "text": "그 다음은 돋보기야. 돋보기를 사용하면 이번 열의 올바른 선택지를 바로 알 수 있어.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_9"
       },
       {
-        "text": "장갑은 상대방의 무작위 아이템을 훔쳐옵니다.",
-        "imagePath": "Sprites/TutorialImage/gloves"
+        "text": "다음은 장갑이야. 장갑을 사용하면 상대의 아이템 중 하나를 랜덤으로 빼앗을 수 있지.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_10"
       },
       {
-        "text": "가장 먼저 4점을 얻은 플레이어가 승리합니다.",
-        "imagePath": "Sprites/TutorialImage/TutorialImage_4"
+        "text": "다음은 쪽지야. 쪽지를 사용하면 랜덤으로 한 열의 올바른 선택지를 바로 알 수 있어.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_11"
+      },
+      {
+        "text": "마지막은 고문서야. 고문서는 정답이 조사인 열 두 곳을 알려 주지.",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_12"
+      },
+      {
+        "text": "자, 이제 준비는 다 된 것 같군! 그럼 튜토리얼을 마치고 본 게임으로 넘어가 보자고!!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_0"
       }
     ]
   }

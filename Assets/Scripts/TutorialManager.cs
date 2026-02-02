@@ -29,19 +29,29 @@ public class TutorialManager : MonoBehaviour
     private void ShowStep(int stepIndex)
     {
     prevButton.interactable = !stepIndex.Equals(0);
-    nextButton.interactable = !stepIndex.Equals(tutorialData.steps.Length-1);
         
         if (stepIndex < tutorialData.steps.Length)
         {
             tutorialText.text = tutorialData.steps[stepIndex].text;
-            Sprite tutorialSprite = Resources.Load<Sprite>(tutorialData.steps[stepIndex].imagePath);
-            if (tutorialSprite != null)
+            string imagePath = tutorialData.steps[stepIndex].imagePath;
+            Texture2D tutorialTexture = Resources.Load<Texture2D>(imagePath);
+
+            if (tutorialTexture != null)
             {
+                Sprite tutorialSprite = Sprite.Create(tutorialTexture, new Rect(0, 0, tutorialTexture.width, tutorialTexture.height), new Vector2(0.5f, 0.5f));
                 tutorialImage.sprite = tutorialSprite;
             }
             else
             {
-                Debug.LogError($"Tutorial Image not found at path: {tutorialData.steps[stepIndex].imagePath}");
+                Debug.LogError($"Tutorial Image not found at path: {imagePath}");
+            }
+            if(stepIndex == tutorialData.steps.Length - 1)
+            {
+                nextButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "시작하기";
+            }
+            else
+            {
+                nextButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "다음으로";
             }
         }
         else
@@ -54,6 +64,11 @@ public class TutorialManager : MonoBehaviour
     private void OnNextButtonClicked()
     {
         _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
+        if (currentStep >= tutorialData.steps.Length - 1)
+        {
+            SceneManager.UnloadSceneAsync("TutorialScene");
+            return;
+        }
         currentStep++;
         ShowStep(currentStep);
     }
