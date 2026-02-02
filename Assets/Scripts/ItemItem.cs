@@ -4,45 +4,36 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemItem : MonoBehaviour,IPointerClickHandler
+public class ItemItem : MonoBehaviour
 {
     private ItemType _itemType;
+    private Button _button;
     [SerializeField] Image _image;
     public void Init(ItemType itemType)
     {
         _itemType = itemType;
-        Render();
-    }
-
-    public void OnPointerClick(PointerEventData data)
-    {
-        OnUse();
-    }
-    private void Render()
-    {
-        switch (_itemType)
+        _button = GetComponent<Button>();
+        switch (itemType)
         {
+            case ItemType.AncientDocument:
+                _image.sprite = Resources.Load<Sprite>("Sprites/AncientDocument");
+                break;
             case ItemType.Americano:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Americano") as Sprite;
+                _image.sprite = Resources.Load<Sprite>("Sprites/Americano");
                 break;
             case ItemType.Beer:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Beer") as Sprite;
+                _image.sprite = Resources.Load<Sprite>("Sprites/Beer");
                 break;
             case ItemType.Gloves:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Gloves") as Sprite;
-                break;
-            case ItemType.AncientDocument:
-                _image.sprite = Resources.Load<Sprite>("Sprites/AncientDocument") as Sprite;
-                break;
-            case ItemType.MagnifyingGlass:
-                _image.sprite = Resources.Load<Sprite>("Sprites/MagnifyingGlass") as Sprite;
+                _image.sprite = Resources.Load<Sprite>("Sprites/Gloves");
                 break;
             case ItemType.Transceiver:
-                _image.sprite = Resources.Load<Sprite>("Sprites/Transceiver") as Sprite;
+                _image.sprite = Resources.Load<Sprite>("Sprites/Transceiver");
+                break;
+            case ItemType.MagnifyingGlass:
+                _image.sprite = Resources.Load<Sprite>("Sprites/MagnifyingGlass");
                 break;
         }
-
-
     }
 
     private void OnUse()

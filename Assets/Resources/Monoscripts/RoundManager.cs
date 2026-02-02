@@ -112,11 +112,8 @@ public class RoundManager : MonoBehaviour
             _currentColumn++;
         }
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
-        if(_currentColumn==_currentSentenceData.sentences.Count) _currentColumn = 0;
-        while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count)
-        {
-            _currentColumn++;
-        }
+        if(_currentColumn==_currentSentenceData.sentences.Count)
+            RevealAnswer();
     }
 
     public void CorrectWordPositionsAdd(Position position)

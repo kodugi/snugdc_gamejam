@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class TurnManager : MonoBehaviour
 {
@@ -45,6 +46,10 @@ public class TurnManager : MonoBehaviour
         if (_currentPlayer == 1)
         {
             PlayEnemyTurn();
+        }
+        else
+        {
+            _gameManager.UIManager.DisDisableAll();
         }
     }
 
@@ -95,7 +100,30 @@ public class TurnManager : MonoBehaviour
 
     private void PlayEnemyTurn()
     {
-        
+        Enemy enemy = GameManager.Instance.GetEnemy();
+        int i = 0;
+        while (true)
+        {
+            i++;
+            Debug.Log(i);
+            if (i == 10) break;
+            ItemType useItem = enemy.UseItem();
+            if (useItem == ItemType.None)
+                break;
+            PlayItem(useItem);
+        }
+
+        Position first = enemy.getNextChoice();
+        ProcessWordChoice(first.row, first.col);
+        Position second = enemy.getNextChoice();
+        if (second.row != -1)
+        {
+            ProcessWordChoice(second.row, second.col);
+        }
+        else
+        {
+            TurnEnd();
+        }
     }
     public void ProcessWordChoice(int row, int column)
     {
@@ -149,14 +177,13 @@ public class TurnManager : MonoBehaviour
         if (_usedItems[ItemType.Americano] > 0)
         {
             _usedAmericanoLastTurn = true;
-            return;
         }
         else
         {
             _usedAmericanoLastTurn = false;
             _currentPlayer = (_currentPlayer + 1) % 2;
         }
-
+        _gameManager.UIManager.DisableAll();
         if (_roundManager.CurrentColumn >= _roundManager.CurrentSentenceData.sentences.Count)
         {
             _roundManager.RevealAnswer();
