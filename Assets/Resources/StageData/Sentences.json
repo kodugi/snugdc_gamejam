@@ -77,6 +77,126 @@
                 {"word": "샀다", "type": "Verb", "isCorrect": false},
                 {"word": "넣었다", "type": "Verb", "isCorrect": false}
             ]
+        ],
+        [
+            [
+                {"word": "바나나", "type": "Noun", "isCorrect": true},
+                {"word": "사과", "type": "Noun", "isCorrect": false},
+                {"word": "시간", "type": "Noun", "isCorrect": false},
+                {"word": "초콜릿", "type": "Noun", "isCorrect": false},
+                {"word": "명품백", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "우유", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "사과", "type": "Noun", "isCorrect": true},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "골프채", "type": "Noun", "isCorrect": false},
+                {"word": "금", "type": "Noun", "isCorrect": false},
+                {"word": "먹고", "type": "Verb", "isCorrect": false}
+            ],
+            [
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "유난히", "type": "Adverb", "isCorrect": false},
+                {"word": "더", "type": "Adverb", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": true}
+            ],
+            [
+                {"word": "달다.", "type": "Verb", "isCorrect": false},
+                {"word": "느끼하다.", "type": "Verb", "isCorrect": true},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
+                {"word": "값지다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "바나나", "type": "Noun", "isCorrect": true},
+                {"word": "사과", "type": "Noun", "isCorrect": false},
+                {"word": "시간", "type": "Noun", "isCorrect": false},
+                {"word": "초콜릿", "type": "Noun", "isCorrect": false},
+                {"word": "명품백", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "우유", "type": "Noun", "isCorrect": true},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "사과", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "골프채", "type": "Noun", "isCorrect": false},
+                {"word": "금", "type": "Noun", "isCorrect": false},
+                {"word": "먹고", "type": "Verb", "isCorrect": false}
+            ],
+            [
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "유난히", "type": "Adverb", "isCorrect": true},
+                {"word": "더", "type": "Adverb", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "달다.", "type": "Verb", "isCorrect": true},
+                {"word": "느끼하다.", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
+                {"word": "값지다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "사과", "type": "Noun", "isCorrect": false},
+                {"word": "시간", "type": "Noun", "isCorrect": true},
+                {"word": "초콜릿", "type": "Noun", "isCorrect": false},
+                {"word": "명품백", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "우유", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "사과", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "골프채", "type": "Noun", "isCorrect": false},
+                {"word": "금", "type": "Noun", "isCorrect": true},
+                {"word": "먹고", "type": "Verb", "isCorrect": false}
+            ],
+            [
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "유난히", "type": "Adverb", "isCorrect": false},
+                {"word": "더", "type": "Adverb", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": true}
+            ],
+            [
+                {"word": "달다.", "type": "Verb", "isCorrect": false},
+                {"word": "느끼하다.", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": false},
+                {"word": "값지다.", "type": "Verb", "isCorrect": true}
+            ]
         ]
     ]
 }
