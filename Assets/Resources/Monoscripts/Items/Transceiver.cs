@@ -27,7 +27,7 @@ public class Transceiver : IItem
             // Highlight the word at correctLocations[randomIndex]
             if(gameManager.GetCurrentPlayer().playerId == 0) // 플레이어
             {
-                Debug.Log($"The word at column {correctLocations[randomIndex].Item2 + 1}, row {correctLocations[randomIndex].Item1 + 1} is correct!");
+                gameManager.ShowInfoUIManager($"{correctLocations[randomIndex].Item2 + 1}번째 줄의 {correctLocations[randomIndex].Item1 + 1}번째 단어는 옳습니다.");
             }
             else // 적
             {
