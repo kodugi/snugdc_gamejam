@@ -45,9 +45,7 @@ public class Enemy: Player
 
     public Position getNextChoice()
     {
-        // row가-1이면 skip을 의미
         int currentColumn = _gameManager.GetCurrentColumn();
-        
         List<int> availableIndices = new List<int>();
         for (int i = 0; i < _availableWords[currentColumn].Count; i++)
         {
@@ -56,44 +54,119 @@ public class Enemy: Player
                 availableIndices.Add(i);
             }
         }
-        int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count + (_gameManager.GetRemainingChoices() >= 2 ? 0 : 4));
-        // 남은 선택 횟수가 2회 이상이면 skip 불가
-        // 일단은 위치를 가능한 후보군 중 랜덤으로 선택
-        Debug.Log($"Available Indices Count: {availableIndices.Count}, Remaining Choices: {_gameManager.GetRemainingChoices()}");
-        if(randomIndex < availableIndices.Count)
+
+        int correctTilesLeftTotal = 0;
+        for (int c = _gameManager.GetCurrentColumn(); c < _gameManager.GetCurrentSentenceData().sentences.Count; c++)
         {
-            Debug.Log($"Enemy 선택: Column {currentColumn}, Row {availableIndices[randomIndex]}");
-            return new Position(availableIndices[randomIndex], currentColumn);
+            if (!_gameManager.GetCorrectColumns().Contains(c))
+            {
+                correctTilesLeftTotal++;
+            }
         }
-        Debug.Log($"Enemy 선택: Column {currentColumn}, Skip");
-        return new Position(-1, currentColumn);
+
+        // Phase 2: 정답 추론 및 개수 결정 (Action Logic)
+        if (correctTilesLeftTotal <= 2) // Case A
+        {
+            // 남은 정답 모두 선택 (여기서는 1개만 선택 가능하므로, 다음 턴에 나머지를 선택하게 됨)
+            return new Position(availableIndices[0], currentColumn);
+        }
+
+        if (correctTilesLeftTotal == 3) // Case B
+        {
+            // 아이템 사용은 UseItem에서 처리. 여기서는 차선책으로 1개 선택
+            return new Position(availableIndices[Random.Range(0, availableIndices.Count)], currentColumn);
+        }
+
+        int remainder = correctTilesLeftTotal % 3;
+        int choicesToMake = 0;
+
+        if (remainder == 1) // Case C (4개 남은 경우)
+        {
+            choicesToMake = 1;
+        }
+        else if (remainder == 2) // Case C (5개 남은 경우)
+        {
+            choicesToMake = 2;
+        }
+        else if (remainder == 0) // 이미 3의 배수 (6, 9개)
+        {
+            choicesToMake = 1; // 임의로 1개 선택하여 판 흔들기
+        }
+
+        // choicesToMake 만큼 선택해야 하지만, 현재 로직에서는 한 번에 하나만 선택 가능.
+        // 일단 첫번째 선택을 하고, 남은 선택 기회가 있으면 추가 선택
+        if (choicesToMake > 0 && availableIndices.Count > 0)
+        {
+             // Phase 3: 문장 완성 로직 (Consistency) - 현재는 승리 전략에 집중
+            return new Position(availableIndices[0], currentColumn);
+        }
+        
+        // 기본 로직: 랜덤 선택
+        if (availableIndices.Count > 0)
+        {
+            return new Position(availableIndices[Random.Range(0, availableIndices.Count)], currentColumn);
+        }
+
+        return new Position(-1, currentColumn); // 선택할 게 없을 때 스킵
     }
 
     public ItemType UseItem()
     {
-        // 랜덤으로 아이템 사용, 선택하지 않은 경우 None 반환
-        // 실제 아이템 사용 처리는 TurnManager의 PlayItem에서 수행
-        // UseItem이 None을 반환할 때까지 반복 호출, 사용 불가능한 아이템을 선택한 경우 다시 호출
-        List<ItemType> availableItems = new List<ItemType>();
-        foreach(var item in inventory.Keys)
+        // 1순위: 장갑
+        if (inventory.ContainsKey(ItemType.Gloves) && inventory[ItemType.Gloves] > 0)
         {
-            if(inventory[item] > 0)
+            return ItemType.Gloves;
+        }
+
+        // 2순위: 돋보기 (확률 50%)
+        int currentColumn = _gameManager.GetCurrentColumn();
+        int availableCount = 0;
+        for (int i = 0; i < _availableWords[currentColumn].Count; i++)
+        {
+            if (_availableWords[currentColumn][i])
             {
-                availableItems.Add(item);
+                availableCount++;
+            }
+        }
+        if (availableCount == 2 && inventory.ContainsKey(ItemType.MagnifyingGlass) && inventory[ItemType.MagnifyingGlass] > 0)
+        {
+            return ItemType.MagnifyingGlass;
+        }
+
+        // 3순위: 아메리카노 & 맥주 (필승 구도가 아닐 때)
+        int correctTilesLeft = 0;
+        for (int c = _gameManager.GetCurrentColumn(); c < _gameManager.GetCurrentSentenceData().sentences.Count; c++)
+        {
+            if (!_gameManager.GetCorrectColumns().Contains(c))
+            {
+                correctTilesLeft++;
             }
         }
 
-        if(availableItems.Count == 0)
+        if (correctTilesLeft % 3 == 0)
         {
-            return ItemType.None;
+            if (inventory.ContainsKey(ItemType.Americano) && inventory[ItemType.Americano] > 0)
+            {
+                return ItemType.Americano;
+            }
+            if (inventory.ContainsKey(ItemType.Beer) && inventory[ItemType.Beer] > 0)
+            {
+                return ItemType.Beer;
+            }
         }
 
-        int randomIndex = UnityEngine.Random.Range(0, availableItems.Count + 1);
-        if (randomIndex == availableItems.Count)
+        // 4순위: 공개된 고문서 & 무전기 (정보 부족 시)
+        // 문맥상 정답 유추가 어려운 경우를 판단하는 로직 추가 필요 (일단은 아이템이 있으면 사용)
+        if (inventory.ContainsKey(ItemType.AncientDocument) && inventory[ItemType.AncientDocument] > 0)
         {
-            return ItemType.None;
+            return ItemType.AncientDocument;
         }
-        return availableItems[randomIndex];
+        if (inventory.ContainsKey(ItemType.Transceiver) && inventory[ItemType.Transceiver] > 0)
+        {
+            return ItemType.Transceiver;
+        }
+
+        return ItemType.None;
     }
 
     public void Initialize(GameManager gameManager, TurnManager turnManager)
