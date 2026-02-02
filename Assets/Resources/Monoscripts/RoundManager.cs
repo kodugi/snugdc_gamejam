@@ -40,9 +40,8 @@ public class RoundManager : MonoBehaviour
         _turnManager.ResetPlayer();
         _correctColumns.Clear();
         SelectSentence();
-        StartRun();
+        InitRun();
     }
-
     public void SelectSentence()
     {
         // Logic for selecting a sentence goes here
@@ -84,8 +83,19 @@ public class RoundManager : MonoBehaviour
         {
             _currentColumn++; // 이미 맞힌 열은 건너뜀
         }
+    }
+    public void InitRun()
+    {
+        _correctWordPositions.Clear();
+        _incorrectWordPositions.Clear();
+        _currentColumn = 0;
+        while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count)
+        {
+            _currentColumn++; // 이미 맞힌 열은 건너뜀
+        }
         _turnManager.StartTurn();
     }
+
 
     public void RevealAnswer()
     {

@@ -58,4 +58,9 @@ public class UIManager: MonoBehaviour
         playerInventory.Render(playerinventory,true);
         enemyInventory.Render(enemyinventory,false);
     }
+
+    public void ItemShowcase(ItemType item)
+    {
+        
+    }
 }

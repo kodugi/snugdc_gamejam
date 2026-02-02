@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemItem : MonoBehaviour
+public class ItemItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     private ItemType _itemType;
     private Button _button;
@@ -44,11 +44,21 @@ public class ItemItem : MonoBehaviour
 
     private void OnUse()
     {
+        _button.enabled = false;
         GameManager.Instance.PlayItem(_itemType);
         Destroy(this.gameObject);
         
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        
+    }
     private void OnStolen()
     {
         
