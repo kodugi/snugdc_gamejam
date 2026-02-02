@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     private GameState _currentState = GameState.GameStart;
-    public List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Player { playerId = 1 } };
+    public List<Player> Players = new List<Player> { new Player { playerId = 0 }, new Enemy { playerId = 1 } };
     private List<ItemType> _allItems = new List<ItemType>();
 
     public void StartGame()
