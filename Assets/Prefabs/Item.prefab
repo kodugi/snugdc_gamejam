@@ -97,12 +97,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemItem
   _image: {fileID: 9100044658315026069}
   sprites:
-  - {fileID: -8553582175004071258, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
-  - {fileID: 1729840402284382006, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
-  - {fileID: 148264454483829304, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
-  - {fileID: 6334439168542168994, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
-  - {fileID: 6240419937970178579, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
-  - {fileID: 8943728508470143933, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
+  - {fileID: -3205353899159453726, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
+  - {fileID: 5174536370939589859, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
+  - {fileID: -3613115809963827809, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
+  - {fileID: 7760854180288436974, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
+  - {fileID: 3901677021369210954, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
+  - {fileID: 7789877645182839796, guid: a141ed6e7b54b87428efd898dc24b059, type: 3}
 --- !u!222 &1278744975279883975
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -727242227946012942, guid: 9df3b11f328a0de48821a7bbc6cc8b0d, type: 3}
+  m_Sprite: {fileID: 148264454483829304, guid: fba7c7b4a3a23ef46b6487a4e7dfd1ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

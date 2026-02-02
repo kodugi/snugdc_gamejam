@@ -48,7 +48,6 @@ public class TurnManager : MonoBehaviour
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
-        GainItem();
         if (_currentPlayer == 1)
         {
             Debug.Log("Enemy's Turn");

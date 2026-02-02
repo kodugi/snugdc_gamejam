@@ -11,6 +11,7 @@ public class ItemList : MonoBehaviour
         }
         foreach(var item in inventory)
         {
+            Debug.Log("Item:"+item);
             if (item.Key == ItemType.None) continue;
             if (item.Value == 0) continue;
             for(int i = 0; i < item.Value; i++)
