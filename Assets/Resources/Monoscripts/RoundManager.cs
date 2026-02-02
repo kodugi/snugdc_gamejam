@@ -63,6 +63,7 @@ public class RoundManager : MonoBehaviour
         }
         Debug.Log($"Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         Debug.Log("Remaining Rounds: " + _remainingRounds);
+        _gameManager.UIManager.UpdateScore(_scores.Item1, _scores.Item2);
         if (_remainingRounds > 0)
         {
             StartRound();

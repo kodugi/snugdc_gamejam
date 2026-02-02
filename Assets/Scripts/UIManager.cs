@@ -5,6 +5,7 @@ public class UIManager: MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI TMP_RemainingChoices;
     [SerializeField] private TurnEndButton _turnEndButton;
+    [SerializeField] private TMPro.TextMeshProUGUI TMP_Score;
     [SerializeField] private CanvasGroup _PlayField;
     [SerializeField] private CanvasGroup _ItemField;
     [SerializeField] private CanvasGroup _MainField;
@@ -26,6 +27,12 @@ public class UIManager: MonoBehaviour
             EnableSkip();
         }
     }
+
+    public void UpdateScore(int playerScore, int enemyScore)
+    {
+        TMP_Score.text = $"{playerScore}:{enemyScore}";
+    }
+
     public void EnableSkip()
     {
         _turnEndButton.Enable();
