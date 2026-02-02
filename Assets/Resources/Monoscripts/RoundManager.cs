@@ -73,19 +73,20 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Remaining Rounds: " + _remainingRounds);
         _gameManager.UIManager.UpdateScore(_scores.Item1, _scores.Item2);
 
-        _gameManager.UIManager.InfoDeploy(winnerId == 0 ? "플레이어 승리!" : "CPU 승리!");
+        _gameManager.ShowInfoUIManager(winnerId == 0 ? "플레이어 승리!" : "CPU 승리!");
         if(winnerId == 0)
         {
             _gameManager.SoundManager.PlaySound(AudioType.Victory);
         }
-        await Task.Delay(1000);
+        await Task.Delay(3000);
         isEndRoundActive = false;
-        if (_remainingRounds > 0)
+        if (_scores.Item1<3 && _scores.Item2<3)
         {
             StartRound();
         }
         else
         {
+            _gameManager.UIManager.SetEndUI(_scores.Item1>=3);
             Debug.Log("Game Over");
             Debug.Log($"Final Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         }
@@ -153,8 +154,11 @@ public class RoundManager : MonoBehaviour
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
         if(_currentColumn==_currentSentenceData.sentences.Count)
             RevealAnswer();
-        _gameManager.ButtonContainer.UnHighLightAll();
-        _gameManager.ButtonContainer.HighLightColumn(_currentColumn);
+        if(_turnManager.CurrentPlayer==0)
+        {
+            _gameManager.ButtonContainer.UnHighLightAll();
+            _gameManager.ButtonContainer.HighLightColumn(_currentColumn);
+        }
     }
 
     public void CorrectWordPositionsAdd(Position position)

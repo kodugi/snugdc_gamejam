@@ -166,8 +166,8 @@ public class GameManager : MonoBehaviour
         _textUImanager.Disable();
     }
 
-    public void ShowInfoUIManager(string text)
+    public void ShowInfoUIManager(string text,float staytime=1f)
     {
-        _uiManager.InfoDeploy(text);
+        _uiManager.InfoDeploy(text,staytime);
     }
 }

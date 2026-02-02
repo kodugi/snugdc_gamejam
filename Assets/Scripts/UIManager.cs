@@ -15,6 +15,7 @@ public class UIManager: MonoBehaviour
     [SerializeField] private InfoBoxManager infoBoxManager;
     [SerializeField] private PlayerSpriteController playerSpriteController;
     [SerializeField] private PlayerSpriteController enemySpriteController;
+    [SerializeField] private EndingController endingController;
     
     public void UpdateRemainingChoices(int remainingChoices)
     {
@@ -50,11 +51,13 @@ public class UIManager: MonoBehaviour
 
     public void DisableAll()
     {
-        _MainField.blocksRaycasts = false;
+        _PlayField.blocksRaycasts = false;
+        _ItemField.blocksRaycasts = false;
     }
     public void DisDisableAll()
     {
-        _MainField.blocksRaycasts = true;
+        _PlayField.blocksRaycasts = true;
+        _ItemField.blocksRaycasts = true;
     }
 
     public void ItemUpdate(DefaultDictionary<ItemType, int> playerinventory,DefaultDictionary<ItemType, int> enemyinventory)
@@ -64,9 +67,9 @@ public class UIManager: MonoBehaviour
         enemyInventory.Render(enemyinventory,false);
     }
 
-    public void InfoDeploy(string text)
+    public void InfoDeploy(string text,float time)
     {
-        infoBoxManager.CloneAndDeploy(text);
+        infoBoxManager.CloneAndDeploy(text,time);
     }
     public void PlayerWinRender()
     {
@@ -84,5 +87,11 @@ public class UIManager: MonoBehaviour
     {
         playerSpriteController.reset();
         enemySpriteController.reset();
+    }
+
+    public void SetEndUI(bool iswin)
+    {
+        endingController.gameObject.SetActive(true);
+        endingController.setEnd(iswin);
     }
 }

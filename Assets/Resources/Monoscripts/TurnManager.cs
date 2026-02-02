@@ -45,16 +45,21 @@ public class TurnManager : MonoBehaviour
     {
         RemainingChoices = 2;
         _usedItems.Clear();
-        _gameManager.GainItem();
+        if(_currentPlayer==0)
+        {
+            _gameManager.GainItem();
+        }
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
         if (_currentPlayer == 1)
         {
-            Debug.Log("Enemy's Turn");
+            
+            _gameManager.ShowInfoUIManager("CPU 의 턴");
             PlayEnemyTurn();
         }
         else
         {
+            _gameManager.ShowInfoUIManager("당신 의 턴");
             _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
             _gameManager.UIManager.DisDisableAll();
         }
@@ -65,7 +70,7 @@ public class TurnManager : MonoBehaviour
         foreach (var player in _gameManager.GetPlayers())
         {
             int totalItems = GetTotalItems(player.playerId);
-            int leftCapacity = 5 - totalItems; // Assuming max capacity is 5
+            int leftCapacity = 3 - totalItems; // Assuming max capacity is 3
             for (int i = 0; i < 1 && i < leftCapacity; i++) // Example: gain 1 item
             {
                 ItemType newItem = _gameManager.GetAllItems()[Random.Range(0, _gameManager.GetAllItems().Count)]; // Logic to determine which item to gain
@@ -148,7 +153,7 @@ public class TurnManager : MonoBehaviour
 
             if (message != "")
             {
-                _gameManager.UIManager.InfoDeploy(message);
+                _gameManager.ShowInfoUIManager(message);
             }
             
             

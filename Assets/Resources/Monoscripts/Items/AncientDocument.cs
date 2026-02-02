@@ -56,6 +56,6 @@ public class AncientDocument : IItem
 
         if (output == "") output = "남은 조사가 없습니다.";
         if(gameManager.GetCurrentPlayer().playerId == 0) 
-        gameManager.ShowInfoUIManager(output);
+        gameManager.ShowInfoUIManager(output,2f);
     }
 }
