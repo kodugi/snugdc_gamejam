@@ -13,9 +13,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Button HomeButton;
     [SerializeField] Button ExitButton;
     [SerializeField] Button TutorialButton;
+    private SoundManager _soundManager;
     
     private void StartGame()
     {
+        PlaySound();
         titleCanvas.transform.gameObject.SetActive(false);
         playCanvas.transform.gameObject.SetActive(true);
         GameManager.Instance.StartGame();
@@ -23,24 +25,31 @@ public class CanvasManager : MonoBehaviour
 
     private void EndGame()
     {
+        PlaySound();
         titleCanvas.transform.gameObject.SetActive(true);
         playCanvas.transform.gameObject.SetActive(false);
     }
 
     private void OpenTutorial()
     {
+        PlaySound();
         titleCanvas.transform.gameObject.SetActive(false);
         playCanvas.transform.gameObject.SetActive(false);
         SceneManager.LoadScene("TutorialScene", LoadSceneMode.Additive);
+    }
+
+    private void PlaySound()
+    {
+        _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
     }
 
     private void CloseTutorial(Scene scene)
     {
         if (scene.name == "TutorialScene")
         {
+            PlaySound();
             titleCanvas.transform.gameObject.SetActive(true);
             playCanvas.transform.gameObject.SetActive(false);
-            
         }   
     }
     public void Awake()
@@ -52,5 +61,8 @@ public class CanvasManager : MonoBehaviour
         SceneManager.sceneUnloaded+= CloseTutorial;
     }
     
-    
+    public void Start()
+    {
+        _soundManager = GetComponent<SoundManager>();
+    }
 }
