@@ -68,11 +68,6 @@ public class UIManager: MonoBehaviour
     {
         infoBoxManager.CloneAndDeploy(text);
     }
-    public void ItemShowcase(ItemType item)
-    {
-        
-    }
-
     public void PlayerWinRender()
     {
         playerSpriteController.Win();
