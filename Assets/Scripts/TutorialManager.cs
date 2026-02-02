@@ -67,6 +67,6 @@ public class TutorialManager : MonoBehaviour
     private void OnQuitButtonClicked()
     {
         _soundManager.GetComponent<AudioSource>().PlayOneShot(_soundManager.ButtonClickSound);
-        SceneManager.LoadScene("UIScene");
+        SceneManager.UnloadSceneAsync("TutorialScene");
     }
 }

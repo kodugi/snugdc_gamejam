@@ -6,7 +6,7 @@ public class RoundManager : MonoBehaviour
 {
     private GameManager _gameManager;
     private TurnManager _turnManager;
-
+    
     private int _remainingRounds;
     private SentenceData _currentSentenceData;
     private List<Position> _correctWordPositions = new List<Position>();
@@ -20,7 +20,7 @@ public class RoundManager : MonoBehaviour
     public List<Position> IncorrectWordPositions => _incorrectWordPositions;
     public HashSet<int> CorrectColumns => _correctColumns;
     private (int, int) _scores = (0, 0); // (playerScore, enemyScore)
-
+    private bool isEndRoundActive = false;
     private void Awake()
     {
         _gameManager = GetComponent<GameManager>();
@@ -53,6 +53,8 @@ public class RoundManager : MonoBehaviour
 
     public async void EndRound()
     {
+        if (isEndRoundActive) return;
+        isEndRoundActive = true;
         int winnerId = _gameManager.GetCurrentPlayer().playerId;
         if(winnerId == 0)
         {
@@ -72,7 +74,7 @@ public class RoundManager : MonoBehaviour
             _gameManager.PlaySound(AudioType.Victory);
         }
         await Task.Delay(1000);
-
+        isEndRoundActive = false;
         if (_remainingRounds > 0)
         {
             StartRound();

@@ -14,22 +14,34 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Button ExitButton;
     [SerializeField] Button TutorialButton;
     
-    public void StartGame()
+    private void StartGame()
     {
         titleCanvas.transform.gameObject.SetActive(false);
         playCanvas.transform.gameObject.SetActive(true);
         GameManager.Instance.StartGame();
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         titleCanvas.transform.gameObject.SetActive(true);
         playCanvas.transform.gameObject.SetActive(false);
     }
 
-    public void OpenTutorial()
+    private void OpenTutorial()
     {
-        SceneManager.LoadScene("TutorialScene");
+        titleCanvas.transform.gameObject.SetActive(false);
+        playCanvas.transform.gameObject.SetActive(false);
+        SceneManager.LoadScene("TutorialScene", LoadSceneMode.Additive);
+    }
+
+    private void CloseTutorial(Scene scene)
+    {
+        if (scene.name == "TutorialScene")
+        {
+            titleCanvas.transform.gameObject.SetActive(true);
+            playCanvas.transform.gameObject.SetActive(false);
+            
+        }   
     }
     public void Awake()
     {
@@ -37,5 +49,8 @@ public class CanvasManager : MonoBehaviour
         HomeButton.onClick.AddListener(EndGame);
         ExitButton.onClick.AddListener(Application.Quit);
         TutorialButton.onClick.AddListener(OpenTutorial);
+        SceneManager.sceneUnloaded+= CloseTutorial;
     }
+    
+    
 }
