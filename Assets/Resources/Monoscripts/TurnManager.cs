@@ -101,6 +101,57 @@ public class TurnManager : MonoBehaviour
             _gameManager.GetPlayers()[_currentPlayer].inventory[item]--;
             _usedItems[item]++;
             _gameManager.SoundManager.PlaySound(AudioType.ItemUse);
+
+            string message = "";
+            if(_currentPlayer == 0) // 플레이어가 아이템을 사용할 때만 메시지 표시
+            {
+                switch (item)
+                {
+                    // 나머지 아이템은 자체적으로 메시지가 나오므로 표시할 필요 없음
+                    case ItemType.Americano:
+                        message = "플레이어가 단어를 한 번 더 고를 수 있도록 합니다.";
+                        break;
+                    case ItemType.Beer:
+                        message = "현재 선택해야 할 열을 고르지 않고 넘어갑니다. 선택횟수는 차감되지 않습니다.";
+                        break;
+                    case ItemType.Gloves:
+                        message = "상대방의 무작위 아이템을 훔쳐옵니다.";
+                        break;
+                }
+            }
+            else
+            {
+                switch (item)
+                {
+                    // 모든 아이템의 메시지 표시
+                    case ItemType.AncientDocument:
+                        message = "CPU가 단어의 힌트를 확인합니다.";
+                        break;
+                    case ItemType.Americano:
+                        message = "CPU가 단어를 한 번 더 고를 수 있도록 합니다.";
+                        break;
+                    case ItemType.Beer:
+                        message = "CPU가 현재 선택해야 할 열을 고르지 않고 넘어갑니다.";
+                        break;
+                    case ItemType.Gloves:
+                        message = "CPU가 상대방의 무작위 아이템을 훔쳐옵니다.";
+                        break;
+                    case ItemType.MagnifyingGlass:
+                        message = "CPU가 단어의 힌트를 확인합니다.";
+                        break;
+                    case ItemType.Transceiver:
+                        message = "CPU가 단어의 힌트를 확인합니다.";
+                        break;
+                }
+            }
+            
+
+            if (message != "")
+            {
+                _gameManager.UIManager.InfoDeploy(message);
+            }
+            
+            
             _gameManager.GetItemStrategy(item).Use(_gameManager);
         }
     }
