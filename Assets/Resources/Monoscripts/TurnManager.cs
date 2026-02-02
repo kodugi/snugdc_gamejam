@@ -49,6 +49,7 @@ public class TurnManager : MonoBehaviour
         {
             _gameManager.GainItem();
         }
+        _gameManager.SetDrankBeer(false);
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
         if (_currentPlayer == 1)
@@ -174,7 +175,11 @@ public class TurnManager : MonoBehaviour
         }
         if (RemainingChoices <= 0)
             return;
-        RemainingChoices--;
+        if (!_gameManager.HasDrankBeer())
+        {
+            RemainingChoices--; // 맥주를 마시면 선택 횟수가 줄어들지 않음
+        }
+        
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
@@ -184,6 +189,12 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            if(_gameManager.HasDrankBeer())
+            {
+                // 해당 라운드 패배 처리
+                _roundManager.ChooseWinner(_gameManager.GetOpponent().playerId);
+                return;
+            }
             _gameManager.SoundManager.PlaySound(AudioType.Incorrect);
             _gameManager.ButtonContainer.DisableButton(row, column);
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));

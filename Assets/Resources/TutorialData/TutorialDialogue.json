@@ -53,7 +53,11 @@
         "imagePath": "Sprites/TutorialImage/TutorialImage_7"
       },
       {
-        "text": "다음은 맥주야. 맥주를 마시면 턴 소모 없이 이번 열을 건너뛰고 다음 열으로 넘어갈 수 있지.",
+        "text": "다음은 맥주야. 맥주를 마신 턴에는 정답을 계속해서 맞힐 수 있어!",
+        "imagePath": "Sprites/TutorialImage/TutorialImage_8"
+      },
+      {
+        "text": "하지만 조심해야 해. 맥주를 마신 턴에 단어를 틀리면, 그 즉시 게임에서 패배하게 된단 말이지!",
         "imagePath": "Sprites/TutorialImage/TutorialImage_8"
       },
       {

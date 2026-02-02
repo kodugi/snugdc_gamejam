@@ -57,8 +57,14 @@ public class RoundManager : MonoBehaviour
     public async void EndRound()
     {
         if (isEndRoundActive) return;
-        isEndRoundActive = true;
         int winnerId = _gameManager.GetCurrentPlayer().playerId;
+        ChooseWinner(winnerId);
+    }
+
+    public async void ChooseWinner(int winnerId)
+    {
+        if (isEndRoundActive) return;
+        isEndRoundActive = true;
         if(winnerId == 0)
         {
             _scores.Item1 += 1;

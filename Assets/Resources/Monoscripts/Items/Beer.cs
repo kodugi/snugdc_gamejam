@@ -4,6 +4,6 @@ public class Beer : IItem
 {
     public void Use(GameManager gameManager)
     {
-        gameManager.BeerEffect();
+        gameManager.SetDrankBeer(true);
     }
 }

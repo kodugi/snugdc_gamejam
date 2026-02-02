@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public SoundManager SoundManager => _soundManager;
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
     private SoundManager _soundManager;
+    private bool _drankBeer = false;
     
 
     private void Awake()
@@ -143,9 +144,14 @@ public class GameManager : MonoBehaviour
         return _roundManager.CorrectColumns;
     }
 
-    public void BeerEffect()
+    public void SetDrankBeer(bool drank)
     {
-        _roundManager.AdvanceColumn();
+        _drankBeer = drank;
+    }
+
+    public bool HasDrankBeer()
+    {
+        return _drankBeer;
     }
     public void AddRemainingChoices(int amount)
     {
