@@ -160,6 +160,8 @@ public class GameManager : MonoBehaviour
             audioType == AudioType.Correct ? _soundManager.CorrectSound :
             audioType == AudioType.Incorrect ? _soundManager.IncorrectSound :
             audioType == AudioType.Victory ? _soundManager.VictorySound :
+            audioType == AudioType.ButtonClick ? _soundManager.ButtonClickSound :
+            audioType == AudioType.ItemUse ? _soundManager.ItemUseSound :
             null
         );
     }
