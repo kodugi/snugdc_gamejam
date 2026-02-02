@@ -109,15 +109,15 @@ public class TurnManager : MonoBehaviour
     {
         await GameManager.Instance.GetEnemy().PlayTurnAsync();
     }
-    public void ProcessWordChoice(int row, int column)
+    public bool ProcessWordChoice(int row, int column)
     {
         if (column != _roundManager.CurrentColumn)
         {
             Debug.Log("clicked:" + column + ",need:" + _roundManager.CurrentColumn);
-            return;
+            return false;
         }
         if (RemainingChoices <= 0)
-            return;
+            return false;
         RemainingChoices--;
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
@@ -131,13 +131,17 @@ public class TurnManager : MonoBehaviour
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }
 
-        _roundManager.AdvanceColumn();
+        if (_roundManager.AdvanceColumn())
+        {
+            return true;
+        }
 
         _gameManager.ButtonContainer.UnHighLightAll();
         if (RemainingChoices > 0)
         {
             _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         }
+        return false;
     }
 
     public void TurnEnd()

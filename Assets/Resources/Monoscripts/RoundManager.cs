@@ -86,7 +86,7 @@ public class RoundManager : MonoBehaviour
         _turnManager.StartTurn();
     }
 
-    public void RevealAnswer()
+    public bool RevealAnswer()
     {
         foreach (var pos in _correctWordPositions)
         {
@@ -101,24 +101,26 @@ public class RoundManager : MonoBehaviour
             _gameManager.GetEnemy().RemoveAt(pos);
             _gameManager.ButtonContainer.DisableButton(pos.row, pos.col);
         }
-        EndRun();
+        return EndRun();
     }
 
-    public void EndRun()
+    public bool EndRun()
     {
         Debug.Log($"EndRun. Correct columns so far: {_correctColumns.Count}");
         
         if (_correctColumns.Count < _currentSentenceData.sentences.Count)
         {
             StartRun();
+            return false;
         }
         else
         {
             EndRound();
+            return true;
         }
     }
 
-    public void AdvanceColumn()
+    public bool AdvanceColumn()
     {
         do
         {
@@ -126,7 +128,9 @@ public class RoundManager : MonoBehaviour
         }
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
         if(_currentColumn==_currentSentenceData.sentences.Count)
-            RevealAnswer();
+            return RevealAnswer();
+        
+        return false;
     }
 
     public void CorrectWordPositionsAdd(Position position)

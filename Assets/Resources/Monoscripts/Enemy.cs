@@ -25,7 +25,11 @@ public class Enemy: Player
 
         Position first = getNextChoice();
         Debug.Log("Enemy first 선택: Column " + first.col + ", Row " + first.row);
-        _turnManager.ProcessWordChoice(first.row, first.col);
+        if (_turnManager.ProcessWordChoice(first.row, first.col))
+        {
+            _turnManager.TurnEnd();
+            return;
+        }
 
         Position second;
         while(true){
@@ -34,7 +38,11 @@ public class Enemy: Player
             if(second.row == -1){
                 break;
             }
-            _turnManager.ProcessWordChoice(second.row, second.col);
+            if(_turnManager.ProcessWordChoice(second.row, second.col))
+            {
+                _turnManager.TurnEnd();
+                return;
+            }
             if(_turnManager.RemainingChoices <= 0){
                 break;
             }
