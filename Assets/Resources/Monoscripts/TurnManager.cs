@@ -42,7 +42,7 @@ public class TurnManager : MonoBehaviour
         _gameManager.ButtonContainer.UnHighLightAll();
         _gameManager.ButtonContainer.HighLightColumn(_roundManager.CurrentColumn);
         _gameManager.UIManager.UpdateRemainingChoices(RemainingChoices);
-        GainItem();
+        _gameManager.GainItem();
         if (_currentPlayer == 1)
         {
             PlayEnemyTurn();
@@ -110,13 +110,13 @@ public class TurnManager : MonoBehaviour
             ItemType useItem = enemy.UseItem();
             if (useItem == ItemType.None)
                 break;
-            PlayItem(useItem);
+            _gameManager.PlayItem(useItem);
         }
 
         Position first = enemy.getNextChoice();
         if(first.row == -1)
         {
-            Debug.Log("Enemy chose to skip on the first turn. Pray to jesus now.");
+            Debug.Log("Enemy chose to skip on the first turn. Pray to jesus and Buddha now.");
         }
         ProcessWordChoice(first.row, first.col);
         
