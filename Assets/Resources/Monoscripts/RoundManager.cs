@@ -105,7 +105,6 @@ public class RoundManager : MonoBehaviour
             _correctColumns.Add(pos.col);
             _gameManager.GetEnemy().RemoveExceptAnswer(pos.col); // 적의 후보군에서도 정답만 남김
             _gameManager.ButtonContainer.DisableColumn(pos.col);
-            _gameManager.ButtonContainer.HighlightButton(pos.row, pos.col);
         }
         foreach (var pos in _incorrectWordPositions)
         {
@@ -137,6 +136,8 @@ public class RoundManager : MonoBehaviour
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
         if(_currentColumn==_currentSentenceData.sentences.Count)
             RevealAnswer();
+        _gameManager.ButtonContainer.UnHighLightAll();
+        _gameManager.ButtonContainer.HighLightColumn(_currentColumn);
     }
 
     public void CorrectWordPositionsAdd(Position position)
