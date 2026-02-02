@@ -27,7 +27,7 @@ public class RoundManager : MonoBehaviour
 
     public void StartGame()
     {
-        _remainingRounds = 3;
+        _remainingRounds = 5;
         StartRound();
     }
 
@@ -46,6 +46,7 @@ public class RoundManager : MonoBehaviour
         // Logic for selecting a sentence goes here
         _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[Random.Range(0, _gameManager.SentenceParser.sentenceDataList.Count)];
         _gameManager.ButtonContainer.Init(_currentSentenceData);
+        _gameManager.GetEnemy().Initialize(_gameManager);
     }
 
     public void EndRound()
@@ -77,6 +78,7 @@ public class RoundManager : MonoBehaviour
     {
         foreach (var pos in _correctWordPositions)
         {
+            Debug.Log("Revealing answer at " + pos.row + ", " + pos.col);
             _correctColumns.Add(pos.col);
             _gameManager.GetEnemy().RemoveExceptAnswer(pos.col); // 적의 후보군에서도 정답만 남김
             _gameManager.ButtonContainer.DisableColumn(pos.col);
