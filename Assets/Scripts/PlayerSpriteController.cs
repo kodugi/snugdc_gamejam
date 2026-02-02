@@ -7,27 +7,38 @@ public class PlayerSpriteController : MonoBehaviour
     [SerializeField] private Sprite lose;
     [SerializeField] private Sprite win;
 
-    private Image image;
+    private Image _image;
+    public Image Image
+    {
+        get
+        {
+            if (_image == null)
+            {
+                _image = GetComponent<Image>();
+            }
+            return _image;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        image = GetComponent<Image>();
-        image.sprite = idle;
+        _image = GetComponent<Image>();
+        Image.sprite = idle;
     }
 
     public void Win()
     {
-        image.sprite = win;
+        Image.sprite = win;
     }
 
     public void Lose()
     {
-        image.sprite = lose;
+        Image.sprite = lose;
     }
 
     public void reset()
     {
-        image.sprite = idle;
+        Image.sprite = idle;
     }
     // Update is called once per frame
     void Update()

@@ -72,5 +72,8 @@ public class CanvasManager : MonoBehaviour
     public void Start()
     {
         _soundManager = GetComponent<SoundManager>();
+        _soundManager.PlayMusic(AudioType.TitleScreenMusic);
+        titleCanvas.transform.gameObject.SetActive(true);
+        playCanvas.transform.gameObject.SetActive(false);
     }
 }
