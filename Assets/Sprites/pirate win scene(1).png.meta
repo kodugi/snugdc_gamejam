@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 28ce92060ad79314f89bb917726a1c25
+guid: 7ab1d10ef8680e34f98088cf63549353
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -765150924802650856
-    second: arrow_0
+      213: -866553195706184487
+    second: pirate win scene(1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arrow_0
+      name: pirate win scene(1)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 36
-        height: 70
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81d839fa943a165f0800000000000000
-      internalID: -765150924802650856
+      spriteID: 9dc04fea57269f3f0800000000000000
+      internalID: -866553195706184487
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      arrow_0: -765150924802650856
+      pirate win scene(1)_0: -866553195706184487
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

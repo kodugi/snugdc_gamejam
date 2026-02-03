@@ -73,6 +73,7 @@ public class ButtonHandler : MonoBehaviour
         if(_button.interactable)
         transform.localScale = Vector3.one;
         highlightImage.enabled = false;
+        if (!_button.interactable && isCorrect) return;
         UnHighlightImage.enabled = true;
     }
 
