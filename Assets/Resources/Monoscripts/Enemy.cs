@@ -7,9 +7,11 @@ public class Enemy: Player
     private GameManager _gameManager;
     private TurnManager _turnManager;
     private List<List<bool>> _availableWords;
+    private bool _isBeerEffectActive = false;
 
     public async Task PlayTurnAsync()
     {
+        _isBeerEffectActive = false; // 턴 시작 시 초기화
         int i = 0;
         while (true)
         {
@@ -19,6 +21,12 @@ public class Enemy: Player
             ItemType useItem = UseItem();
             if (useItem == ItemType.None)
                 break;
+            
+            if (useItem == ItemType.Beer)
+            {
+                _isBeerEffectActive = true;
+            }
+
             Debug.Log("Enemy uses item: " + useItem);
             _gameManager.PlayItem(useItem);
         }
@@ -41,6 +49,7 @@ public class Enemy: Player
         {
             _turnManager.TurnEnd();
         }
+        _isBeerEffectActive = false; // 턴 종료 시 초기화
     }
 
     public Position getNextChoice()
@@ -61,6 +70,19 @@ public class Enemy: Player
             if (!_gameManager.GetCorrectColumns().Contains(c))
             {
                 correctTilesLeftTotal++;
+            }
+        }
+
+        // Beer 아이템 사용 시, 정답이 100% 확실한 경우에만 선택
+        if (_isBeerEffectActive)
+        {
+            if (availableIndices.Count == 1)
+            {
+                return new Position(availableIndices[0], currentColumn);
+            }
+            else
+            {
+                return new Position(-1, currentColumn); // 확실하지 않으면 선택 중지
             }
         }
 
@@ -118,7 +140,7 @@ public class Enemy: Player
             return ItemType.Gloves;
         }
 
-        // 2순위: 돋보기 (확률 50%)
+        // 2순위: 돋보기 (정답 확신 시)
         int currentColumn = _gameManager.GetCurrentColumn();
         int availableCount = 0;
         for (int i = 0; i < _availableWords[currentColumn].Count; i++)
@@ -133,7 +155,40 @@ public class Enemy: Player
             return ItemType.MagnifyingGlass;
         }
 
-        // 3순위: 아메리카노 & 맥주 (필승 구도가 아닐 때)
+        // 맥주 사용 조건 강화: 여러 개의 정답을 확실히 알 때만 사용
+        if (inventory.ContainsKey(ItemType.Beer) && inventory[ItemType.Beer] > 0)
+        {
+            int certainCorrectColumns = 0;
+            for (int c = _gameManager.GetCurrentColumn(); c < _gameManager.GetCurrentSentenceData().sentences.Count; c++)
+            {
+                if (_gameManager.GetCorrectColumns().Contains(c)) continue;
+
+                int count = 0;
+                for (int r = 0; r < _availableWords[c].Count; r++)
+                {
+                    if (_availableWords[c][r])
+                    {
+                        count++;
+                    }
+                }
+                if (count == 1)
+                {
+                    certainCorrectColumns++;
+                }
+                else
+                {
+                    break; // 연속적이지 않으면 중단
+                }
+            }
+
+            if (certainCorrectColumns >= 2) // 최소 2개 이상의 정답을 확신할 때
+            {
+                return ItemType.Beer;
+            }
+        }
+
+
+        // 3순위: 아메리카노 (필승 구도가 아닐 때)
         int correctTilesLeft = 0;
         for (int c = _gameManager.GetCurrentColumn(); c < _gameManager.GetCurrentSentenceData().sentences.Count; c++)
         {
@@ -148,10 +203,6 @@ public class Enemy: Player
             if (inventory.ContainsKey(ItemType.Americano) && inventory[ItemType.Americano] > 0)
             {
                 return ItemType.Americano;
-            }
-            if (inventory.ContainsKey(ItemType.Beer) && inventory[ItemType.Beer] > 0)
-            {
-                return ItemType.Beer;
             }
         }
 
