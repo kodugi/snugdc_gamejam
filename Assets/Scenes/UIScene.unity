@@ -2780,7 +2780,6 @@ MonoBehaviour:
   idle: {fileID: 7620869590115789396, guid: d30407f3baefc494c936f5c6a3bb3998, type: 3}
   lose: {fileID: -2571551372635377227, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
   win: {fileID: -819501722830561752, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
-  arrowimage: {fileID: 0}
 --- !u!1 &924755788
 GameObject:
   m_ObjectHideFlags: 0
@@ -4796,7 +4795,6 @@ MonoBehaviour:
   idle: {fileID: 8708344105300648415, guid: d30407f3baefc494c936f5c6a3bb3998, type: 3}
   lose: {fileID: -8902938388912322983, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
   win: {fileID: -5803327392296257307, guid: 718249d4137f28e4aa323748eaf38511, type: 3}
-  arrowimage: {fileID: 0}
 --- !u!114 &2104873387
 MonoBehaviour:
   m_ObjectHideFlags: 0
