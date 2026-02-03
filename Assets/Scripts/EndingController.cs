@@ -10,6 +10,7 @@ public class EndingController : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI text;
     private Image image;
+    private CanvasManager _canvasManager;
 
     private float t;
 
@@ -28,12 +29,12 @@ public class EndingController : MonoBehaviour
 
     private void restart()
     {
-        GameManager.Instance.StartGame();
+        _canvasManager.StartGame();
         gameObject.SetActive(false);
     }
     void Start()
     {
-        
+        _canvasManager = FindObjectOfType<CanvasManager>();
     }
 
     // Update is called once per frame

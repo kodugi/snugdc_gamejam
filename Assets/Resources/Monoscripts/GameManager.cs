@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public SentenceParser SentenceParser => _sentenceParser;
     public UIManager UIManager => _uiManager;
     public SoundManager SoundManager => _soundManager;
+    public CanvasManager CanvasManager => FindObjectOfType<CanvasManager>();
     private Dictionary<ItemType, IItem> _itemStrategies = new Dictionary<ItemType, IItem>();
     private SoundManager _soundManager;
     private bool _drankBeer = false;
