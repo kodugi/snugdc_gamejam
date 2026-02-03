@@ -14,8 +14,9 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Button ExitButton;
     [SerializeField] Button TutorialButton;
     private SoundManager _soundManager;
+    public SoundManager SoundManager => _soundManager;
     
-    private void StartGame()
+    public void StartGame()
     {
         PlayButtonSound();
         _soundManager.PlayMusic(AudioType.IngameScreenMusic);
@@ -25,7 +26,7 @@ public class CanvasManager : MonoBehaviour
         GameManager.Instance.StartGame();
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         PlayButtonSound();
         _soundManager.PlayMusic(AudioType.TitleScreenMusic);
@@ -33,7 +34,7 @@ public class CanvasManager : MonoBehaviour
         playCanvas.transform.gameObject.SetActive(false);
     }
 
-    private void OpenTutorial()
+    public void OpenTutorial()
     {
         PlayButtonSound();
         _soundManager.PlayMusic(AudioType.TutorialMusic);
@@ -42,12 +43,12 @@ public class CanvasManager : MonoBehaviour
         SceneManager.LoadScene("TutorialScene", LoadSceneMode.Additive);
     }
 
-    private void PlayButtonSound()
+    public void PlayButtonSound()
     {
         _soundManager.PlayOneShot(AudioType.ButtonClick);
     }
 
-    private void CloseTutorial(Scene scene)
+    public void CloseTutorial(Scene scene)
     {
         if (scene.name == "TutorialScene")
         {

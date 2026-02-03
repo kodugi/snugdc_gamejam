@@ -112,12 +112,12 @@ public class RoundManager : MonoBehaviour
         {
             if(_scores.Item1>=3)
             {
-                _gameManager.SoundManager.Play(AudioType.WinEndingSound);
+                _gameManager.CanvasManager.SoundManager.Play(AudioType.WinEndingSound);
                 _gameManager.UIManager.SetEndUI(true);
             }
             else
             {
-                _gameManager.SoundManager.Play(AudioType.LoseEndingSound);
+                _gameManager.CanvasManager.SoundManager.Play(AudioType.LoseEndingSound);
                 _gameManager.UIManager.SetEndUI(false);
             }
             Debug.Log("Game Over");
