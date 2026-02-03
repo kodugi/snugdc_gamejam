@@ -13,6 +13,7 @@ public class RoundManager : MonoBehaviour
     private List<Position> _incorrectWordPositions = new List<Position>();
     private int _currentColumn = 0;
     private HashSet<int> _correctColumns = new HashSet<int>();
+    private HashSet<int> _usedSentenceIndices = new HashSet<int>();
 
     public SentenceData CurrentSentenceData => _currentSentenceData;
     public int CurrentColumn => _currentColumn;
@@ -48,8 +49,21 @@ public class RoundManager : MonoBehaviour
     }
     public void SelectSentence()
     {
-        // Logic for selecting a sentence goes here
-        _currentSentenceData = _gameManager.SentenceParser.sentenceDataList[Random.Range(0, _gameManager.SentenceParser.sentenceDataList.Count)];
+        var sentenceList = _gameManager.SentenceParser.sentenceDataList;
+        if (_usedSentenceIndices.Count >= sentenceList.Count)
+        {
+            _usedSentenceIndices.Clear();
+        }
+
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(0, sentenceList.Count);
+        } while (_usedSentenceIndices.Contains(randomIndex));
+
+        _usedSentenceIndices.Add(randomIndex);
+        _currentSentenceData = sentenceList[randomIndex];
+
         _gameManager.ButtonContainer.Init(_currentSentenceData);
         _gameManager.GetEnemy().Initialize(_gameManager, _turnManager);
     }
