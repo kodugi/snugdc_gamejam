@@ -3,9 +3,12 @@ public enum AudioType
     Correct,
     Incorrect,
     Victory,
+    Defeat,
     ButtonClick,
     ItemUse,
     TitleScreenMusic,
     IngameScreenMusic,
-    TutorialMusic
+    TutorialMusic,
+    WinEndingSound,
+    LoseEndingSound
 }

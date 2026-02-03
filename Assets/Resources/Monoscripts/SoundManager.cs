@@ -6,21 +6,49 @@ public class SoundManager : MonoBehaviour
     [SerializeField] public AudioClip CorrectSound;
     [SerializeField] public AudioClip IncorrectSound;
     [SerializeField] public AudioClip VictorySound;
+    [SerializeField] public AudioClip DefeatSound;
     [SerializeField] public AudioClip ItemUseSound;
     [SerializeField] public AudioClip TitleScreenMusic;
     [SerializeField] public AudioClip IngameScreenMusic;
     [SerializeField] public AudioClip TutorialMusic;
+    [SerializeField] public AudioClip WinEndingSound;
+    [SerializeField] public AudioClip LoseEndingSound;
 
-    public void PlaySound(AudioType audioType)
+    public void PlayOneShot(AudioType audioType)
     {
         GetComponent<AudioSource>().PlayOneShot(
             audioType == AudioType.Correct ? CorrectSound :
             audioType == AudioType.Incorrect ? IncorrectSound :
             audioType == AudioType.Victory ? VictorySound :
+            audioType == AudioType.Defeat ? DefeatSound :
             audioType == AudioType.ButtonClick ? ButtonClickSound :
             audioType == AudioType.ItemUse ? ItemUseSound :
+            audioType == AudioType.WinEndingSound ? WinEndingSound :
+            audioType == AudioType.LoseEndingSound ? LoseEndingSound :
             null
         );
+    }
+
+    public void Play(AudioType audioType)
+    {
+        AudioClip clipToPlay = null;
+        switch (audioType)
+        {
+            case AudioType.WinEndingSound:
+                clipToPlay = WinEndingSound;
+                break;
+            case AudioType.LoseEndingSound:
+                clipToPlay = LoseEndingSound;
+                break;
+        }
+
+        if (clipToPlay != null)
+        {
+            AudioSource audioSource = GetComponent<AudioSource>();
+            audioSource.clip = clipToPlay;
+            audioSource.loop = false;
+            audioSource.Play();
+        }
     }
 
     public void PlayMusic(AudioType audioType)
