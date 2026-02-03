@@ -160,10 +160,14 @@ public class RoundManager : MonoBehaviour
         while (_correctColumns.Contains(_currentColumn) && _currentColumn < _currentSentenceData.sentences.Count);
         if(_currentColumn==_currentSentenceData.sentences.Count)
             RevealAnswer();
+            _gameManager.ButtonContainer.UnHighLightAll();
         if(_turnManager.CurrentPlayer==0)
         {
-            _gameManager.ButtonContainer.UnHighLightAll();
             _gameManager.ButtonContainer.HighLightColumn(_currentColumn);
+        }
+        else
+        {
+            _gameManager.ButtonContainer.UnUnHighLightColumn(_currentColumn);
         }
     }
 

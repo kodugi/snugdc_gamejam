@@ -83,6 +83,13 @@ public class ButtonContainer : MonoBehaviour
         {
             buttonlists[col][row].HighLight();
         }
+    }public void UnUnHighLightColumn(int col)
+    {
+        if (col >= buttonlists.Length) return;
+        for (int row = 0; row < buttonlists[col].Length; row++)
+        {
+            buttonlists[col][row].UnUnHighLight();
+        }
     }
     // Update is called once per frame
     void Update()

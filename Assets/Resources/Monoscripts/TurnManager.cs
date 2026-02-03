@@ -56,6 +56,7 @@ public class TurnManager : MonoBehaviour
         {
             
             _gameManager.ShowInfoUIManager("CPU 의 턴");
+            _gameManager.ButtonContainer.UnUnHighLightColumn(_roundManager.CurrentColumn);
             PlayEnemyTurn();
         }
         else
@@ -119,7 +120,7 @@ public class TurnManager : MonoBehaviour
                         message = "플레이어가 단어를 한 번 더 고를 수 있도록 합니다.";
                         break;
                     case ItemType.Beer:
-                        message = "이번 턴 동안 단어 선택 시 행동력이 차감되지 않습니다. 단, 틀리면 즉시 패배합니다.";
+                        message = "틀릴 때까지 단어를 선택합니다. 틀릴 시, 패배합니다.";
                         break;
                     case ItemType.Gloves:
                         message = "상대방의 무작위 아이템을 훔쳐옵니다.";
@@ -138,7 +139,7 @@ public class TurnManager : MonoBehaviour
                         message = "CPU가 단어를 한 번 더 고를 수 있도록 합니다.";
                         break;
                     case ItemType.Beer:
-                        message = "CPU가 이번 턴 동안 단어 선택 시 행동력이 차감되지 않습니다. 단, 틀리면 즉시 패배합니다.";
+                        message = "CPU가 맥주를 마십니다.";
                         break;
                     case ItemType.Gloves:
                         message = "CPU가 상대방의 무작위 아이템을 훔쳐옵니다.";
