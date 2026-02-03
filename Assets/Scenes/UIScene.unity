@@ -3659,8 +3659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800eccfb0059c2f439cacf5198d7aa58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndingController
-  winPortrait: {fileID: 21300000, guid: 65c92e50266708440bc4cef940ae7cba, type: 3}
-  losePortrait: {fileID: 21300000, guid: e808c3e26d108d146bd125073bfa4230, type: 3}
+  winPortrait: {fileID: 21300000, guid: 7ab1d10ef8680e34f98088cf63549353, type: 3}
+  losePortrait: {fileID: 21300000, guid: 9b51eabe52bf3904dab37db3ec137fb0, type: 3}
   button: {fileID: 947171666}
   text: {fileID: 785279610}
   fadeinTime: 0
@@ -3684,7 +3684,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e808c3e26d108d146bd125073bfa4230, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b51eabe52bf3904dab37db3ec137fb0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
