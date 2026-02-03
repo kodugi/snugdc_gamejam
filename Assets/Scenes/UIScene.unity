@@ -3663,7 +3663,7 @@ MonoBehaviour:
   losePortrait: {fileID: 21300000, guid: 9b51eabe52bf3904dab37db3ec137fb0, type: 3}
   button: {fileID: 947171666}
   text: {fileID: 785279610}
-  fadeinTime: 0
+  fadeinTime: 3
 --- !u!114 &1181088709
 MonoBehaviour:
   m_ObjectHideFlags: 0
