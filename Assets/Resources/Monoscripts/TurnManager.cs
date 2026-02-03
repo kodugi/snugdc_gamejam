@@ -98,6 +98,7 @@ public class TurnManager : MonoBehaviour
             {
                 case ItemType.Gloves:
                     if (_usedItems[item] >= 1) return;
+                    if (_gameManager.GetOpponent().GetTotalItems() == 0) return; // 상대방이 아이템이 없으면 사용 불가
                     break;
                 case ItemType.Americano:
                     if (_usedAmericanoLastTurn) return;
@@ -118,7 +119,7 @@ public class TurnManager : MonoBehaviour
                         message = "플레이어가 단어를 한 번 더 고를 수 있도록 합니다.";
                         break;
                     case ItemType.Beer:
-                        message = "현재 선택해야 할 열을 고르지 않고 넘어갑니다. 선택횟수는 차감되지 않습니다.";
+                        message = "이번 턴 동안 단어 선택 시 행동력이 차감되지 않습니다. 단, 틀리면 즉시 패배합니다.";
                         break;
                     case ItemType.Gloves:
                         message = "상대방의 무작위 아이템을 훔쳐옵니다.";
@@ -137,7 +138,7 @@ public class TurnManager : MonoBehaviour
                         message = "CPU가 단어를 한 번 더 고를 수 있도록 합니다.";
                         break;
                     case ItemType.Beer:
-                        message = "CPU가 현재 선택해야 할 열을 고르지 않고 넘어갑니다.";
+                        message = "CPU가 이번 턴 동안 단어 선택 시 행동력이 차감되지 않습니다. 단, 틀리면 즉시 패배합니다.";
                         break;
                     case ItemType.Gloves:
                         message = "CPU가 상대방의 무작위 아이템을 훔쳐옵니다.";
