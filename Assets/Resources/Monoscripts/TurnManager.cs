@@ -45,6 +45,7 @@ public class TurnManager : MonoBehaviour
     {
         RemainingChoices = 2;
         _usedItems.Clear();
+        _gameManager.UIManager.PlayerSpriteSetArrow(_currentPlayer);
         if(_currentPlayer==0)
         {
             _gameManager.GainItem();
@@ -217,7 +218,7 @@ public class TurnManager : MonoBehaviour
         {
             return;
         }*/
-
+        _gameManager.UIManager.PlayerSpriteResetArrow();
         RemainingChoices = 2;
         _currentPlayer = (_currentPlayer + 1) % 2;
         

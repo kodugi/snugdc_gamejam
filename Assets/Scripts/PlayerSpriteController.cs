@@ -6,6 +6,7 @@ public class PlayerSpriteController : MonoBehaviour
     [SerializeField] private Sprite idle;
     [SerializeField] private Sprite lose;
     [SerializeField] private Sprite win;
+    [SerializeField] private Image arrowimage;
 
     private Image _image;
     public Image Image
@@ -39,6 +40,17 @@ public class PlayerSpriteController : MonoBehaviour
     public void reset()
     {
         Image.sprite = idle;
+        arrowimage.enabled = false;
+    }
+
+    public void MyTurn()
+    {
+        arrowimage.enabled = true;
+    }
+
+    public void NotMyTurn()
+    {
+        arrowimage.enabled = false;
     }
     // Update is called once per frame
     void Update()

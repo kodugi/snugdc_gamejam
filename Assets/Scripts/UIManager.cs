@@ -89,6 +89,25 @@ public class UIManager: MonoBehaviour
         enemySpriteController.reset();
     }
 
+    public void PlayerSpriteSetArrow(int playerid)
+    {
+        if (playerid == 1)
+        {
+            enemySpriteController.MyTurn();
+            playerSpriteController.NotMyTurn();
+        }
+        else
+        {
+            playerSpriteController.MyTurn();
+            enemySpriteController.NotMyTurn();
+        }
+    }
+
+    public void PlayerSpriteResetArrow()
+    {
+        enemySpriteController.NotMyTurn();
+        playerSpriteController.NotMyTurn();
+    }
     public void SetEndUI(bool iswin)
     {
         endingController.gameObject.SetActive(true);
