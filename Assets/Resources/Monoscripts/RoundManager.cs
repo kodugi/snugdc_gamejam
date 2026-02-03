@@ -96,7 +96,11 @@ public class RoundManager : MonoBehaviour
         _gameManager.ShowInfoUIManager(winnerId == 0 ? "플레이어 승리!" : "CPU 승리!");
         if(winnerId == 0)
         {
-            _gameManager.SoundManager.PlaySound(AudioType.Victory);
+            _gameManager.SoundManager.PlayOneShot(AudioType.Victory);
+        }
+        else
+        {
+            _gameManager.SoundManager.PlayOneShot(AudioType.Defeat);
         }
         await Task.Delay(3000);
         isEndRoundActive = false;
@@ -106,7 +110,16 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
-            _gameManager.UIManager.SetEndUI(_scores.Item1>=3);
+            if(_scores.Item1>=3)
+            {
+                _gameManager.SoundManager.Play(AudioType.WinEndingSound);
+                _gameManager.UIManager.SetEndUI(true);
+            }
+            else
+            {
+                _gameManager.SoundManager.Play(AudioType.LoseEndingSound);
+                _gameManager.UIManager.SetEndUI(false);
+            }
             Debug.Log("Game Over");
             Debug.Log($"Final Scores - Player: {_scores.Item1}, Enemy: {_scores.Item2}");
         }

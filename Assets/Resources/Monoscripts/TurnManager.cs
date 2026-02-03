@@ -109,7 +109,7 @@ public class TurnManager : MonoBehaviour
 
             _gameManager.GetPlayers()[_currentPlayer].inventory[item]--;
             _usedItems[item]++;
-            _gameManager.SoundManager.PlaySound(AudioType.ItemUse);
+            _gameManager.SoundManager.PlayOneShot(AudioType.ItemUse);
 
             string message = "";
             if(_currentPlayer == 0) // 플레이어가 아이템을 사용할 때만 메시지 표시
@@ -186,7 +186,7 @@ public class TurnManager : MonoBehaviour
         WordData chosenWord = _roundManager.CurrentSentenceData.sentences[column][row];
         if (chosenWord.isCorrect)
         {
-            _gameManager.SoundManager.PlaySound(AudioType.Correct);
+            _gameManager.SoundManager.PlayOneShot(AudioType.Correct);
             _gameManager.ButtonContainer.DisableColumn(column);
             _roundManager.CorrectWordPositionsAdd(new Position(row, column));
         }
@@ -198,7 +198,7 @@ public class TurnManager : MonoBehaviour
                 _roundManager.ChooseWinner(_gameManager.GetOpponent().playerId);
                 return;
             }
-            _gameManager.SoundManager.PlaySound(AudioType.Incorrect);
+            _gameManager.SoundManager.PlayOneShot(AudioType.Incorrect);
             _gameManager.ButtonContainer.DisableButton(row, column);
             _roundManager.IncorrectWordPositionsAdd(new Position(row, column));
         }
