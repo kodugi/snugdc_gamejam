@@ -135,7 +135,7 @@ public class Enemy: Player
     public ItemType UseItem()
     {
         // 1순위: 장갑
-        if (inventory.ContainsKey(ItemType.Gloves) && inventory[ItemType.Gloves] > 0)
+        if (inventory.ContainsKey(ItemType.Gloves) && inventory[ItemType.Gloves] > 0 && _gameManager.GetOpponent().GetTotalItems() > 0)
         {
             return ItemType.Gloves;
         }

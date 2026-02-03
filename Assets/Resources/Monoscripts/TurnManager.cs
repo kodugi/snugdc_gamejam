@@ -99,6 +99,7 @@ public class TurnManager : MonoBehaviour
             {
                 case ItemType.Gloves:
                     if (_usedItems[item] >= 1) return;
+                    if (_gameManager.GetOpponent().GetTotalItems() == 0) return; // 상대방이 아이템이 없으면 사용 불가
                     break;
                 case ItemType.Americano:
                     if (_usedAmericanoLastTurn) return;

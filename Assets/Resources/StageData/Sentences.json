@@ -197,6 +197,375 @@
                 {"word": "비싸다", "type": "Verb", "isCorrect": false},
                 {"word": "값지다", "type": "Verb", "isCorrect": true}
             ]
+        ],
+        [
+            [
+                {"word": "이", "type": "Adjective", "isCorrect": false},
+                {"word": "저", "type": "Adjective", "isCorrect": true},
+                {"word": "금색", "type": "Noun", "isCorrect": false},
+                {"word": "빛", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "기차", "type": "Noun", "isCorrect": true},
+                {"word": "비행기", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "무지개", "type": "Noun", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": false},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": true},
+                {"word": "민들레", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "민들레", "type": "Noun", "isCorrect": true},
+                {"word": "강철", "type": "Noun", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": false},
+                {"word": "향기", "type": "Noun", "isCorrect": false},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "너무", "type": "Adverb", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "꽤", "type": "Adverb", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "빠르다.", "type": "Verb", "isCorrect": false},
+                {"word": "단단하다.", "type": "Verb", "isCorrect": false},
+                {"word": "아름답다.", "type": "Verb", "isCorrect": true}
+            ]
+        ],
+        [
+            [
+                {"word": "이", "type": "Adjective", "isCorrect": false},
+                {"word": "저", "type": "Adjective", "isCorrect": false},
+                {"word": "금색", "type": "Noun", "isCorrect": false},
+                {"word": "빛", "type": "Noun", "isCorrect": true}
+            ],
+            [
+                {"word": "기차", "type": "Noun", "isCorrect": false},
+                {"word": "비행기", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "무지개", "type": "Noun", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": true},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": false},
+                {"word": "민들레", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "민들레", "type": "Noun", "isCorrect": false},
+                {"word": "강철", "type": "Noun", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": false},
+                {"word": "향기", "type": "Noun", "isCorrect": false},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": true}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "너무", "type": "Adverb", "isCorrect": true},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "꽤", "type": "Adverb", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "빠르다.", "type": "Verb", "isCorrect": true},
+                {"word": "단단하다.", "type": "Verb", "isCorrect": false},
+                {"word": "아름답다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "이", "type": "Adjective", "isCorrect": true},
+                {"word": "저", "type": "Adjective", "isCorrect": false},
+                {"word": "금색", "type": "Noun", "isCorrect": false},
+                {"word": "빛", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "기차", "type": "Noun", "isCorrect": false},
+                {"word": "비행기", "type": "Noun", "isCorrect": true},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "무지개", "type": "Noun", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "보다", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": false},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": false},
+                {"word": "민들레", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "민들레", "type": "Noun", "isCorrect": false},
+                {"word": "강철", "type": "Noun", "isCorrect": false},
+                {"word": "소리", "type": "Noun", "isCorrect": true},
+                {"word": "향기", "type": "Noun", "isCorrect": false},
+                {"word": "와/과 달리", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "너무", "type": "Adverb", "isCorrect": false},
+                {"word": "보다", "type": "Conjunction", "isCorrect": true},
+                {"word": "처럼", "type": "Conjunction", "isCorrect": false},
+                {"word": "꽤", "type": "Adverb", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "빠르다.", "type": "Verb", "isCorrect": true},
+                {"word": "단단하다.", "type": "Verb", "isCorrect": false},
+                {"word": "아름답다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "딸기", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "고급", "type": "Noun", "isCorrect": true},
+                {"word": "마술사", "type": "Noun", "isCorrect": false},
+                {"word": "젓가락", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": true},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "비둘기", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "고양이", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "언제나", "type": "Adverb", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false},
+                {"word": "예상보다", "type": "Adverb", "isCorrect": true}
+            ],
+            [
+                {"word": "먹다.", "type": "Verb", "isCorrect": false},
+                {"word": "옳다.", "type": "Verb", "isCorrect": false},
+                {"word": "날리다.", "type": "Verb", "isCorrect": false},
+                {"word": "먹이를 주다.", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": true}
+            ]
+        ],
+        [
+            [
+                {"word": "딸기", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "고급", "type": "Noun", "isCorrect": false},
+                {"word": "마술사", "type": "Noun", "isCorrect": true},
+                {"word": "젓가락", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "비둘기", "type": "Noun", "isCorrect": true},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "고양이", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "언제나", "type": "Adverb", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": true},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false},
+                {"word": "예상보다", "type": "Adverb", "isCorrect": false}
+            ],
+            [
+                {"word": "먹다.", "type": "Verb", "isCorrect": false},
+                {"word": "옳다.", "type": "Verb", "isCorrect": false},
+                {"word": "날리다.", "type": "Verb", "isCorrect": true},
+                {"word": "먹이를 주다.", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "딸기", "type": "Noun", "isCorrect": true},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "고급", "type": "Noun", "isCorrect": false},
+                {"word": "마술사", "type": "Noun", "isCorrect": false},
+                {"word": "젓가락", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": true},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "비둘기", "type": "Noun", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": true},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "고양이", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "은/는", "type": "Conjunction", "isCorrect": false},
+                {"word": "언제나", "type": "Adverb", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "에게", "type": "Conjunction", "isCorrect": false},
+                {"word": "예상보다", "type": "Adverb", "isCorrect": false}
+            ],
+            [
+                {"word": "먹다.", "type": "Verb", "isCorrect": false},
+                {"word": "옳다.", "type": "Verb", "isCorrect": true},
+                {"word": "날리다.", "type": "Verb", "isCorrect": false},
+                {"word": "먹이를 주다.", "type": "Verb", "isCorrect": false},
+                {"word": "비싸다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": true},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "대포", "type": "Noun", "isCorrect": false},
+                {"word": "화약", "type": "Noun", "isCorrect": false},
+                {"word": "뜨거운", "type": "Adjective", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": true},
+                {"word": "연기", "type": "Noun", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "사용해서", "type": "Verb", "isCorrect": false},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": true}
+            ],
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "내", "type": "Noun", "isCorrect": true},
+                {"word": "냄새", "type": "Noun", "isCorrect": false},
+                {"word": "유람선", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "에서", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "보인다.", "type": "Verb", "isCorrect": false},
+                {"word": "먹는다.", "type": "Verb", "isCorrect": false},
+                {"word": "난다.", "type": "Verb", "isCorrect": false},
+                {"word": "마신다.", "type": "Verb", "isCorrect": true}
+            ]
+        ],
+        [
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "대포", "type": "Noun", "isCorrect": true},
+                {"word": "화약", "type": "Noun", "isCorrect": false},
+                {"word": "뜨거운", "type": "Adjective", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": false},
+                {"word": "연기", "type": "Noun", "isCorrect": true},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "사용해서", "type": "Verb", "isCorrect": false},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "내", "type": "Noun", "isCorrect": false},
+                {"word": "냄새", "type": "Noun", "isCorrect": true},
+                {"word": "유람선", "type": "Noun", "isCorrect": false}
+            ],
+            [
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "에서", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": true},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "보인다.", "type": "Verb", "isCorrect": false},
+                {"word": "먹는다.", "type": "Verb", "isCorrect": false},
+                {"word": "난다.", "type": "Verb", "isCorrect": true},
+                {"word": "마신다.", "type": "Verb", "isCorrect": false}
+            ]
+        ],
+        [
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": true},
+                {"word": "대포", "type": "Noun", "isCorrect": false},
+                {"word": "화약", "type": "Noun", "isCorrect": false},
+                {"word": "뜨거운", "type": "Adjective", "isCorrect": false}
+            ],
+            [
+                {"word": "주스", "type": "Noun", "isCorrect": false},
+                {"word": "연기", "type": "Noun", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false},
+                {"word": "푸딩", "type": "Noun", "isCorrect": true}
+            ],
+            [
+                {"word": "사용해서", "type": "Verb", "isCorrect": false},
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": true}
+            ],
+            [
+                {"word": "오렌지", "type": "Noun", "isCorrect": false},
+                {"word": "바나나", "type": "Noun", "isCorrect": false},
+                {"word": "내", "type": "Noun", "isCorrect": false},
+                {"word": "냄새", "type": "Noun", "isCorrect": false},
+                {"word": "유람선", "type": "Noun", "isCorrect": true}
+            ],
+            [
+                {"word": "와/과", "type": "Conjunction", "isCorrect": false},
+                {"word": "에서", "type": "Conjunction", "isCorrect": true},
+                {"word": "이/가", "type": "Conjunction", "isCorrect": false},
+                {"word": "을/를", "type": "Conjunction", "isCorrect": false}
+            ],
+            [
+                {"word": "보인다.", "type": "Verb", "isCorrect": false},
+                {"word": "먹는다.", "type": "Verb", "isCorrect": true},
+                {"word": "난다.", "type": "Verb", "isCorrect": false},
+                {"word": "마신다.", "type": "Verb", "isCorrect": false}
+            ]
         ]
     ]
 }
