@@ -44,7 +44,7 @@ public class CanvasManager : MonoBehaviour
 
     private void PlayButtonSound()
     {
-        _soundManager.PlaySound(AudioType.ButtonClick);
+        _soundManager.PlayOneShot(AudioType.ButtonClick);
     }
 
     private void CloseTutorial(Scene scene)
